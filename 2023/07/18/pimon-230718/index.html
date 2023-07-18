@@ -16,24 +16,28 @@
   <meta name="author" content="Archibald Wan">
   <meta name="keywords" content="java">
   
-    <meta name="description" content="综述检索">
+    <meta name="description" content="基于ApachePimon V0.4的分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客使用规范">
-<meta property="og:url" content="http://archibald-nice.github.io/2023/06/28/hello-world/">
+<meta property="og:title" content="浅尝Pimon">
+<meta property="og:url" content="http://archibald-nice.github.io/2023/07/18/pimon-230718/">
 <meta property="og:site_name" content="Archie&#39;s Tech-blog">
-<meta property="og:description" content="综述检索">
+<meta property="og:description" content="基于ApachePimon V0.4的分析">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-28T01:54:29.353Z">
-<meta property="article:modified_time" content="2023-06-28T01:54:29.353Z">
+<meta property="og:image" content="http://archibald-nice.github.io/img/pimon-architecture.png">
+<meta property="article:published_time" content="2023-07-18T15:32:51.000Z">
+<meta property="article:modified_time" content="2023-07-18T17:11:20.734Z">
 <meta property="article:author" content="Archibald Wan">
-<meta property="article:tag" content="helloworld">
+<meta property="article:tag" content="bigdata">
+<meta property="article:tag" content="apache">
+<meta property="article:tag" content="pimon">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://archibald-nice.github.io/img/pimon-architecture.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>博客使用规范 - Archie&#39;s Tech-blog</title>
+  <title>浅尝Pimon - Archie&#39;s Tech-blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -238,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="博客使用规范"></span>
+            <span id="subtitle" data-typed-text="浅尝Pimon"></span>
           
         </div>
 
@@ -249,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-28 09:54" pubdate>
-          2023年6月28日 上午
+        <time datetime="2023-07-18 23:32" pubdate>
+          2023年7月18日 晚上
         </time>
       </span>
     
@@ -261,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4 字
+          419 字
         
       </span>
     
@@ -272,7 +276,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -318,12 +322,20 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">博客使用规范</h1>
+            <h1 style="display: none">浅尝Pimon</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><h2 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h2>
+                <h1 id="01-总览"><a href="#01-总览" class="headerlink" title="01 总览"></a>01 总览</h1><p><strong>Streaming data lake platform with high-speed data ingestion, changelog tracking and efficient real-time analytics.</strong></p>
+<p>Pimon 是一个具有 <code>高速数据摄取</code>、<code>变更日志跟踪</code> 和 <code>高效实时分析</code> 功能的 <strong>流数据湖平台</strong></p>
+<p><a target="_blank" rel="noopener" href="https://paimon.apache.org/">官网</a>、<a target="_blank" rel="noopener" href="https://paimon.apache.org/docs/master">文档</a>、<a target="_blank" rel="noopener" href="https://github.com/apache/incubator-paimon/">GitHub</a>、<a target="_blank" rel="noopener" href="https://paimon.apache.org/community/how-to-contribute/">贡献指南</a></p>
+<blockquote>
+<p>Pimon核心支持Flink的数据读取，同时也支持Hive、Spark、Trino等计算引擎的读取</p>
+</blockquote>
+<h2 id="1-1-架构"><a href="#1-1-架构" class="headerlink" title="1.1 架构"></a>1.1 架构</h2><p><img src="/../img/pimon-architecture.png" srcset="/img/loading.gif" lazyload alt="Pimon Architecture"></p>
+<h2 id="1-2-基本概念-Basic-Concepts"><a href="#1-2-基本概念-Basic-Concepts" class="headerlink" title="1.2 基本概念 Basic Concepts"></a>1.2 基本概念 Basic Concepts</h2><h2 id="1-3-文件布局-File-Layouts"><a href="#1-3-文件布局-File-Layouts" class="headerlink" title="1.3 文件布局 File Layouts"></a>1.3 文件布局 File Layouts</h2><h2 id="1-4-文件操作-File-Operations"><a href="#1-4-文件操作-File-Operations" class="headerlink" title="1.4 文件操作 File Operations"></a>1.4 文件操作 File Operations</h2><h2 id="1-5-主键表-Primary-Key-Table"><a href="#1-5-主键表-Primary-Key-Table" class="headerlink" title="1.5 主键表 Primary Key Table"></a>1.5 主键表 Primary Key Table</h2><h2 id="1-6-仅追加表-Append-Only-Table"><a href="#1-6-仅追加表-Append-Only-Table" class="headerlink" title="1.6 仅追加表 Append Only Table"></a>1.6 仅追加表 Append Only Table</h2><h2 id="1-7-外部日志系统-External-Log-Systems"><a href="#1-7-外部日志系统-External-Log-Systems" class="headerlink" title="1.7 外部日志系统 External Log Systems"></a>1.7 外部日志系统 External Log Systems</h2><h1 id="02-核心"><a href="#02-核心" class="headerlink" title="02 核心"></a>02 核心</h1><h2 id="2-1-引擎-Engine"><a href="#2-1-引擎-Engine" class="headerlink" title="2.1 引擎 Engine"></a>2.1 引擎 Engine</h2><h2 id="2-2-文件系统-Filesystems"><a href="#2-2-文件系统-Filesystems" class="headerlink" title="2.2 文件系统 Filesystems"></a>2.2 文件系统 Filesystems</h2><h2 id="2-3-用法指导-How-to"><a href="#2-3-用法指导-How-to" class="headerlink" title="2.3 用法指导 How to"></a>2.3 用法指导 How to</h2><h2 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h2><h1 id="03-Engines"><a href="#03-Engines" class="headerlink" title="03 Engines"></a>03 Engines</h1><h1 id="04-Filesystems"><a href="#04-Filesystems" class="headerlink" title="04 Filesystems"></a>04 Filesystems</h1><p>111</p>
+<h1 id="05"><a href="#05" class="headerlink" title="05"></a>05</h1>
                 
               </div>
             
@@ -341,8 +353,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  <a href="/categories/Apache/" class="category-chain-item">Apache</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Apache/Pimon/" class="category-chain-item">Pimon</a>
+  
+  
+
   
 
       </span>
@@ -356,7 +375,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/helloworld/">#helloworld</a>
+        <a href="/tags/bigdata/">#bigdata</a>
+      
+        <a href="/tags/apache/">#apache</a>
+      
+        <a href="/tags/pimon/">#pimon</a>
       
     </div>
   
@@ -368,8 +391,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>博客使用规范</div>
-      <div>http://archibald-nice.github.io/2023/06/28/hello-world/</div>
+      <div>浅尝Pimon</div>
+      <div>http://archibald-nice.github.io/2023/07/18/pimon-230718/</div>
     </div>
     <div class="license-meta">
       
@@ -381,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月28日</div>
+          <div>2023年7月18日</div>
         </div>
       
       
@@ -413,15 +436,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/17/spark-230716/" title="Spark基础">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spark基础</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/07/17/spark-230716/" title="Spark基础">
+                        <span class="hidden-mobile">Spark基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

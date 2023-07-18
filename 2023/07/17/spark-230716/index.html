@@ -16,24 +16,25 @@
   <meta name="author" content="Archibald Wan">
   <meta name="keywords" content="java">
   
-    <meta name="description" content="综述检索">
+    <meta name="description" content="Spark相关知识点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客使用规范">
-<meta property="og:url" content="http://archibald-nice.github.io/2023/06/28/hello-world/">
+<meta property="og:title" content="Spark基础">
+<meta property="og:url" content="http://archibald-nice.github.io/2023/07/17/spark-230716/">
 <meta property="og:site_name" content="Archie&#39;s Tech-blog">
-<meta property="og:description" content="综述检索">
+<meta property="og:description" content="Spark相关知识点">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-28T01:54:29.353Z">
-<meta property="article:modified_time" content="2023-06-28T01:54:29.353Z">
+<meta property="article:published_time" content="2023-07-17T15:32:51.000Z">
+<meta property="article:modified_time" content="2023-07-18T13:30:34.085Z">
 <meta property="article:author" content="Archibald Wan">
-<meta property="article:tag" content="helloworld">
+<meta property="article:tag" content="bigdata">
+<meta property="article:tag" content="spark">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>博客使用规范 - Archie&#39;s Tech-blog</title>
+  <title>Spark基础 - Archie&#39;s Tech-blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -238,7 +239,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="博客使用规范"></span>
+            <span id="subtitle" data-typed-text="Spark基础"></span>
           
         </div>
 
@@ -249,8 +250,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-28 09:54" pubdate>
-          2023年6月28日 上午
+        <time datetime="2023-07-17 23:32" pubdate>
+          2023年7月17日 晚上
         </time>
       </span>
     
@@ -261,7 +262,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4 字
+          2k 字
         
       </span>
     
@@ -272,7 +273,7 @@
         
         
         
-          1 分钟
+          17 分钟
         
       </span>
     
@@ -318,12 +319,45 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">博客使用规范</h1>
+            <h1 style="display: none">Spark基础</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><h2 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h2>
+                <h2 id="01-Spark"><a href="#01-Spark" class="headerlink" title="01 Spark"></a>01 Spark</h2><h3 id="1-1-Local模式"><a href="#1-1-Local模式" class="headerlink" title="1.1 Local模式"></a>1.1 Local模式</h3><ol>
+<li>解压tar包；</li>
+<li>运行官方Pi案例： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master <span class="hljs-built_in">local</span>[2] \<br>	./examples/jars/spark-examples_2.12-3.0.0.jar \<br>	10<br></code></pre></td></tr></table></figure></li>
+<li>运行官方WordCount案例： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-shell<br>...<br>scala&gt; sc.textFile(<span class="hljs-string">&quot;/home/bigdata/modules/spark-3.2.4/tmp_data/input.txt&quot;</span>).flatMap(_.<span class="hljs-built_in">split</span>(<span class="hljs-string">&quot; &quot;</span>)).map((_,<span class="hljs-number">1</span>)).reduceByKey(_+_).collect<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="1-2-Standalone模式"><a href="#1-2-Standalone模式" class="headerlink" title="1.2 Standalone模式"></a>1.2 Standalone模式</h3><p>由Spark使用自身的资源调动引擎管理 Master 和 Worker</p>
+<blockquote>
+<p>为方便测试仅在单节点上部署单节点伪集群模式(Master和Worker均在一台机器)</p>
+</blockquote>
+<p>直接启动命令：<code>./sbin/start-all.sh</code><br>网页查看：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a><br>运行官方Pi案例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master spark://locahost:7077 \<br>	./examples/jars/spark-examples_2.12-3.2.4.jar \<br>	10<br></code></pre></td></tr></table></figure>
+
+<h4 id="1-2-1-提交参数进阶"><a href="#1-2-1-提交参数进阶" class="headerlink" title="1.2.1 提交参数进阶"></a>1.2.1 提交参数进阶</h4><ul>
+<li>–<strong>executor-memory</strong>: 指定Executor内存</li>
+<li>–<strong>total-executor-cores</strong>: 指定Executor核数</li>
+<li>–<strong>deploy-mode</strong>：指定运行模式：<ul>
+<li><em>client</em>：Driver程序在本地运行</li>
+<li><em>cluster</em>：Driver程序在集群中运行</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-Yarn模式"><a href="#1-3-Yarn模式" class="headerlink" title="1.3 Yarn模式"></a>1.3 Yarn模式</h3><p>启动好 HDFS 和 Yarn 后，执行Pi案例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master yarn \<br>	./examples/jars/spark-examples_2.12-3.2.4.jar \<br>	10<br></code></pre></td></tr></table></figure>
+
+<h4 id="1-3-1-集成Spark的historyServer"><a href="#1-3-1-集成Spark的historyServer" class="headerlink" title="1.3.1 集成Spark的historyServer"></a>1.3.1 集成Spark的historyServer</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; <span class="hljs-built_in">mv</span> spark-defaults.conf.template spark-defaults.conf<br><br>&gt; vi spark-defaults.conf<br>spark.eventLog.enabled	<span class="hljs-literal">true</span><br>spark.eventLog.<span class="hljs-built_in">dir</span>	hdfs://node-001:8020/<span class="hljs-variable">$&#123;directory&#125;</span><br>spark.yarn.historyServer.address=node-001:18080<br>spark.history.ui.port=18080<br><br><span class="hljs-comment"># 参数1含义：WEBUI访问的端口号为18080</span><br><span class="hljs-comment"># 参数2含义：指定历史服务器日志存储路径</span><br><span class="hljs-comment"># 参数3含义：指定保存Application历史记录的个数，如果超过这个值，旧的应用程序信息将被删除，这个是内存中的应用数，而不是页面上显示的应用数</span><br>&gt; vi spark-env.sh<br><span class="hljs-built_in">export</span> SPARK_HISTORY_OPTS=<span class="hljs-string">&quot;</span><br><span class="hljs-string">-Dspark.history.ui.port=18080 </span><br><span class="hljs-string">-Dspark.history.fs.logDirectory=hdfs://node-001:8020/<span class="hljs-variable">$&#123;directory&#125;</span></span><br><span class="hljs-string">-Dspark.history.retainedApplications=30&quot;</span><br><br>./sbin/spark-start-hitory-server.sh<br></code></pre></td></tr></table></figure>
+<p>至此，spark的history服务就集成到了hadoop中，访问 <a target="_blank" rel="noopener" href="http://node-001:18080/">http://node-001:18080</a> 可以查看历时任务，同时可从yarn管理页面跳转。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master yarn \<br>	./examples/jars/spark-examples_2.12-3.2.4.jar \<br>	10<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-2-运行模式"><a href="#1-3-2-运行模式" class="headerlink" title="1.3.2 运行模式"></a>1.3.2 运行模式</h3><ol>
+<li><strong>yarn-client</strong>(默认)：Driver程序运行在客户端，适用于交互、调试，希望立即看到app的输出</li>
+<li><strong>yarn-cluster</strong>：Driver程序运行在由ResourceManager启动的APPMaster适用于生产环境</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit --deploy-mode client/cluster ...<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -341,7 +375,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  <a href="/categories/Spark/" class="category-chain-item">Spark</a>
   
   
 
@@ -356,7 +390,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/helloworld/">#helloworld</a>
+        <a href="/tags/bigdata/">#bigdata</a>
+      
+        <a href="/tags/spark/">#spark</a>
       
     </div>
   
@@ -368,8 +404,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>博客使用规范</div>
-      <div>http://archibald-nice.github.io/2023/06/28/hello-world/</div>
+      <div>Spark基础</div>
+      <div>http://archibald-nice.github.io/2023/07/17/spark-230716/</div>
     </div>
     <div class="license-meta">
       
@@ -381,7 +417,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月28日</div>
+          <div>2023年7月17日</div>
         </div>
       
       
@@ -413,15 +449,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/17/spark-230716/" title="Spark基础">
+                      <a href="/2023/07/18/pimon-230718/" title="浅尝Pimon">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spark基础</span>
+                        <span class="hidden-mobile">浅尝Pimon</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/06/28/hello-world/" title="博客使用规范">
+                        <span class="hidden-mobile">博客使用规范</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
