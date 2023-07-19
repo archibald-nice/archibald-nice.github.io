@@ -4,11 +4,38 @@
   
   
   <entry>
-    <title>浅尝Pimon</title>
+    <title>Hexo(Fluid)使用技巧</title>
+    <link href="/2023/07/20/hello-world/"/>
+    <url>/2023/07/20/hello-world/</url>
+    
+    <content type="html"><![CDATA[<h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><p>这是一句话<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="这是对应的脚注">[1]</span></a></sup></p><h1 id="Tag插件"><a href="#Tag插件" class="headerlink" title="Tag插件"></a>Tag插件</h1><h2 id="便签"><a href="#便签" class="headerlink" title="便签"></a>便签</h2><div class="note note-success">            <p>文字 或者 <code>markdown</code> 均可</p>          </div><h2 id="行内标签"><a href="#行内标签" class="headerlink" title="行内标签"></a>行内标签</h2><span class="label label-primary">核心标签</span> <span class="label label-default">默认标签</span><span class="label label-info">信息标签</span> <span class="label label-success">成功标签</span><span class="label label-warning">警告标签</span> <span class="label label-danger">危险标签</span><h2 id="勾选框"><a href="#勾选框" class="headerlink" title="勾选框"></a>勾选框</h2><div>            <input type="checkbox" disabled >普通示例          </div><div>            <input type="checkbox" disabled checked="checked">默认选中          </div>            <input type="checkbox" disabled >内联示例           后面文字不换行<input type="checkbox" disabled > 也可以只传入一个参数，文字写在后边（这样不支持外联）<h2 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h2><a class="btn" href="www.baidu.com"  title="准备起飞" target="_blank">百度</a><h1 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h1><p>目前Fluid暂不支持emoji插件，直接使用 <code>hexo-renderer-markdown-it</code> 插件会导致兼容问题，所以这些拓展型功能我们通过HTML原生支持：</p><ol><li>通过十进制形式插入：&#x1F600;</li><li>通过Unicode插入：&#128513;</li></ol><blockquote><p>可以从 <a href="https://www.emojiall.com/zh-hans/emoji">Emoji-all</a> 中找到所有表情信息</p></blockquote><h1 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>这是对应的脚注<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>Tutorial</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+      <tag>fluid</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>浅尝Paimon</title>
     <link href="/2023/07/18/pimon-230718/"/>
     <url>/2023/07/18/pimon-230718/</url>
     
-    <content type="html"><![CDATA[<h1 id="01-总览"><a href="#01-总览" class="headerlink" title="01 总览"></a>01 总览</h1><p><strong>Streaming data lake platform with high-speed data ingestion, changelog tracking and efficient real-time analytics.</strong></p><p>Pimon 是一个具有 <code>高速数据摄取</code>、<code>变更日志跟踪</code> 和 <code>高效实时分析</code> 功能的 <strong>流数据湖平台</strong></p><p><a href="https://paimon.apache.org/">官网</a>、<a href="https://paimon.apache.org/docs/master">文档</a>、<a href="https://github.com/apache/incubator-paimon/">GitHub</a>、<a href="https://paimon.apache.org/community/how-to-contribute/">贡献指南</a></p><blockquote><p>Pimon核心支持Flink的数据读取，同时也支持Hive、Spark、Trino等计算引擎的读取</p></blockquote><h2 id="1-1-架构"><a href="#1-1-架构" class="headerlink" title="1.1 架构"></a>1.1 架构</h2><p><img src="/../img/pimon-architecture.png" alt="Pimon Architecture"></p><h2 id="1-2-基本概念-Basic-Concepts"><a href="#1-2-基本概念-Basic-Concepts" class="headerlink" title="1.2 基本概念 Basic Concepts"></a>1.2 基本概念 Basic Concepts</h2><h2 id="1-3-文件布局-File-Layouts"><a href="#1-3-文件布局-File-Layouts" class="headerlink" title="1.3 文件布局 File Layouts"></a>1.3 文件布局 File Layouts</h2><h2 id="1-4-文件操作-File-Operations"><a href="#1-4-文件操作-File-Operations" class="headerlink" title="1.4 文件操作 File Operations"></a>1.4 文件操作 File Operations</h2><h2 id="1-5-主键表-Primary-Key-Table"><a href="#1-5-主键表-Primary-Key-Table" class="headerlink" title="1.5 主键表 Primary Key Table"></a>1.5 主键表 Primary Key Table</h2><h2 id="1-6-仅追加表-Append-Only-Table"><a href="#1-6-仅追加表-Append-Only-Table" class="headerlink" title="1.6 仅追加表 Append Only Table"></a>1.6 仅追加表 Append Only Table</h2><h2 id="1-7-外部日志系统-External-Log-Systems"><a href="#1-7-外部日志系统-External-Log-Systems" class="headerlink" title="1.7 外部日志系统 External Log Systems"></a>1.7 外部日志系统 External Log Systems</h2><h1 id="02-核心"><a href="#02-核心" class="headerlink" title="02 核心"></a>02 核心</h1><h2 id="2-1-引擎-Engine"><a href="#2-1-引擎-Engine" class="headerlink" title="2.1 引擎 Engine"></a>2.1 引擎 Engine</h2><h2 id="2-2-文件系统-Filesystems"><a href="#2-2-文件系统-Filesystems" class="headerlink" title="2.2 文件系统 Filesystems"></a>2.2 文件系统 Filesystems</h2><h2 id="2-3-用法指导-How-to"><a href="#2-3-用法指导-How-to" class="headerlink" title="2.3 用法指导 How to"></a>2.3 用法指导 How to</h2><h2 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h2><h1 id="03-Engines"><a href="#03-Engines" class="headerlink" title="03 Engines"></a>03 Engines</h1><h1 id="04-Filesystems"><a href="#04-Filesystems" class="headerlink" title="04 Filesystems"></a>04 Filesystems</h1><p>111</p><h1 id="05"><a href="#05" class="headerlink" title="05"></a>05</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="01-总览"><a href="#01-总览" class="headerlink" title="01 总览"></a>01 总览</h1><p><strong>Streaming data lake platform with high-speed data ingestion, changelog tracking and efficient real-time analytics.</strong></p><p>Paimon 是一个具有 <code>高速数据摄取</code>、<code>变更日志跟踪</code> 和 <code>高效实时分析</code> 功能的 <strong>流数据湖平台</strong></p><p><a href="https://paimon.apache.org/">官网</a>、<a href="https://paimon.apache.org/docs/master">文档</a>、<a href="https://github.com/apache/incubator-paimon/">GitHub</a>、<a href="https://paimon.apache.org/community/how-to-contribute/">贡献指南</a>、<a href="https://paimon.apache.org/docs/master/project/roadmap/">Roadmap</a></p><blockquote><p>Paimon核心支持Flink的数据读取，同时也支持Hive、Spark、Trino等计算引擎的读取</p></blockquote><h2 id="1-1-架构"><a href="#1-1-架构" class="headerlink" title="1.1 架构"></a>1.1 架构</h2><p><img src="/img/paimon-architecture.png" alt="Paimon Architecture"></p><h2 id="1-2-基本概念-Basic-Concepts"><a href="#1-2-基本概念-Basic-Concepts" class="headerlink" title="1.2 基本概念 Basic Concepts"></a>1.2 基本概念 Basic Concepts</h2><ul><li><strong>Snapshot</strong><sup>快照</sup>: 快照是对表再某一瞬间的<code>状态记录</code>，因此可以让用户进行Time-traveling(时间旅行);</li><li><strong>Partition</strong><sup>分区</sup>: 和Hive类似，Paimon将数据按照分区来切分数据块；<blockquote><p>如果定义了主键，分区键必须是主键的子集。</p></blockquote></li><li><strong>Bucket</strong><sup>桶</sup>: 对于 非分区表、已分区表 进行<code>二次数据切分</code>。用户可以通过提供<code>bucket-key</code>选项来指定bucket列<blockquote><p>Bucket 是针对<code>&quot;读/写&quot;的最小存储单元</code>，因此bucket的数量限制了最大的处理并行性。但是，这个数字不应该太大，因为它将导致大量小文件和低读取性能。<u>一般情况下，建议每个bucket中的数据大小为<strong>1GB</strong>左右</u>。</p></blockquote></li><li><strong>Consistency Guarantees</strong><sup>一致性保证</sup>: 写表时，Paimon通过<code>两阶段提交协议</code>自动将一批记录提交出去（每次提交时最多产生两次snapshot）</li></ul><h1 id="02-核心"><a href="#02-核心" class="headerlink" title="02 核心"></a>02 核心</h1><h2 id="1-3-文件布局-File-Layouts"><a href="#1-3-文件布局-File-Layouts" class="headerlink" title="1.3 文件布局 File Layouts"></a>1.3 文件布局 File Layouts</h2><p><img src="/img/paimon-file-layout.png" alt="Paimon Architecture"></p><ol><li><strong>Snapshot Files</strong><sup>快照文件</sup>:</li><li><strong>Manifest Files</strong><sup>清单文件</sup>:</li><li><strong>Data Files</strong><sup>数据文件</sup>:</li></ol><h2 id="1-4-文件操作-File-Operations"><a href="#1-4-文件操作-File-Operations" class="headerlink" title="1.4 文件操作 File Operations"></a>1.4 文件操作 File Operations</h2><h2 id="1-5-主键表-Primary-Key-Table"><a href="#1-5-主键表-Primary-Key-Table" class="headerlink" title="1.5 主键表 Primary Key Table"></a>1.5 主键表 Primary Key Table</h2><h2 id="1-6-仅追加表-Append-Only-Table"><a href="#1-6-仅追加表-Append-Only-Table" class="headerlink" title="1.6 仅追加表 Append Only Table"></a>1.6 仅追加表 Append Only Table</h2><h2 id="1-7-外部日志系统-External-Log-Systems"><a href="#1-7-外部日志系统-External-Log-Systems" class="headerlink" title="1.7 外部日志系统 External Log Systems"></a>1.7 外部日志系统 External Log Systems</h2><h1 id="03-引擎-Engines"><a href="#03-引擎-Engines" class="headerlink" title="03 引擎 Engines"></a>03 引擎 Engines</h1><h1 id="04-文件系统-Filesystems"><a href="#04-文件系统-Filesystems" class="headerlink" title="04 文件系统 Filesystems"></a>04 文件系统 Filesystems</h1><h1 id="05-用法指导-How-to"><a href="#05-用法指导-How-to" class="headerlink" title="05 用法指导 How to"></a>05 用法指导 How to</h1><h1 id="06-运维调优-Maintenance"><a href="#06-运维调优-Maintenance" class="headerlink" title="06 运维调优 Maintenance"></a>06 运维调优 Maintenance</h1><h1 id="07-三方调用-API"><a href="#07-三方调用-API" class="headerlink" title="07 三方调用 API"></a>07 三方调用 API</h1>]]></content>
     
     
     <categories>
@@ -26,7 +53,7 @@
       
       <tag>apache</tag>
       
-      <tag>pimon</tag>
+      <tag>paimon</tag>
       
     </tags>
     
@@ -54,31 +81,6 @@
       <tag>bigdata</tag>
       
       <tag>spark</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>博客使用规范</title>
-    <link href="/2023/06/28/hello-world/"/>
-    <url>/2023/06/28/hello-world/</url>
-    
-    <content type="html"><![CDATA[<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><h2 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h2>]]></content>
-    
-    
-    <categories>
-      
-      <category>教程</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>helloworld</tag>
       
     </tags>
     

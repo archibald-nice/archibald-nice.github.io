@@ -16,24 +16,25 @@
   <meta name="author" content="Archibald Wan">
   <meta name="keywords" content="java">
   
-    <meta name="description" content="01 Spark1.1 Local模式 解压tar包； 运行官方Pi案例： 12345&gt; bin&#x2F;spark-submit \	--class org.apache.spark.examples.SparkPi \	--master local[2] \	.&#x2F;examples&#x2F;jars&#x2F;spark-examples_2.12-3.0.0.jar \	10 运行官方WordCount案例： 1">
+    <meta name="description" content="脚注这是一句话[1] Tag插件便签             文字 或者 markdown 均可             行内标签核心标签 默认标签 信息标签 成功标签 警告标签 危险标签  勾选框             普通示例                         默认选中                         内联示例            后面文字不换行  也可以只传">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark基础">
-<meta property="og:url" content="http://archibald-nice.github.io/2023/07/16/spark-230716/">
+<meta property="og:title" content="Hexo(Fluid)使用技巧">
+<meta property="og:url" content="http://archibald-nice.github.io/2023/07/20/hello-world/">
 <meta property="og:site_name" content="Archie&#39;s Tech-blog">
-<meta property="og:description" content="01 Spark1.1 Local模式 解压tar包； 运行官方Pi案例： 12345&gt; bin&#x2F;spark-submit \	--class org.apache.spark.examples.SparkPi \	--master local[2] \	.&#x2F;examples&#x2F;jars&#x2F;spark-examples_2.12-3.0.0.jar \	10 运行官方WordCount案例： 1">
+<meta property="og:description" content="脚注这是一句话[1] Tag插件便签             文字 或者 markdown 均可             行内标签核心标签 默认标签 信息标签 成功标签 警告标签 危险标签  勾选框             普通示例                         默认选中                         内联示例            后面文字不换行  也可以只传">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-16T14:53:41.731Z">
-<meta property="article:modified_time" content="2023-07-16T14:53:41.731Z">
+<meta property="article:published_time" content="2023-07-19T17:15:19.023Z">
+<meta property="article:modified_time" content="2023-07-19T17:15:19.023Z">
 <meta property="article:author" content="Archibald Wan">
-<meta property="article:tag" content="bigdata spark">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="fluid">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Spark基础 - Archie&#39;s Tech-blog</title>
+  <title>Hexo(Fluid)使用技巧 - Archie&#39;s Tech-blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -238,7 +239,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Spark基础"></span>
+            <span id="subtitle" data-typed-text="Hexo(Fluid)使用技巧"></span>
           
         </div>
 
@@ -249,8 +250,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-16 22:53" pubdate>
-          2023年7月16日 晚上
+        <time datetime="2023-07-20 01:15" pubdate>
+          2023年7月20日 凌晨
         </time>
       </span>
     
@@ -261,7 +262,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          271 字
         
       </span>
     
@@ -272,7 +273,7 @@
         
         
         
-          17 分钟
+          3 分钟
         
       </span>
     
@@ -318,46 +319,43 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Spark基础</h1>
+            <h1 style="display: none">Hexo(Fluid)使用技巧</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="01-Spark"><a href="#01-Spark" class="headerlink" title="01 Spark"></a>01 Spark</h2><h3 id="1-1-Local模式"><a href="#1-1-Local模式" class="headerlink" title="1.1 Local模式"></a>1.1 Local模式</h3><ol>
-<li>解压tar包；</li>
-<li>运行官方Pi案例： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master <span class="hljs-built_in">local</span>[2] \<br>	./examples/jars/spark-examples_2.12-3.0.0.jar \<br>	10<br></code></pre></td></tr></table></figure></li>
-<li>运行官方WordCount案例： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-shell<br>...<br>scala&gt; sc.textFile(<span class="hljs-string">&quot;/home/bigdata/modules/spark-3.2.4/tmp_data/input.txt&quot;</span>).flatMap(_.<span class="hljs-built_in">split</span>(<span class="hljs-string">&quot; &quot;</span>)).map((_,<span class="hljs-number">1</span>)).reduceByKey(_+_).collect<br></code></pre></td></tr></table></figure></li>
+                <h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><p>这是一句话<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="这是对应的脚注">[1]</span></a></sup></p>
+<h1 id="Tag插件"><a href="#Tag插件" class="headerlink" title="Tag插件"></a>Tag插件</h1><h2 id="便签"><a href="#便签" class="headerlink" title="便签"></a>便签</h2><div class="note note-success">
+            <p>文字 或者 <code>markdown</code> 均可</p>
+          </div>
+
+<h2 id="行内标签"><a href="#行内标签" class="headerlink" title="行内标签"></a>行内标签</h2><span class="label label-primary">核心标签</span> <span class="label label-default">默认标签</span>
+<span class="label label-info">信息标签</span> <span class="label label-success">成功标签</span>
+<span class="label label-warning">警告标签</span> <span class="label label-danger">危险标签</span>
+
+<h2 id="勾选框"><a href="#勾选框" class="headerlink" title="勾选框"></a>勾选框</h2><div>
+            <input type="checkbox" disabled >普通示例
+          </div>
+<div>
+            <input type="checkbox" disabled checked="checked">默认选中
+          </div>
+
+            <input type="checkbox" disabled >内联示例
+           后面文字不换行
+<input type="checkbox" disabled > 也可以只传入一个参数，文字写在后边（这样不支持外联）
+
+<h2 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h2><a class="btn" href="www.baidu.com"  title="准备起飞" target="_blank">百度</a>
+
+<h1 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h1><p>目前Fluid暂不支持emoji插件，直接使用 <code>hexo-renderer-markdown-it</code> 插件会导致兼容问题，所以这些拓展型功能我们通过HTML原生支持：</p>
+<ol>
+<li>通过十进制形式插入：&#x1F600;</li>
+<li>通过Unicode插入：&#128513;</li>
 </ol>
-<h3 id="1-2-Standalone模式"><a href="#1-2-Standalone模式" class="headerlink" title="1.2 Standalone模式"></a>1.2 Standalone模式</h3><p>由Spark使用自身的资源调动引擎管理 Master 和 Worker</p>
 <blockquote>
-<p>为方便测试仅在单节点上部署单节点伪集群模式(Master和Worker均在一台机器)</p>
+<p>可以从 <a target="_blank" rel="noopener" href="https://www.emojiall.com/zh-hans/emoji">Emoji-all</a> 中找到所有表情信息</p>
 </blockquote>
-<p>直接启动命令：<code>./sbin/start-all.sh</code><br>网页查看：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a><br>运行官方Pi案例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master spark://locahost:7077 \<br>	./examples/jars/spark-examples_2.12-3.2.4.jar \<br>	10<br></code></pre></td></tr></table></figure>
-
-<h4 id="1-2-1-提交参数进阶"><a href="#1-2-1-提交参数进阶" class="headerlink" title="1.2.1 提交参数进阶"></a>1.2.1 提交参数进阶</h4><ul>
-<li>–<strong>executor-memory</strong>: 指定Executor内存</li>
-<li>–<strong>total-executor-cores</strong>: 指定Executor核数</li>
-<li>–<strong>deploy-mode</strong>：指定运行模式：<ul>
-<li><em>client</em>：Driver程序在本地运行</li>
-<li><em>cluster</em>：Driver程序在集群中运行</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-Yarn模式"><a href="#1-3-Yarn模式" class="headerlink" title="1.3 Yarn模式"></a>1.3 Yarn模式</h3><p>启动好 HDFS 和 Yarn 后，执行Pi案例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master yarn \<br>	./examples/jars/spark-examples_2.12-3.2.4.jar \<br>	10<br></code></pre></td></tr></table></figure>
-
-<h4 id="1-3-1-集成Spark的historyServer"><a href="#1-3-1-集成Spark的historyServer" class="headerlink" title="1.3.1 集成Spark的historyServer"></a>1.3.1 集成Spark的historyServer</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; <span class="hljs-built_in">mv</span> spark-defaults.conf.template spark-defaults.conf<br><br>&gt; vi spark-defaults.conf<br>spark.eventLog.enabled	<span class="hljs-literal">true</span><br>spark.eventLog.<span class="hljs-built_in">dir</span>	hdfs://node-001:8020/<span class="hljs-variable">$&#123;directory&#125;</span><br>spark.yarn.historyServer.address=node-001:18080<br>spark.history.ui.port=18080<br><br><span class="hljs-comment"># 参数1含义：WEBUI访问的端口号为18080</span><br><span class="hljs-comment"># 参数2含义：指定历史服务器日志存储路径</span><br><span class="hljs-comment"># 参数3含义：指定保存Application历史记录的个数，如果超过这个值，旧的应用程序信息将被删除，这个是内存中的应用数，而不是页面上显示的应用数</span><br>&gt; vi spark-env.sh<br><span class="hljs-built_in">export</span> SPARK_HISTORY_OPTS=<span class="hljs-string">&quot;</span><br><span class="hljs-string">-Dspark.history.ui.port=18080 </span><br><span class="hljs-string">-Dspark.history.fs.logDirectory=hdfs://node-001:8020/<span class="hljs-variable">$&#123;directory&#125;</span></span><br><span class="hljs-string">-Dspark.history.retainedApplications=30&quot;</span><br><br>./sbin/spark-start-hitory-server.sh<br></code></pre></td></tr></table></figure>
-<p>至此，spark的history服务就集成到了hadoop中，访问 <a target="_blank" rel="noopener" href="http://node-001:18080/">http://node-001:18080</a> 可以查看历时任务，同时可从yarn管理页面跳转。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit \<br>	--class org.apache.spark.examples.SparkPi \<br>	--master yarn \<br>	./examples/jars/spark-examples_2.12-3.2.4.jar \<br>	10<br></code></pre></td></tr></table></figure>
-
-<h3 id="1-3-2-运行模式"><a href="#1-3-2-运行模式" class="headerlink" title="1.3.2 运行模式"></a>1.3.2 运行模式</h3><ol>
-<li><strong>yarn-client</strong>(默认)：Driver程序运行在客户端，适用于交互、调试，希望立即看到app的输出</li>
-<li><strong>yarn-cluster</strong>：Driver程序运行在由ResourceManager启动的APPMaster适用于生产环境</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; bin/spark-submit --deploy-mode client/cluster ...<br></code></pre></td></tr></table></figure>
-
-<h2 id="02-SparkCore"><a href="#02-SparkCore" class="headerlink" title="02 SparkCore"></a>02 SparkCore</h2><h2 id="03-SparkSQL"><a href="#03-SparkSQL" class="headerlink" title="03 SparkSQL"></a>03 SparkSQL</h2><h2 id="04-SparkStreaming"><a href="#04-SparkStreaming" class="headerlink" title="04 SparkStreaming"></a>04 SparkStreaming</h2>
+<h1 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>这是对应的脚注
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -375,7 +373,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Spark/" class="category-chain-item">Spark</a>
+  <a href="/categories/Tutorial/" class="category-chain-item">Tutorial</a>
   
   
 
@@ -390,7 +388,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/bigdata-spark/">#bigdata spark</a>
+        <a href="/tags/hexo/">#hexo</a>
+      
+        <a href="/tags/fluid/">#fluid</a>
       
     </div>
   
@@ -402,8 +402,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Spark基础</div>
-      <div>http://archibald-nice.github.io/2023/07/16/spark-230716/</div>
+      <div>Hexo(Fluid)使用技巧</div>
+      <div>http://archibald-nice.github.io/2023/07/20/hello-world/</div>
     </div>
     <div class="license-meta">
       
@@ -415,7 +415,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月16日</div>
+          <div>2023年7月20日</div>
         </div>
       
       
@@ -451,8 +451,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/28/hello-world/" title="博客使用规范">
-                        <span class="hidden-mobile">博客使用规范</span>
+                      <a href="/2023/07/18/pimon-230718/" title="浅尝Paimon">
+                        <span class="hidden-mobile">浅尝Paimon</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
