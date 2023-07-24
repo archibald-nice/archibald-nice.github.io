@@ -16,15 +16,15 @@
   <meta name="author" content="Archibald Wan">
   <meta name="keywords" content="java">
   
-    <meta name="description" content="脚注这是一句话[1] Tag插件便签             文字 或者 markdown 均可             行内标签核心标签 默认标签 信息标签 成功标签 警告标签 危险标签  勾选框             普通示例                         默认选中                         内联示例            后面文字不换行  也可以只传">
+    <meta name="description" content="&#x2F;* 设置整个页面的字体 *&#x2F;   html, body, .markdown-body {     font-family: STXihei, &quot;华文细黑&quot;, &quot;Microsoft YaHei&quot;, &quot;微软雅黑&quot;;     font-size: 15px;   }   字体建议通过&lt;style&gt;标签为文章设置单独字体 12345678910111213&lt;style&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo(Fluid)使用技巧">
 <meta property="og:url" content="http://archibald-nice.github.io/2023/07/20/hello-world/">
 <meta property="og:site_name" content="Archie&#39;s Tech-blog">
-<meta property="og:description" content="脚注这是一句话[1] Tag插件便签             文字 或者 markdown 均可             行内标签核心标签 默认标签 信息标签 成功标签 警告标签 危险标签  勾选框             普通示例                         默认选中                         内联示例            后面文字不换行  也可以只传">
+<meta property="og:description" content="&#x2F;* 设置整个页面的字体 *&#x2F;   html, body, .markdown-body {     font-family: STXihei, &quot;华文细黑&quot;, &quot;Microsoft YaHei&quot;, &quot;微软雅黑&quot;;     font-size: 15px;   }   字体建议通过&lt;style&gt;标签为文章设置单独字体 12345678910111213&lt;style&gt;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-19T17:15:19.023Z">
-<meta property="article:modified_time" content="2023-07-19T17:15:19.023Z">
+<meta property="article:published_time" content="2023-07-19T17:34:48.991Z">
+<meta property="article:modified_time" content="2023-07-19T17:34:48.991Z">
 <meta property="article:author" content="Archibald Wan">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="fluid">
@@ -250,7 +250,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-20 01:15" pubdate>
+        <time datetime="2023-07-20 01:34" pubdate>
           2023年7月20日 凌晨
         </time>
       </span>
@@ -262,7 +262,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          271 字
+          717 字
         
       </span>
     
@@ -273,7 +273,7 @@
         
         
         
-          3 分钟
+          6 分钟
         
       </span>
     
@@ -324,7 +324,18 @@
             
               <div class="markdown-body">
                 
-                <h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><p>这是一句话<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="这是对应的脚注">[1]</span></a></sup></p>
+                <style>
+  /* 设置整个页面的字体 */
+  html, body, .markdown-body {
+    font-family: STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑";
+    font-size: 15px;
+  }
+</style>
+
+<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p>建议通过<code>&lt;style&gt;</code>标签为文章设置单独字体</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-comment">/* 设置整个页面的字体 */</span></span><br><span class="language-css">  <span class="hljs-selector-tag">html</span>, <span class="hljs-selector-tag">body</span>, <span class="hljs-selector-class">.markdown-body</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-family</span>: STXihei, <span class="hljs-string">&quot;华文细黑&quot;</span>, <span class="hljs-string">&quot;Microsoft YaHei&quot;</span>, <span class="hljs-string">&quot;微软雅黑&quot;</span>;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-comment">/* 只设置 markdown 字体 */</span></span><br><span class="language-css">  <span class="hljs-selector-class">.markdown-body</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-family</span>: KaiTi,<span class="hljs-string">&quot;Microsoft YaHei&quot;</span>,Georgia, sans, serif;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><p>这是一句话<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="这是对应的脚注">[1]</span></a></sup></p>
 <h1 id="Tag插件"><a href="#Tag插件" class="headerlink" title="Tag插件"></a>Tag插件</h1><h2 id="便签"><a href="#便签" class="headerlink" title="便签"></a>便签</h2><div class="note note-success">
             <p>文字 或者 <code>markdown</code> 均可</p>
           </div>
