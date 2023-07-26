@@ -16,29 +16,22 @@
   <meta name="author" content="Archibald Wan">
   <meta name="keywords" content="java">
   
-    <meta name="description" content="基于apache-paimon-0.4的分析">
+    <meta name="description" content="基于apache-paimon-0.4，官方提出的核心概念学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Paimon-[卷I]-核心概念">
 <meta property="og:url" content="http://archibald-nice.github.io/2023/07/24/paimon-230718/">
 <meta property="og:site_name" content="Archie&#39;s Tech-blog">
-<meta property="og:description" content="基于apache-paimon-0.4的分析">
+<meta property="og:description" content="基于apache-paimon-0.4，官方提出的核心概念学习">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-architecture.png">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-file-layout.png">
-<meta property="og:image" content="http://archibald-nice.github.io/img/lsm-sorted-run.png">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-file-operations-0.png">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-file-operations-1.png">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-file-operations-2.png">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-file-operations-3.png">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-file-operations-4.png">
+<meta property="og:image" content="http://archibald-nice.github.io/img/paimon-blog-title.png">
 <meta property="article:published_time" content="2023-07-24T15:32:51.000Z">
-<meta property="article:modified_time" content="2023-07-26T10:09:35.638Z">
+<meta property="article:modified_time" content="2023-07-26T17:21:31.647Z">
 <meta property="article:author" content="Archibald Wan">
 <meta property="article:tag" content="bigdata">
 <meta property="article:tag" content="apache">
 <meta property="article:tag" content="paimon">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://archibald-nice.github.io/img/paimon-architecture.png">
+<meta name="twitter:image" content="http://archibald-nice.github.io/img/paimon-blog-title.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -123,7 +116,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Archie&#39;s Tech-blog</strong>
+      <strong>Archie&#39;s Tech-Space 🐼</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -367,7 +360,7 @@
 <h5 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h5><p>不同的 <code>sorted runs</code> 中可能包含相同主键的 <code>data files</code>，所以 <span class="label label-danger">在查询LSM树的时候，必须按照用户指定的合并引擎规则搭配时间戳合并相同主键的sorted runs集合</span></p>
 <h5 id="写入操作"><a href="#写入操作" class="headerlink" title="写入操作"></a>写入操作</h5><p>新纪录将首先在内存中缓冲，当缓冲区已满时，将对内存中的所有记录进行排序并刷写到磁盘中。</p>
 <h5 id="合并操作"><a href="#合并操作" class="headerlink" title="合并操作"></a>合并操作</h5><p>当越来越多的数据写入LSM树，刷写出来的 <code>sorted runs</code> 将会堆积，为了处理因为大量 <code>sorted runs</code> 带来的查询性能低下(甚至是OOM情形)，Paimon使用了 <span class="label label-info">Compaction</span> 操作来合并小单位的 <code>sorted runs</code>。</p>
-<p>类似于 Rocksdb 的 <em>universal compation</em>[^1]，Paimon 的Compaction策略也是在”读”&#x2F;“写”之间进行性能的抉择，因为合并动作对于数据块来说是一个敏感的锁式操作，对于CPU和磁盘I&#x2F;O影响较大。</p>
+<p>类似于 Rocksdb 的 <em>universal compation</em><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="xxx">[1]</span></a></sup>，Paimon 的Compaction策略也是在”读”&#x2F;“写”之间进行性能的抉择，因为合并动作对于数据块来说是一个敏感的锁式操作，对于CPU和磁盘I&#x2F;O影响较大。</p>
 <h3 id="1-4-文件操作"><a href="#1-4-文件操作" class="headerlink" title="1.4 文件操作"></a>1.4 文件操作</h3><h4 id="1-4-1-Flink集成Paimon"><a href="#1-4-1-Flink集成Paimon" class="headerlink" title="1.4.1 Flink集成Paimon"></a>1.4.1 Flink集成Paimon</h4><p>从 <a target="_blank" rel="noopener" href="https://repository.apache.org/snapshots/org/apache/paimon/">Flink集成jar包</a> 路径下载对应flink版本的官方jar包(1.14&#x2F;1.15&#x2F;1.16&#x2F;1.17)，拷贝到 <code>$FLINK_HOME/lib/</code> 下(按需改名)</p>
 <div class="note note-info">
             <p>此处编者使用了 <code>paimon-flink-1.17-0.5.jar</code> 作为三方包</p>
@@ -527,18 +520,18 @@
             <p><code>first-row</code>引擎仅支持插入顺序，所以无法为其指定 <code>squence.field</code> 参数，此外它也不接受 <em>DELETE操作</em> 和 <em>UPDATE_BEFORE操作</em></p>
           </div>
 
-<div class="note note-warning">
-            <p>在 FlinkSQL 中设置 <code>table.exec.sink.upsert-materialize=NONE</code> 总是会导致奇怪的行为，所以当明确摄入的数据是乱序的时候，请阅读并使用 <a href="#153">序列化字段</a></p>
-          </div>
-
-<h4 id="1-5-2-Changelog-制造器"><a href="#1-5-2-Changelog-制造器" class="headerlink" title="1.5.2 Changelog 制造器"></a>1.5.2 Changelog 制造器</h4><p>流式查询会不断生产出变更<sup>changes</sup>，我们可以通过指定 &#96;&#96; 这个表属性来进行制造器的切换。</p>
+<blockquote>
+<p>在 FlinkSQL 中设置 <code>table.exec.sink.upsert-materialize=NONE</code> 总是会导致奇怪的行为，所以当明确摄入的数据是乱序的时候，请阅读并使用 <a href="#Sequence-Field">序列字段</a></p>
+</blockquote>
+<h4 id="1-5-2-Changelog-制造器"><a href="#1-5-2-Changelog-制造器" class="headerlink" title="1.5.2 Changelog 制造器"></a>1.5.2 Changelog 制造器</h4><p>流式查询会不断生产出变更<sup>changes</sup>，我们可以通过指定 <code>changelog-producer</code> 这个表属性来进行制造器的切换。</p>
 <ul>
 <li><strong>None</strong><sup>无</sup>：仅看得到合并后的数据结果，无法回溯旧的数据状态；<span class="label label-danger">不建议</span></li>
 <li><strong>Input</strong><sup>(常规)输入型</sup>：将输入的记录直接刷写到独立的changelog文件中。<span class="label label-success">建议</span></li>
 <li><strong>Lookup</strong><sup>检索型</sup>：使用缓存辅助changelog的刷写。<span class="label label-warning">试验</span></li>
 <li><strong>Full Compaction</strong><sup>全压缩</sup>：对于读延迟过高的场景可以使用该制造器，它分离了 <code>数据刷写</code> 和 <code>日志生成</code> 两个流程，加速查询，但是写延迟升高。<span class="label label-danger">不建议</span></li>
 </ul>
-<h4 id="1-5-3-序列字段"><a href="#1-5-3-序列字段" class="headerlink" title="1.5.3 序列字段"></a><span id="153">1.5.3 序列字段</span></h4><p>正常情况下，主键表都是按照数据输入顺序进行合并的，当数据是乱序的情况下，会导致合并结果不正确。对比Flink水印的概念，我们在Paimon的主键表中指定一个时间类型字段 <code>sequence.field</code> 来纠正乱序问题。例如在 FlinkSQL 建表语句中：</p>
+<p><span id="Sequence-Field"></span><br></p>
+<h4 id="1-5-3-序列字段"><a href="#1-5-3-序列字段" class="headerlink" title="1.5.3 序列字段"></a>1.5.3 序列字段</h4><p>正常情况下，主键表都是按照数据输入顺序进行合并的，当数据是乱序的情况下，会导致合并结果不正确。对比Flink水印的概念，我们在Paimon的主键表中指定一个时间类型字段 <code>sequence.field</code> 来纠正乱序问题。例如在 FlinkSQL 建表语句中：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> MyTable (<br>    pk <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> ENFORCED,<br>    v1 <span class="hljs-keyword">DOUBLE</span>,<br>    v2 <span class="hljs-type">BIGINT</span>,<br>    dt <span class="hljs-type">TIMESTAMP</span><br>) <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;sequence.field&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dt&#x27;</span><br>);<br></code></pre></td></tr></table></figure>
 
 <h4 id="1-5-4-序列组"><a href="#1-5-4-序列组" class="headerlink" title="1.5.4 序列组"></a>1.5.4 序列组</h4><p>当合并引擎是 <code>partial-update</code> 引擎且接受多流输入时，光靠 <code>sequence-field</code> 可能无法解决乱序问题，因为在<strong>流A</strong>上的 <code>sequence-field</code> 可能会被<strong>流B</strong>上的更新操作覆盖。</p>
@@ -559,7 +552,9 @@
 <li><strong>compaction.max.file-num</strong>：<span class="label label-default">default:50</span> 数据文件压缩触发阈值上限。</li>
 </ul>
 <h3 id="1-7-外部日志系统"><a href="#1-7-外部日志系统" class="headerlink" title="1.7 外部日志系统"></a>1.7 外部日志系统</h3><p>主要是接入 <code>Kafka</code> 等日志系统。具体可参考 <a target="_blank" rel="noopener" href="https://paimon.apache.org/docs/master/concepts/external-log-systems/#supported-log-systems">最新官网文档说明</a></p>
-
+<hr>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>xxx
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
