@@ -16,16 +16,16 @@
   <meta name="author" content="Archibald Wan">
   <meta name="keywords" content="java">
   
-    <meta name="description" content="基于apache-paimon-0.4，官方提出的核心概念学习">
+    <meta name="description" content="基于apache-paimon-0.4，官方提出的核心目录学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Paimon-[卷I]-核心概念">
+<meta property="og:title" content="Paimon-[卷I]-官网越阅越悦">
 <meta property="og:url" content="http://archibald-nice.github.io/2023/07/24/paimon-230718/">
 <meta property="og:site_name" content="Archie&#39;s Tech-blog">
-<meta property="og:description" content="基于apache-paimon-0.4，官方提出的核心概念学习">
+<meta property="og:description" content="基于apache-paimon-0.4，官方提出的核心目录学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://archibald-nice.github.io/img/paimon-blog-title.png">
 <meta property="article:published_time" content="2023-07-24T15:32:51.000Z">
-<meta property="article:modified_time" content="2023-07-26T17:21:31.647Z">
+<meta property="article:modified_time" content="2023-07-28T20:30:44.605Z">
 <meta property="article:author" content="Archibald Wan">
 <meta property="article:tag" content="bigdata">
 <meta property="article:tag" content="apache">
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Paimon-[卷I]-核心概念 - Archie&#39;s Tech-blog</title>
+  <title>Paimon-[卷I]-官网越阅越悦 - Archie&#39;s Tech-blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -242,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Paimon-[卷I]-核心概念"></span>
+            <span id="subtitle" data-typed-text="Paimon-[卷I]-官网越阅越悦"></span>
           
         </div>
 
@@ -265,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14k 字
+          17k 字
         
       </span>
     
@@ -276,7 +276,7 @@
         
         
         
-          118 分钟
+          142 分钟
         
       </span>
     
@@ -322,7 +322,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Paimon-[卷I]-核心概念</h1>
+            <h1 style="display: none">Paimon-[卷I]-官网越阅越悦</h1>
             
             
               <div class="markdown-body">
@@ -335,7 +335,7 @@
   }
 </style>
 
-<h2 id="01-总览"><a href="#01-总览" class="headerlink" title="01 总览"></a>01 总览</h2><p><strong>Streaming data lake platform with high-speed data ingestion, changelog tracking and efficient real-time analytics.</strong></p>
+<h2 id="01-总览-😎"><a href="#01-总览-😎" class="headerlink" title="01 总览 😎"></a>01 总览 😎</h2><p><strong>Streaming data lake platform with high-speed data ingestion, changelog tracking and efficient real-time analytics.</strong></p>
 <p>Paimon 是一个具有 <code>高速数据摄取</code>、<code>变更日志跟踪</code> 和 <code>高效实时分析</code> 功能的 <strong>流数据湖平台</strong></p>
 <p><a target="_blank" rel="noopener" href="https://paimon.apache.org/">官网</a>、<a target="_blank" rel="noopener" href="https://paimon.apache.org/docs/master">文档</a>、<a target="_blank" rel="noopener" href="https://github.com/apache/incubator-paimon/">GitHub</a>、<a target="_blank" rel="noopener" href="https://paimon.apache.org/community/how-to-contribute/">贡献指南</a>、<a target="_blank" rel="noopener" href="https://paimon.apache.org/docs/master/project/roadmap/">Roadmap</a></p>
 <div class="note note-info">
@@ -349,19 +349,19 @@
 <li><strong>Bucket</strong><sup>桶</sup>: 对于 非分区表、已分区表 进行 <code>二次数据切分</code>。用户可以通过提供 <code>bucket-key</code> 选项来指定bucket列<br><span class="label label-primary">Bucket 是针对 <code>读/写的最小存储单元</code>，因此bucket的数量限制了最大的处理并行性。但是，这个数字不应该太大，因为它将导致大量小文件和低读取性能。<u>一般情况下，建议每个bucket中的数据大小为<strong>1GB</strong>左右</u></span></li>
 <li><strong>Consistency Guarantees</strong><sup>一致性保证</sup>: 写表时，Paimon通过 <code>两阶段提交协议</code> 自动将一批记录提交出去（每次提交时最多产生两次snapshot）</li>
 </ul>
-<h2 id="02-核心"><a href="#02-核心" class="headerlink" title="02 核心"></a>02 核心</h2><h3 id="1-3-文件布局"><a href="#1-3-文件布局" class="headerlink" title="1.3 文件布局"></a>1.3 文件布局</h3><p><img src="/img/paimon-file-layout.png" srcset="/img/loading.gif" lazyload alt="Paimon File Layout"></p>
+<h2 id="02-核心-👽"><a href="#02-核心-👽" class="headerlink" title="02 核心 👽"></a>02 核心 👽</h2><h3 id="2-1-文件布局"><a href="#2-1-文件布局" class="headerlink" title="2.1 文件布局"></a>2.1 文件布局</h3><p><img src="/img/paimon-file-layout.png" srcset="/img/loading.gif" lazyload alt="Paimon File Layout"></p>
 <ol>
 <li><strong>Snapshot Files</strong><sup>快照文件</sup>: 快照文件均存储在上图的 <code>snapshot</code> 文件夹中，这些文件是 JSON 格式的，其中包含了 <span class="label label-info">元数据信息</span> 和 <span class="label label-info">快照的变更记录列表</span></li>
 <li><strong>Manifest Files</strong><sup>清单文件</sup>: 清单文件均存储在上图的 <code>manifest</code> 文件夹中， 每个 <code>manifest-list</code> 中由1个以上的 <code>manifest-file</code> 组成，每个 manifset-file 包含了 <span class="label label-info">LSM数据文件</span> 和 <span class="label label-info">changelog files</span></li>
 <li><strong>Data Files</strong><sup>数据文件</sup>: 数据文件由 <code>partitions</code> 和 <code>buckets</code> 所组织，每个桶目录包含了一个 <span class="label label-info">LSM tree</span> 以及它的 <span class="label label-info">changelog files</span></li>
 </ol>
-<h4 id="1-3-1-简述-LSM-Trees"><a href="#1-3-1-简述-LSM-Trees" class="headerlink" title="1.3.1 简述 LSM-Trees"></a>1.3.1 简述 LSM-Trees</h4><p><img src="/img/lsm-sorted-run.png" srcset="/img/loading.gif" lazyload alt="LSM"></p>
+<h4 id="2-1-1-简述-LSM-Trees"><a href="#2-1-1-简述-LSM-Trees" class="headerlink" title="2.1.1 简述 LSM-Trees"></a>2.1.1 简述 LSM-Trees</h4><p><img src="/img/lsm-sorted-run.png" srcset="/img/loading.gif" lazyload alt="LSM"></p>
 <p>LSM 树将文件以多个 <span class="label label-success">sorted runs</span><sup>序运行</sup> 组成。<code>sorted runs</code> 由多个 <code>data files</code> 组成，每个<code>sorted runs</code> 都是唯一的。</p>
 <h5 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h5><p>不同的 <code>sorted runs</code> 中可能包含相同主键的 <code>data files</code>，所以 <span class="label label-danger">在查询LSM树的时候，必须按照用户指定的合并引擎规则搭配时间戳合并相同主键的sorted runs集合</span></p>
 <h5 id="写入操作"><a href="#写入操作" class="headerlink" title="写入操作"></a>写入操作</h5><p>新纪录将首先在内存中缓冲，当缓冲区已满时，将对内存中的所有记录进行排序并刷写到磁盘中。</p>
 <h5 id="合并操作"><a href="#合并操作" class="headerlink" title="合并操作"></a>合并操作</h5><p>当越来越多的数据写入LSM树，刷写出来的 <code>sorted runs</code> 将会堆积，为了处理因为大量 <code>sorted runs</code> 带来的查询性能低下(甚至是OOM情形)，Paimon使用了 <span class="label label-info">Compaction</span> 操作来合并小单位的 <code>sorted runs</code>。</p>
 <p>类似于 Rocksdb 的 <em>universal compation</em><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="xxx">[1]</span></a></sup>，Paimon 的Compaction策略也是在”读”&#x2F;“写”之间进行性能的抉择，因为合并动作对于数据块来说是一个敏感的锁式操作，对于CPU和磁盘I&#x2F;O影响较大。</p>
-<h3 id="1-4-文件操作"><a href="#1-4-文件操作" class="headerlink" title="1.4 文件操作"></a>1.4 文件操作</h3><h4 id="1-4-1-Flink集成Paimon"><a href="#1-4-1-Flink集成Paimon" class="headerlink" title="1.4.1 Flink集成Paimon"></a>1.4.1 Flink集成Paimon</h4><p>从 <a target="_blank" rel="noopener" href="https://repository.apache.org/snapshots/org/apache/paimon/">Flink集成jar包</a> 路径下载对应flink版本的官方jar包(1.14&#x2F;1.15&#x2F;1.16&#x2F;1.17)，拷贝到 <code>$FLINK_HOME/lib/</code> 下(按需改名)</p>
+<h3 id="2-2-文件操作"><a href="#2-2-文件操作" class="headerlink" title="2.2 文件操作"></a>2.2 文件操作</h3><h4 id="2-2-1-Flink集成Paimon"><a href="#2-2-1-Flink集成Paimon" class="headerlink" title="2.2.1 Flink集成Paimon"></a>2.2.1 Flink集成Paimon</h4><p>从 <a target="_blank" rel="noopener" href="https://repository.apache.org/snapshots/org/apache/paimon/">Flink集成jar包</a> 路径下载对应flink版本的官方jar包(1.14&#x2F;1.15&#x2F;1.16&#x2F;1.17)，拷贝到 <code>$FLINK_HOME/lib/</code> 下(按需改名)</p>
 <div class="note note-info">
             <p>此处编者使用了 <code>paimon-flink-1.17-0.5.jar</code> 作为三方包</p>
           </div>
@@ -381,7 +381,7 @@
             <p>使用 sql-client 时建议执行 <code>SET execution.runtime-mode=BATCH;</code> ，将整体模式设置为批处理；避免遇上删除等不兼容流处理的问题。</p>
           </div>
 
-<h4 id="1-4-2-操作速览"><a href="#1-4-2-操作速览" class="headerlink" title="1.4.2 操作速览"></a>1.4.2 操作速览</h4><h5 id="创建Catalog"><a href="#创建Catalog" class="headerlink" title="创建Catalog"></a>创建Catalog</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- warehouse的路径在分布式路径中使用专有协议，如 HDFS 或 OSS 等</span><br><span class="hljs-keyword">CREATE</span> CATALOG my_catalog <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;type&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;paimon&#x27;</span>,<br>    <span class="hljs-string">&#x27;warehouse&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;file:/tmp/paimon&#x27;</span><br>);<br><br>USE CATALOG my_catalog;<br></code></pre></td></tr></table></figure>
+<h4 id="2-2-2-操作速览"><a href="#2-2-2-操作速览" class="headerlink" title="2.2.2 操作速览"></a>2.2.2 操作速览</h4><h5 id="创建Catalog"><a href="#创建Catalog" class="headerlink" title="创建Catalog"></a>创建Catalog</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- warehouse的路径在分布式路径中使用专有协议，如 HDFS 或 OSS 等</span><br><span class="hljs-keyword">CREATE</span> CATALOG my_catalog <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;type&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;paimon&#x27;</span>,<br>    <span class="hljs-string">&#x27;warehouse&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;file:/tmp/paimon&#x27;</span><br>);<br><br>USE CATALOG my_catalog;<br></code></pre></td></tr></table></figure>
 
 <h5 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> T (<br>  id <span class="hljs-type">BIGINT</span>,<br>  a <span class="hljs-type">INT</span>,<br>  b STRING,<br>  dt STRING COMMENT <span class="hljs-string">&#x27;timestamp string in format yyyyMMdd&#x27;</span>,<br>  <span class="hljs-keyword">PRIMARY</span> KEY(id, dt) <span class="hljs-keyword">NOT</span> ENFORCED<br>) PARTITIONED <span class="hljs-keyword">BY</span> (dt);<br></code></pre></td></tr></table></figure>
 
@@ -494,8 +494,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;FLINK_HOME&#125;</span><br>./bin/flink run \<br>    /path/to/paimon-flink-action-0.5-SNAPSHOT.jar \<br>    rollback-to \<br>    --warehouse &lt;warehouse-path&gt; \<br>    --database &lt;database-name&gt; \ <br>    --table &lt;table-name&gt; \<br>    --snapshot &lt;snapshot-id&gt; \<br>    [--catalog-conf &lt;paimon-catalog-conf&gt; [--catalog-conf &lt;paimon-catalog-conf&gt; ...]]<br></code></pre></td></tr></table></figure>
 
 <h5 id="Flink流写操作"><a href="#Flink流写操作" class="headerlink" title="Flink流写操作"></a>Flink流写操作</h5><p>请跳转 &#x3D;&gt; <a href="http://#">Paimon-[番外]-FlinkCDC案例</a> 😼</p>
-<h3 id="1-5-主键表"><a href="#1-5-主键表" class="headerlink" title="1.5 主键表"></a>1.5 主键表</h3><p><code>Changelog表</code> 是创建表时的<strong>默认表类型</strong>。用户可以在表中插入、更新或删除记录。<br>主键是每条记录唯一的一组列。Paimon会强制排序数据，这意味着在每个bucket中，数据是被排列好的，因此用户可以通过<u>在主键上添加过滤条件来实现高性能</u>。</p>
-<h4 id="1-5-1-合并引擎"><a href="#1-5-1-合并引擎" class="headerlink" title="1.5.1 合并引擎"></a>1.5.1 合并引擎</h4><p><code>Paimon Sink</code> 接收到上游一批数据且其中包含重复组件数据时，会对那部分数据进行合并<sup>merge</sup>，以确保数据的唯一，用户可以通过指定 <span class="label label-info">merge-engine</span> 参数来定义合并策略。</p>
+<h3 id="2-3-主键表"><a href="#2-3-主键表" class="headerlink" title="2.3 主键表"></a>2.3 主键表</h3><p><code>Changelog表</code> 是创建表时的<strong>默认表类型</strong>。用户可以在表中插入、更新或删除记录。<br>主键是每条记录唯一的一组列。Paimon会强制排序数据，这意味着在每个bucket中，数据是被排列好的，因此用户可以通过<u>在主键上添加过滤条件来实现高性能</u>。</p>
+<h4 id="2-3-1-合并引擎"><a href="#2-3-1-合并引擎" class="headerlink" title="2.3.1 合并引擎"></a>2.3.1 合并引擎</h4><p><code>Paimon Sink</code> 接收到上游一批数据且其中包含重复组件数据时，会对那部分数据进行合并<sup>merge</sup>，以确保数据的唯一，用户可以通过指定 <span class="label label-info">merge-engine</span> 参数来定义合并策略。</p>
 <ul>
 <li><strong>去重合并引擎</strong><sup>deduplicate</sup><span class="label label-default">默认</span>：将最近接触到的数据(全字段)替换之前的旧数据；</li>
 <li><strong>部分更新引擎</strong><sup>partial-update</sup>：将最近接触到的数据(部分字段)替换之前的旧数据；<blockquote>
@@ -523,7 +523,7 @@
 <blockquote>
 <p>在 FlinkSQL 中设置 <code>table.exec.sink.upsert-materialize=NONE</code> 总是会导致奇怪的行为，所以当明确摄入的数据是乱序的时候，请阅读并使用 <a href="#Sequence-Field">序列字段</a></p>
 </blockquote>
-<h4 id="1-5-2-Changelog-制造器"><a href="#1-5-2-Changelog-制造器" class="headerlink" title="1.5.2 Changelog 制造器"></a>1.5.2 Changelog 制造器</h4><p>流式查询会不断生产出变更<sup>changes</sup>，我们可以通过指定 <code>changelog-producer</code> 这个表属性来进行制造器的切换。</p>
+<h4 id="2-3-2-Changelog-制造器"><a href="#2-3-2-Changelog-制造器" class="headerlink" title="2.3.2 Changelog 制造器"></a>2.3.2 Changelog 制造器</h4><p>流式查询会不断生产出变更<sup>changes</sup>，我们可以通过指定 <code>changelog-producer</code> 这个表属性来进行制造器的切换。</p>
 <ul>
 <li><strong>None</strong><sup>无</sup>：仅看得到合并后的数据结果，无法回溯旧的数据状态；<span class="label label-danger">不建议</span></li>
 <li><strong>Input</strong><sup>(常规)输入型</sup>：将输入的记录直接刷写到独立的changelog文件中。<span class="label label-success">建议</span></li>
@@ -531,30 +531,93 @@
 <li><strong>Full Compaction</strong><sup>全压缩</sup>：对于读延迟过高的场景可以使用该制造器，它分离了 <code>数据刷写</code> 和 <code>日志生成</code> 两个流程，加速查询，但是写延迟升高。<span class="label label-danger">不建议</span></li>
 </ul>
 <p><span id="Sequence-Field"></span><br></p>
-<h4 id="1-5-3-序列字段"><a href="#1-5-3-序列字段" class="headerlink" title="1.5.3 序列字段"></a>1.5.3 序列字段</h4><p>正常情况下，主键表都是按照数据输入顺序进行合并的，当数据是乱序的情况下，会导致合并结果不正确。对比Flink水印的概念，我们在Paimon的主键表中指定一个时间类型字段 <code>sequence.field</code> 来纠正乱序问题。例如在 FlinkSQL 建表语句中：</p>
+<h4 id="2-3-3-序列字段"><a href="#2-3-3-序列字段" class="headerlink" title="2.3.3 序列字段"></a>2.3.3 序列字段</h4><p>正常情况下，主键表都是按照数据输入顺序进行合并的，当数据是乱序的情况下，会导致合并结果不正确。对比Flink水印的概念，我们在Paimon的主键表中指定一个时间类型字段 <code>sequence.field</code> 来纠正乱序问题。例如在 FlinkSQL 建表语句中：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> MyTable (<br>    pk <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> ENFORCED,<br>    v1 <span class="hljs-keyword">DOUBLE</span>,<br>    v2 <span class="hljs-type">BIGINT</span>,<br>    dt <span class="hljs-type">TIMESTAMP</span><br>) <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;sequence.field&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dt&#x27;</span><br>);<br></code></pre></td></tr></table></figure>
 
-<h4 id="1-5-4-序列组"><a href="#1-5-4-序列组" class="headerlink" title="1.5.4 序列组"></a>1.5.4 序列组</h4><p>当合并引擎是 <code>partial-update</code> 引擎且接受多流输入时，光靠 <code>sequence-field</code> 可能无法解决乱序问题，因为在<strong>流A</strong>上的 <code>sequence-field</code> 可能会被<strong>流B</strong>上的更新操作覆盖。</p>
+<h4 id="2-3-4-序列组"><a href="#2-3-4-序列组" class="headerlink" title="2.3.4 序列组"></a>2.3.4 序列组</h4><p>当合并引擎是 <code>partial-update</code> 引擎且接受多流输入时，光靠 <code>sequence-field</code> 可能无法解决乱序问题，因为在<strong>流A</strong>上的 <code>sequence-field</code> 可能会被<strong>流B</strong>上的更新操作覆盖。</p>
 <p><strong>案例</strong>：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> T (<br>    k <span class="hljs-type">INT</span>,<br>    a <span class="hljs-type">INT</span>,<br>    b <span class="hljs-type">INT</span>,<br>    g_1 <span class="hljs-type">INT</span>,<br>    c <span class="hljs-type">INT</span>,<br>    d <span class="hljs-type">INT</span>,<br>    g_2 <span class="hljs-type">INT</span>,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (k) <span class="hljs-keyword">NOT</span> ENFORCED<br>) <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;merge-engine&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;partial-update&#x27;</span>,<br>    <span class="hljs-string">&#x27;fields.g_1.sequence-group&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;a,b&#x27;</span>,<br>    <span class="hljs-string">&#x27;fields.g_2.sequence-group&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;c,d&#x27;</span><br>);<br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> T <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br><br><span class="hljs-comment">-- g_2 is null, c, d should not be updated</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> T <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-built_in">CAST</span>(<span class="hljs-keyword">NULL</span> <span class="hljs-keyword">AS</span> <span class="hljs-type">INT</span>));<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> T; <span class="hljs-comment">-- output 1, 2, 2, 2, 1, 1, 1</span><br><br><span class="hljs-comment">-- g_1 is smaller, a, b should not be updated</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> T <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>);<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> T; <span class="hljs-comment">-- output 1, 2, 2, 2, 3, 3, 3</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="1-6-仅追加表"><a href="#1-6-仅追加表" class="headerlink" title="1.6 仅追加表"></a>1.6 仅追加表</h3><p>日志数据的同步往往不关心数据的更新，纯增量数据转换而来的表，无需定义主键的概念。</p>
+<h3 id="2-4-仅追加表"><a href="#2-4-仅追加表" class="headerlink" title="2.4 仅追加表"></a>2.4 仅追加表</h3><p>日志数据的同步往往不关心数据的更新，纯增量数据转换而来的表，无需定义主键的概念。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> MyTable (<br>    product_id <span class="hljs-type">BIGINT</span>,<br>    price <span class="hljs-keyword">DOUBLE</span>,<br>    sales <span class="hljs-type">BIGINT</span><br>) <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;bucket&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;8&#x27;</span>,<br>    <span class="hljs-string">&#x27;bucket-key&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;product_id&#x27;</span><br>);<br></code></pre></td></tr></table></figure>
 
 <div class="note note-info">
             <p>但我们建议设置 <code>bucket-key</code> 属性，否则每行数据将会被散列化，导致性能下降</p>
           </div>
 
-<h4 id="1-6-1-压缩策略"><a href="#1-6-1-压缩策略" class="headerlink" title="1.6.1 压缩策略"></a>1.6.1 压缩策略</h4><p>可以控制压缩策略的配置：</p>
+<h4 id="2-4-1-压缩策略"><a href="#2-4-1-压缩策略" class="headerlink" title="2.4.1 压缩策略"></a>2.4.1 压缩策略</h4><p>可以控制压缩策略的配置：</p>
 <ul>
 <li><strong>write-only</strong>：<span class="label label-default">default:false</span> 只写模式下不跳过 <code>数据压缩</code> 和 <code>快照过期</code> 流程；</li>
 <li><strong>compaction.min.file-num</strong>：<span class="label label-default">default:5</span> 数据文件压缩触发阈值下限。</li>
 <li><strong>compaction.max.file-num</strong>：<span class="label label-default">default:50</span> 数据文件压缩触发阈值上限。</li>
 </ul>
-<h3 id="1-7-外部日志系统"><a href="#1-7-外部日志系统" class="headerlink" title="1.7 外部日志系统"></a>1.7 外部日志系统</h3><p>主要是接入 <code>Kafka</code> 等日志系统。具体可参考 <a target="_blank" rel="noopener" href="https://paimon.apache.org/docs/master/concepts/external-log-systems/#supported-log-systems">最新官网文档说明</a></p>
-<hr>
+<h3 id="2-5-外部日志系统"><a href="#2-5-外部日志系统" class="headerlink" title="2.5 外部日志系统"></a>2.5 外部日志系统</h3><p>主要是接入 <code>Kafka</code> 等日志系统。具体可参考 <a target="_blank" rel="noopener" href="https://paimon.apache.org/docs/master/concepts/external-log-systems/#supported-log-systems">最新官网文档说明</a></p>
+<h2 id="03-引擎"><a href="#03-引擎" class="headerlink" title="03 引擎"></a>03 引擎</h2><p>Paimon 优先集成Flink引擎，且持续同步支持Flink的最新版本。此外还提供对 <code>Hive</code>、<code>Spark</code>、<code>Trino</code>、<code>Presto</code> 的支持。未来也会集成上目前主流的 <code>Doris</code>、<code>Seatunnel</code>、<code>Starrocks</code> 等计算引擎。</p>
+<div class="note note-info">
+            <p>使用过 <code>Apache Hudi</code> 的同学都能体会到，Hudi优先集成Spark功能，对Flink的集成总归没有那么完善。</p>
+          </div>
+
+<p>具体的案例此处不做过多介绍，通篇都在使用Flink引擎做演示，后续会在 <a href="#how-to">用法指导</a> 中全流程使用 Flink 引擎演示更详细的操作。</p>
+<h2 id="04-文件系统"><a href="#04-文件系统" class="headerlink" title="04 文件系统"></a>04 文件系统</h2><p>Paimon 和其他数据湖技术一样原生支持 <code>Local File System</code>，此外也支持了 HDFS 文件系统，只需要在环境变量提前准备好hadoop依赖（环境变量存在 <code>HADOOP_HOME</code> 和 <code>HADOOP_CONF_DIR</code>）</p>
+<div class="note note-info">
+            <p>当然，它也支持目前流行的云分布式文件系统（OSS、S3…）</p>
+          </div>
+
+<p>此处和上一节一样亦不做过多介绍，会直接在 <a href="#how-to">用法指导</a> 中全流程使用 HDFS 做演示。</p>
+<p><span id="how-to"></span></p>
+<h2 id="05-用法指导-🤩"><a href="#05-用法指导-🤩" class="headerlink" title="05 用法指导 🤩"></a>05 用法指导 🤩</h2><h3 id="5-1-建Catalog"><a href="#5-1-建Catalog" class="headerlink" title="5.1 建Catalog"></a>5.1 建Catalog</h3><p>目前 Paimon 提供了两种 Catalog 元储存<sup>metastore</sup>：<code>filesystem-metastore</code> 和 <code>hive-metastore</code>。<br>其中 <code>filesystem-metastore</code> 我们在前面的文件存储章节已经演示并探讨了文件结构，接下来我们切换 <code>hive-metastore</code> 来看看</p>
+<div class="note note-info">
+            <p>请确保已经启动了 hadoop 的 <code>HDFS</code> 服务、<code>hive-metastore</code> 服务、<code>hive-hiveserver2</code> 服务<br>P.S. <code>hive-hiveserver2</code> 服务只是为了创建catalog后方便校验，实际上 Paimon 仅需 <code>hive-metastore</code> 服务即可进行元信息的存储</p>
+          </div>
+
+<div class="note note-warning">
+            <p>如果使用Flink作为计算引擎，实际上 <code>filesystem-metastore</code> 的接入是由 Flink 官方提供的，请按需使用 <a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/hive/overview/#using-bundled-hive-jar">Flink with hive-metastore</a> 手册完成配置。下面编者会使用官方推荐的方法：<em>直接引入 flink-sql-connector-hive-3.1.3 包</em> 来使能 Flink接入Hive-metastore 的功能。</p>
+          </div>
+
+<ol>
+<li>编者使用的环境版本：<code>flink-1.17.1</code>&#x2F;<code>hive-3.1.3</code>，所以直接下载官网的 <a target="_blank" rel="noopener" href="https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-connector-hive-3.1.3_2.12/1.17.1/flink-sql-connector-hive-3.1.3_2.12-1.17.1.jar">flink-sql-connector-hive-3.1.3_2.12-1.17.1.jar</a> 包，拷贝至 <em>$FLINK_HOME&#x2F;lib&#x2F;</em> 下；</li>
+<li>然后按照 <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/FLINK-25128">FLINK-25128</a> <sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="xxx">[2]</span></a></sup> 所述：<ol>
+<li>移除 <code>flink-table-planner-loader-1.17.1.jar</code>；</li>
+<li>从 <em>$FLINK_HOME&#x2F;opt&#x2F;</em> 下拷贝 <code>flink-table-planner_2.12-1.17.1.jar</code> 到 <em>$FLINK_HOME&#x2F;lib&#x2F;</em> 下<blockquote>
+<p>当且仅当使用 Hive dialect 和 hiveserver2 服务 时才需要移除 planner-loader 包，但是<strong>只要涉及到 Hive 的集成，其实都建议进行上述这两步</strong></p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<p>启动 Flink 的 sql-client 服务并执行如下 SQL：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> CATALOG my_hive <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;type&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;paimon&#x27;</span>,<br>    <span class="hljs-string">&#x27;metastore&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;hive&#x27;</span>,<br>    <span class="hljs-string">&#x27;uri&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;thrift://node-001:9083&#x27;</span>,<br>    <span class="hljs-string">&#x27;warehouse&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;hdfs://node-001:8020/paimon&#x27;</span><br>);<br><br>USE CATALOG my_hive;<br></code></pre></td></tr></table></figure>
+
+<p>接下来快速进行下一小节创建表后查看文件情况！</p>
+<h3 id="5-2-建表"><a href="#5-2-建表" class="headerlink" title="5.2 建表"></a>5.2 建表</h3><h4 id="5-2-1-基于PaimonCatalog"><a href="#5-2-1-基于PaimonCatalog" class="headerlink" title="5.2.1 基于PaimonCatalog"></a>5.2.1 基于PaimonCatalog</h4><p>在上一节保持 <code>USE CATALOG my_hive;</code> 后，执行如下语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_001 (<br>    user_id <span class="hljs-type">BIGINT</span>,<br>    item_id <span class="hljs-type">BIGINT</span>,<br>    behavior STRING,<br>    dt STRING,<br>    hh STRING,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (dt, hh, user_id) <span class="hljs-keyword">NOT</span> ENFORCED<br>);<br></code></pre></td></tr></table></figure>
+
+<p>执行成功后看到如下信息：</p>
+<p><img src="/img/paimon-snapshot-001.png" srcset="/img/loading.gif" lazyload alt="HDFS查看t_001表的schema文件"></p>
+<p><img src="/img/paimon-snapshot-002.png" srcset="/img/loading.gif" lazyload alt="Hive-metastore查看t_001表的schema映射"></p>
+<p><img src="/img/paimon-snapshot-003.png" srcset="/img/loading.gif" lazyload alt="Hive-hiveserver2查看t_001表结构"></p>
+<p>当然，我们也可以创建 分区表 t_002 并且通过<strong>桥接语法</strong><sup>CREATE-TABLE-AS</sup>再建立新表 t_002_copy</p>
+<div class="note note-warning">
+            <p>注意当我们指定了主键时，分区键必须是主键的子集！</p>
+          </div>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_002 (<br>    user_id <span class="hljs-type">BIGINT</span>,<br>    item_id <span class="hljs-type">BIGINT</span>,<br>    behavior STRING,<br>    dt STRING,<br>    hh STRING,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (dt, hh, user_id) <span class="hljs-keyword">NOT</span> ENFORCED<br>) PARTITIONED <span class="hljs-keyword">BY</span> (dt, hh);<br><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_002_copy <span class="hljs-keyword">WITH</span> (<span class="hljs-string">&#x27;partition&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dt&#x27;</span>) <span class="hljs-keyword">AS</span> <br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> t_002;<br></code></pre></td></tr></table></figure>
+
+<p>或者，使用<strong>模仿语法</strong><sup>CREATE-TABLE-LIKE</sup>建立具有相同信息(schema, partition, and table properties)的表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_002_like <span class="hljs-keyword">LIKE</span> t_002;<br></code></pre></td></tr></table></figure>
+
+<h4 id="5-2-2-ExternalTable"><a href="#5-2-2-ExternalTable" class="headerlink" title="5.2.2 ExternalTable"></a>5.2.2 ExternalTable</h4><p>当我们不想创建 Paimon Catalog，而只是简单读写表时，可以考虑直接使用 <code>external tables</code></p>
+<div class="note note-info">
+            <p>企业开发中有时候仅仅是为了简单测试 FlinkSQL 读写各类连接器的情况，就可以更灵活的自由切换（指定<code>connector</code>）表原语了。</p>
+          </div>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> MyTable (<br>    user_id <span class="hljs-type">BIGINT</span>,<br>    item_id <span class="hljs-type">BIGINT</span>,<br>    behavior STRING,<br>    dt STRING,<br>    hh STRING,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (dt, hh, user_id) <span class="hljs-keyword">NOT</span> ENFORCED<br>) <span class="hljs-keyword">WITH</span> (<br>    <span class="hljs-string">&#x27;connector&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;paimon&#x27;</span>, <span class="hljs-comment">-- 指定使用 Paimon 连接器</span><br>    <span class="hljs-string">&#x27;path&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;hdfs://path/to/table&#x27;</span>,<br>    <span class="hljs-string">&#x27;auto-create&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;true&#x27;</span> <span class="hljs-comment">-- this table property creates table files for an empty table if table path does not exist</span><br>                           <span class="hljs-comment">-- currently only supported by Flink</span><br>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-3-改表"><a href="#5-3-改表" class="headerlink" title="5.3 改表"></a>5.3 改表</h3><p>不展开，参考 <a target="_blank" rel="noopener" href="https://paimon.apache.org/docs/0.4/how-to/altering-tables/">官方手册</a> 即可。</p>
+<h3 id="5-4-写表-⭐️"><a href="#5-4-写表-⭐️" class="headerlink" title="5.4 写表 ⭐️"></a>5.4 写表 ⭐️</h3><h3 id="5-5-查表"><a href="#5-5-查表" class="headerlink" title="5.5 查表"></a>5.5 查表</h3><h3 id="5-6-系统表"><a href="#5-6-系统表" class="headerlink" title="5.6 系统表"></a>5.6 系统表</h3><h3 id="5-7-Lookup-Joins"><a href="#5-7-Lookup-Joins" class="headerlink" title="5.7 Lookup Joins"></a>5.7 Lookup Joins</h3><h3 id="5-8-CDC-摄取-⭐️"><a href="#5-8-CDC-摄取-⭐️" class="headerlink" title="5.8 CDC 摄取 ⭐️"></a>5.8 CDC 摄取 ⭐️</h3><h2 id="06-运维调优"><a href="#06-运维调优" class="headerlink" title="06 运维调优"></a>06 运维调优</h2><h3 id="6-1-写性能"><a href="#6-1-写性能" class="headerlink" title="6.1 写性能"></a>6.1 写性能</h3><h3 id="6-2-读性能"><a href="#6-2-读性能" class="headerlink" title="6.2 读性能"></a>6.2 读性能</h3><h3 id="6-3-多表写"><a href="#6-3-多表写" class="headerlink" title="6.3 多表写"></a>6.3 多表写</h3><h3 id="6-4-管理分区"><a href="#6-4-管理分区" class="headerlink" title="6.4 管理分区"></a>6.4 管理分区</h3><h3 id="6-5-管理文件"><a href="#6-5-管理文件" class="headerlink" title="6.5 管理文件"></a>6.5 管理文件</h3><h3 id="6-6-重分桶"><a href="#6-6-重分桶" class="headerlink" title="6.6 重分桶"></a>6.6 重分桶</h3><h3 id="6-7-管理标记"><a href="#6-7-管理标记" class="headerlink" title="6.7 管理标记"></a>6.7 管理标记</h3><h3 id="6-8-配置"><a href="#6-8-配置" class="headerlink" title="6.8 配置"></a>6.8 配置</h3><h2 id="XX-参考资料-🗐"><a href="#XX-参考资料-🗐" class="headerlink" title="XX 参考资料 🗐"></a>XX 参考资料 🗐</h2><hr>
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>xxx
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>xxx
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -610,7 +673,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Paimon-[卷I]-核心概念</div>
+      <div>Paimon-[卷I]-官网越阅越悦</div>
       <div>http://archibald-nice.github.io/2023/07/24/paimon-230718/</div>
     </div>
     <div class="license-meta">
@@ -655,9 +718,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/26/paimon-230726/" title="Paimon-[卷II]-使用速通">
+                      <a href="/2023/07/26/paimon-230726/" title="Paimon-[卷II]-开源分析和参与">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Paimon-[卷II]-使用速通</span>
+                        <span class="hidden-mobile">Paimon-[卷II]-开源分析和参与</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
