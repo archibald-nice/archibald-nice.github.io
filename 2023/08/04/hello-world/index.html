@@ -16,28 +16,25 @@
   <meta name="author" content="Archibald Wan">
   <meta name="keywords" content="java">
   
-    <meta name="description" content="基于apache-paimon-0.4，深入源码的探究">
+    <meta name="description" content="&#x2F;* 设置整个页面的字体 *&#x2F;   html, body, .markdown-body {     font-family: STXihei, &quot;华文细黑&quot;, &quot;Microsoft YaHei&quot;, &quot;微软雅黑&quot;;     font-size: 15px;   }   字体建议通过&lt;style&gt;标签为文章设置单独字体 12345678910111213&lt;style&gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Paimon-[卷II]-开源分析和参与">
-<meta property="og:url" content="http://archibald-nice.github.io/2023/07/26/paimon-230726/">
+<meta property="og:title" content="Hexo(Fluid)使用技巧">
+<meta property="og:url" content="http://archibald-nice.github.io/2023/08/04/hello-world/">
 <meta property="og:site_name" content="Archie&#39;s Tech-blog">
-<meta property="og:description" content="基于apache-paimon-0.4，深入源码的探究">
+<meta property="og:description" content="&#x2F;* 设置整个页面的字体 *&#x2F;   html, body, .markdown-body {     font-family: STXihei, &quot;华文细黑&quot;, &quot;Microsoft YaHei&quot;, &quot;微软雅黑&quot;;     font-size: 15px;   }   字体建议通过&lt;style&gt;标签为文章设置单独字体 12345678910111213&lt;style&gt;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://archibald-nice.github.io/img/paimon/paimon-blog-title.png">
-<meta property="article:published_time" content="2023-07-26T10:02:17.000Z">
-<meta property="article:modified_time" content="2023-08-03T17:41:51.170Z">
+<meta property="article:published_time" content="2023-08-03T17:45:51.266Z">
+<meta property="article:modified_time" content="2023-08-03T17:45:51.266Z">
 <meta property="article:author" content="Archibald Wan">
-<meta property="article:tag" content="bigdata">
-<meta property="article:tag" content="apache">
-<meta property="article:tag" content="paimon">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="fluid">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://archibald-nice.github.io/img/paimon/paimon-blog-title.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Paimon-[卷II]-开源分析和参与 - Archie&#39;s Tech-blog</title>
+  <title>Hexo(Fluid)使用技巧 - Archie&#39;s Tech-blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -242,7 +239,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Paimon-[卷II]-开源分析和参与"></span>
+            <span id="subtitle" data-typed-text="Hexo(Fluid)使用技巧"></span>
           
         </div>
 
@@ -253,8 +250,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-26 18:02" pubdate>
-          2023年7月26日 晚上
+        <time datetime="2023-08-04 01:45" pubdate>
+          2023年8月4日 凌晨
         </time>
       </span>
     
@@ -265,7 +262,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          723 字
         
       </span>
     
@@ -276,7 +273,7 @@
         
         
         
-          21 分钟
+          7 分钟
         
       </span>
     
@@ -322,7 +319,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Paimon-[卷II]-开源分析和参与</h1>
+            <h1 style="display: none">Hexo(Fluid)使用技巧</h1>
             
             
               <div class="markdown-body">
@@ -335,77 +332,42 @@
   }
 </style>
 
-<h2 id="01-参与开源"><a href="#01-参与开源" class="headerlink" title="01 参与开源"></a>01 参与开源</h2><h3 id="1-1-邮件订阅"><a href="#1-1-邮件订阅" class="headerlink" title="1.1 邮件订阅"></a>1.1 邮件订阅</h3><p>对于 Apache 的项目，订阅一整个 <code>mailing list</code> 是很必要的，官方会在这个list中推送最新的信息给用户。目前有两个list支持订阅：</p>
-<ul>
-<li><a href="mailto:user-subscribe@paimon.apache.org">user-subscribe@paimon.apache.org</a>：普通游客订阅地址，会推送一些技术支持类消息；</li>
-<li><a href="mailto:dev-subscribe@paimon.apache.org">dev-subscribe@paimon.apache.org</a>：开发者订阅地址，会推送一些特性及讨论话题消息；</li>
-</ul>
-<div class="note note-info">
-            <p>在订阅了游客list后，如果想要加入社区讨论，也可以申请加入 Slack 的 <code>Paimon Channel</code>，申请方式：发送邮件至 <a href="mailto:user@paimon.apache.org">user@paimon.apache.org</a> 并等待审核结果。</p>
+<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p>建议通过<code>&lt;style&gt;</code>标签为文章设置单独字体</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-comment">/* 设置整个页面的字体 */</span></span><br><span class="language-css">  <span class="hljs-selector-tag">html</span>, <span class="hljs-selector-tag">body</span>, <span class="hljs-selector-class">.markdown-body</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-family</span>: STXihei, <span class="hljs-string">&quot;华文细黑&quot;</span>, <span class="hljs-string">&quot;Microsoft YaHei&quot;</span>, <span class="hljs-string">&quot;微软雅黑&quot;</span>;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-comment">/* 只设置 markdown 字体 */</span></span><br><span class="language-css">  <span class="hljs-selector-class">.markdown-body</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-family</span>: KaiTi,<span class="hljs-string">&quot;Microsoft YaHei&quot;</span>,Georgia, sans, serif;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><p>这是一句话<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="这是对应的脚注">[1]</span></a></sup></p>
+<h1 id="Tag插件"><a href="#Tag插件" class="headerlink" title="Tag插件"></a>Tag插件</h1><h2 id="便签"><a href="#便签" class="headerlink" title="便签"></a>便签</h2><div class="note note-success">
+            <p>文字 或者 <code>markdown</code> 均可</p>
           </div>
 
-<h3 id="1-2-代码贡献指南"><a href="#1-2-代码贡献指南" class="headerlink" title="1.2 代码贡献指南"></a>1.2 代码贡献指南</h3><p>简明流程如下：</p>
-<p>当问题落地并有了大致的开发方向，此时可以开发代码并请求PR<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="Pull-Request，语义上来说就是请求(主分支)的合并">[2]</span></a></sup>了。具体步骤如下：</p>
-<ul>
-<li><strong>Discuss</strong><sup>讨论</sup>：<ol>
-<li>issue 的分配需要等待管理员你的审核，当被管理员 <code>associate</code><sup>关联&#x2F;分配</sup> 了该 issue 时，再着手开发也不急（先看代码梳理思路吧）；</li>
-<li>issue 分配到手后，从主仓库 <code>fork</code> 一份代码至私人仓库（仅需master&#x2F;main分支），切换到私人仓库中 <code>clone</code> 一个新的分支出来，新分支最好按照规范来取名，例如：<span class="label label-info">fix-#2992-logout-csrf-vulnerability</span>。表明这个分支用于修复 <u>issueId&#x3D;2992</u> 的问题，具体修复功能是 <u>注销过程中的跨站请求伪造(CSRF)漏洞</u>；</li>
+<h2 id="行内标签"><a href="#行内标签" class="headerlink" title="行内标签"></a>行内标签</h2><span class="label label-primary">核心标签</span> <span class="label label-default">默认标签</span>
+<span class="label label-info">信息标签</span> <span class="label label-success">成功标签</span>
+<span class="label label-warning">警告标签</span> <span class="label label-danger">危险标签</span>
+
+<h2 id="勾选框"><a href="#勾选框" class="headerlink" title="勾选框"></a>勾选框</h2><div>
+            <input type="checkbox" disabled >普通示例
+          </div>
+<div>
+            <input type="checkbox" disabled checked="checked">默认选中
+          </div>
+
+            <input type="checkbox" disabled >内联示例
+           后面文字不换行
+<input type="checkbox" disabled > 也可以只传入一个参数，文字写在后边（这样不支持外联）
+
+<h2 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h2><a class="btn" href="www.baidu.com"  title="准备起飞" target="_blank">百度</a>
+
+<h1 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h1><p>目前Fluid暂不支持emoji插件，直接使用 <code>hexo-renderer-markdown-it</code> 插件会导致兼容问题，所以这些拓展型功能我们通过HTML原生支持：</p>
+<ol>
+<li>通过十进制形式插入：&#x1F600;</li>
+<li>通过Unicode插入：&#128513;</li>
 </ol>
-</li>
-<li><strong>Implement</strong><sup>实现</sup>：</li>
-<li><strong>Review</strong><sup>审核</sup>：在私人仓库新分支下修复好代码并按照 Paimon 的官方测试用例进行自测、语法检查、安全校验后，<code>commit</code> 全部代码到新分支；</li>
-<li><strong>Merge</strong><sup>合并</sup>：进入私人仓库新分支页面，点击 <code>pull request</code> 申请合并分支到 <strong>主仓库的master分支</strong>。</li>
-</ul>
-<div class="note note-info">
-            <p>在 <code>github-issue</code> 中往往会留一些专供新贡献者的入门级issue，标签名一般为 <span class="label label-primary">good first issues</span>，如果是刚接触项目，从他们开始斩杀吧！</p>
-          </div>
-
-<div class="note note-danger">
-            <p>很多开源参与新手总是自顾自的闭门造车式写代码，这是非常不好的行为。在<strong>着手开发前，一定要多讨论多借鉴前辈们的思路，等功能完成&#x2F;bug修复后再深究代码实现原理！</strong>不然写了一堆代码后如果因为一些不符合社区理念的设计导致PR整个被打回，得不偿失！</p>
-          </div>
-
-<h3 id="1-3-社区常用缩略语"><a href="#1-3-社区常用缩略语" class="headerlink" title="1.3 社区常用缩略语"></a>1.3 社区常用缩略语</h3><ul>
-<li><strong>LGTM&#x2F;SGTM</strong>⭐️：<code>Looks/Sounds Good To Me</code>。看起来不错，代码已 review，可以合并。</li>
-<li><strong>WIP</strong>： <code>Work In Progress</code>。若你有个改动很大的 PR，可在写了部分的情况下先提交，在标题里写上 WIP，以告诉项目维护者这个功能还未完成，方便维护者提前 review 部分提交的代码。</li>
-<li><strong>PTAL</strong>⭐️：<code>Please Take A Look</code>。你来瞅瞅？用来提示别人来看一下。</li>
-<li><strong>TBR</strong>⭐️：<code>To Be Reviewed</code>。提示维护者进行 review。</li>
-<li><strong>TL;DR</strong>：<code>Too Long; Didn&#39;t Read</code>。太长，未看。</li>
-<li><strong>TBD</strong>⭐️：<code>To Be Done(or Defined/Discussed/Decided/Determined)</code>。根据语境不同意义有所区别，但一般都是还没 xxx。</li>
-<li><strong>SPOF</strong>：<code>Single point of failure</code>。单节点崩溃。</li>
-<li><strong>ASAP</strong>⭐️：<code>As soon as possible</code>。马上，尽快。</li>
-<li><strong>FYI</strong>：<code>For your information</code>。供你参考。</li>
-<li><strong>TTYL</strong>：<code>Talk to you later</code>。待会回复你。</li>
-<li><strong>Plz</strong>：<code>Please</code> 的谐音。</li>
-<li><strong>Thx</strong>：<code>Thanks</code> 的谐音。</li>
-<li><strong>AFAIK</strong>：<code>As far as I know</code>。据我所知。</li>
-<li><strong>Pvt</strong>：<code>private</code>。经常用在表示所有权上面，比如说私有库，或者私有代码。</li>
-</ul>
-<h3 id="1-4-Issue-Labels"><a href="#1-4-Issue-Labels" class="headerlink" title="1.4 Issue Labels"></a>1.4 Issue Labels</h3><ol>
-<li><strong>bug</strong>: 用于标识代码中的错误或缺陷。</li>
-<li><strong>enhancement</strong>⭐️: 用于指示新功能、改进或增强建议。</li>
-<li><strong>documentation</strong>: 与文档相关的问题或建议。</li>
-<li><strong>duplicate</strong>: 标记重复的问题，即已经在问题跟踪中提出过的问题。</li>
-<li><strong>invalid</strong>: 用于无效的问题，例如用户错误或不正确的使用。</li>
-<li><strong>wontfix</strong>: 用于不打算修复的问题，通常是因为问题不适用或不符合项目目标。</li>
-<li><strong>question</strong>: 用于提出问题、寻求帮助或进行讨论。</li>
-<li><strong>good first issue</strong>⭐️: 适合新贡献者的问题，通常是较小或较简单的任务。</li>
-<li><strong>help wanted</strong>⭐️: 寻求社区成员的帮助解决的问题。</li>
-<li><strong>feature request</strong>: 用于新功能的请求或建议。</li>
-<li><strong>priority</strong>⭐️: 用于标记问题的优先级，通常有高、中、低等级。</li>
-<li><strong>in progress</strong>: 表示问题正在处理中。</li>
-<li><strong>blocked</strong>: 用于指示问题受到了某些阻碍。</li>
-<li><strong>review needed</strong>: 标识需要代码审查的问题。</li>
-<li><strong>testing needed</strong>: 用于需要测试的问题。</li>
-<li><strong>backlog</strong>: 问题的积压列表，即未来可能解决的问题。</li>
-<li><strong>performance</strong>: 用于与性能问题或优化相关的问题。</li>
-</ol>
-<h2 id="02-代码分析"><a href="#02-代码分析" class="headerlink" title="02 代码分析"></a>02 代码分析</h2><p>在不参与开源的情况下，直接 <code>clone</code> 官方代码并切到想看的分支下即可。</p>
-<h3 id="2-2-拉取开源代码"><a href="#2-2-拉取开源代码" class="headerlink" title="2.2 拉取开源代码"></a>2.2 拉取开源代码</h3><h3 id="2-1-With-Flink"><a href="#2-1-With-Flink" class="headerlink" title="2.1 With Flink"></a>2.1 With Flink</h3><h2 id="XX-参考资料-🗐"><a href="#XX-参考资料-🗐" class="headerlink" title="XX 参考资料 🗐"></a>XX 参考资料 🗐</h2><p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-paimon/">Github &gt; Apache Paimon</a><br><a target="_blank" rel="noopener" href="https://paimon.apache.org/community/how-to-contribute/">官方文档 &gt; 参与Paimon贡献指南</a><br><a target="_blank" rel="noopener" href="https://github.com/freeCodeCamp/how-to-contribute-to-open-source">Github &gt; how-to-contribute-to-open-source</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/538667999">知乎 &gt; 如何参与开源项目 - 细说 GitHub 上的 PR 全过程</a><br><a target="_blank" rel="noopener" href="https://poxiao.tk/2023/05/bigdata/paimon/Paimon-Flink-Sink%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">破晓 &gt; Paimon-Flink-Sink源码分析</a></p>
-<hr>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>Proof-of-Concept，也就是概念验证或证明阶段
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>Pull-Request，语义上来说就是请求(主分支)的合并
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span>Podling-Project-Management-Committee。是一个管理委员会，负责指导和管理Podling项目的发展和孵化过程
-<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<blockquote>
+<p>可以从 <a target="_blank" rel="noopener" href="https://www.emojiall.com/zh-hans/emoji">Emoji-all</a> 中找到所有表情信息</p>
+</blockquote>
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><p>⭐️ ✨ ✅</p>
+<h1 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>这是对应的脚注
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -420,23 +382,6 @@
 <span class="category-chains">
   
   
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Apache/" class="category-chain-item">Apache</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Apache/Pimon/" class="category-chain-item">Pimon</a>
-  
-  
-
-  
-
-      </span>
-    
-  
 </span>
 
     </div>
@@ -445,11 +390,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/bigdata/">#bigdata</a>
+        <a href="/tags/hexo/">#hexo</a>
       
-        <a href="/tags/apache/">#apache</a>
-      
-        <a href="/tags/paimon/">#paimon</a>
+        <a href="/tags/fluid/">#fluid</a>
       
     </div>
   
@@ -461,8 +404,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Paimon-[卷II]-开源分析和参与</div>
-      <div>http://archibald-nice.github.io/2023/07/26/paimon-230726/</div>
+      <div>Hexo(Fluid)使用技巧</div>
+      <div>http://archibald-nice.github.io/2023/08/04/hello-world/</div>
     </div>
     <div class="license-meta">
       
@@ -474,7 +417,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月26日</div>
+          <div>2023年8月4日</div>
         </div>
       
       
@@ -501,29 +444,6 @@
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/07/29/paimon-230729/" title="Paimon-[卷III]-案例使用与分析">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Paimon-[卷III]-案例使用与分析</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/07/24/paimon-230718/" title="Paimon-[卷I]-官网越阅越悦">
-                        <span class="hidden-mobile">Paimon-[卷I]-官网越阅越悦</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
               
             </div>
 
