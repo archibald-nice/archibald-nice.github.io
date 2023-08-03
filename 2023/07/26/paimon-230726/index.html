@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://archibald-nice.github.io/img/paimon/paimon-blog-title.png">
 <meta property="article:published_time" content="2023-07-26T10:02:17.000Z">
-<meta property="article:modified_time" content="2023-08-03T17:41:51.170Z">
+<meta property="article:modified_time" content="2023-08-03T17:54:48.739Z">
 <meta property="article:author" content="Archibald Wan">
 <meta property="article:tag" content="bigdata">
 <meta property="article:tag" content="apache">
@@ -265,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.3k 字
         
       </span>
     
@@ -276,7 +276,7 @@
         
         
         
-          21 分钟
+          20 分钟
         
       </span>
     
@@ -345,16 +345,20 @@
           </div>
 
 <h3 id="1-2-代码贡献指南"><a href="#1-2-代码贡献指南" class="headerlink" title="1.2 代码贡献指南"></a>1.2 代码贡献指南</h3><p>简明流程如下：</p>
-<p>当问题落地并有了大致的开发方向，此时可以开发代码并请求PR<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="Pull-Request，语义上来说就是请求(主分支)的合并">[2]</span></a></sup>了。具体步骤如下：</p>
 <ul>
-<li><strong>Discuss</strong><sup>讨论</sup>：<ol>
+<li><strong>Discuss</strong><sup>讨论</sup>：开发前针对一个bug或者功能进行讨论，没有讨论≈无效开发！</li>
+<li><strong>Implement</strong><sup>实现</sup>：<ol>
 <li>issue 的分配需要等待管理员你的审核，当被管理员 <code>associate</code><sup>关联&#x2F;分配</sup> 了该 issue 时，再着手开发也不急（先看代码梳理思路吧）；</li>
 <li>issue 分配到手后，从主仓库 <code>fork</code> 一份代码至私人仓库（仅需master&#x2F;main分支），切换到私人仓库中 <code>clone</code> 一个新的分支出来，新分支最好按照规范来取名，例如：<span class="label label-info">fix-#2992-logout-csrf-vulnerability</span>。表明这个分支用于修复 <u>issueId&#x3D;2992</u> 的问题，具体修复功能是 <u>注销过程中的跨站请求伪造(CSRF)漏洞</u>；</li>
+<li>在私人仓库新分支下修复好代码并按照 Paimon 的官方测试用例进行自测、语法检查、安全校验后，<code>commit</code> 全部代码到新分支。</li>
 </ol>
 </li>
-<li><strong>Implement</strong><sup>实现</sup>：</li>
-<li><strong>Review</strong><sup>审核</sup>：在私人仓库新分支下修复好代码并按照 Paimon 的官方测试用例进行自测、语法检查、安全校验后，<code>commit</code> 全部代码到新分支；</li>
-<li><strong>Merge</strong><sup>合并</sup>：进入私人仓库新分支页面，点击 <code>pull request</code> 申请合并分支到 <strong>主仓库的master分支</strong>。</li>
+<li><strong>Review</strong><sup>审核</sup>：<ol>
+<li>进入私人仓库新分支页面，点击 <code>pull request</code> 申请合并分支到 <strong>主仓库的master分支</strong>；</li>
+<li>等待审核人员的审批结果；</li>
+</ol>
+</li>
+<li><strong>Merge</strong><sup>合并</sup>：审批通过后即可看到代码被合并至主仓库的目标分支中！</li>
 </ul>
 <div class="note note-info">
             <p>在 <code>github-issue</code> 中往往会留一些专供新贡献者的入门级issue，标签名一般为 <span class="label label-primary">good first issues</span>，如果是刚接触项目，从他们开始斩杀吧！</p>
@@ -399,13 +403,10 @@
 <li><strong>backlog</strong>: 问题的积压列表，即未来可能解决的问题。</li>
 <li><strong>performance</strong>: 用于与性能问题或优化相关的问题。</li>
 </ol>
-<h2 id="02-代码分析"><a href="#02-代码分析" class="headerlink" title="02 代码分析"></a>02 代码分析</h2><p>在不参与开源的情况下，直接 <code>clone</code> 官方代码并切到想看的分支下即可。</p>
+<h2 id="02-代码分析-✨"><a href="#02-代码分析-✨" class="headerlink" title="02 代码分析 ✨"></a>02 代码分析 ✨</h2><p>在不参与开源的情况下，直接 <code>clone</code> 官方代码并切到想看的分支下即可。</p>
 <h3 id="2-2-拉取开源代码"><a href="#2-2-拉取开源代码" class="headerlink" title="2.2 拉取开源代码"></a>2.2 拉取开源代码</h3><h3 id="2-1-With-Flink"><a href="#2-1-With-Flink" class="headerlink" title="2.1 With Flink"></a>2.1 With Flink</h3><h2 id="XX-参考资料-🗐"><a href="#XX-参考资料-🗐" class="headerlink" title="XX 参考资料 🗐"></a>XX 参考资料 🗐</h2><p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-paimon/">Github &gt; Apache Paimon</a><br><a target="_blank" rel="noopener" href="https://paimon.apache.org/community/how-to-contribute/">官方文档 &gt; 参与Paimon贡献指南</a><br><a target="_blank" rel="noopener" href="https://github.com/freeCodeCamp/how-to-contribute-to-open-source">Github &gt; how-to-contribute-to-open-source</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/538667999">知乎 &gt; 如何参与开源项目 - 细说 GitHub 上的 PR 全过程</a><br><a target="_blank" rel="noopener" href="https://poxiao.tk/2023/05/bigdata/paimon/Paimon-Flink-Sink%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">破晓 &gt; Paimon-Flink-Sink源码分析</a></p>
 <hr>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>Proof-of-Concept，也就是概念验证或证明阶段
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>Pull-Request，语义上来说就是请求(主分支)的合并
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span>Podling-Project-Management-Committee。是一个管理委员会，负责指导和管理Podling项目的发展和孵化过程
-<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+
                 
               </div>
             
