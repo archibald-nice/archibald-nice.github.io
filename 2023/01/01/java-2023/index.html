@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://archibald-nice.github.io/img/java-blog-title.png">
 <meta property="article:published_time" content="2022-12-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-06T09:09:41.906Z">
+<meta property="article:modified_time" content="2023-08-21T17:22:07.535Z">
 <meta property="article:author" content="Archibald Wan">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="knowledge">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          121 字
+          2.4k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          2 分钟
+          20 分钟
         
       </span>
     
@@ -334,7 +334,54 @@ font-size: 15px;
 }
 </style>
 
-<h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2>
+<h2 id="01-常规通识"><a href="#01-常规通识" class="headerlink" title="01 常规通识"></a>01 常规通识</h2><h3 id="1-1-JVM"><a href="#1-1-JVM" class="headerlink" title="1.1 JVM"></a>1.1 JVM</h3><p><img src="/img/general-knowledge/java-jvm-1.8.jpg" srcset="/img/loading.gif" lazyload alt="jdk-1.8 JVM内存模型"></p>
+<p>从JDK-1.8开始，原有的 <code>方法区</code> 已经被 <code>元数据空间</code><sup>Metaspace</sup> 替换，和方法区不同 ，metaspace不再和堆共用连续的内存空间，而是<strong>使用本地内存</strong>，这意味着<strong>只要机器内存足够，那么不可能出现OOM</strong>！</p>
+<h3 id="1-2-常用集合"><a href="#1-2-常用集合" class="headerlink" title="1.2 常用集合"></a>1.2 常用集合</h3><h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>哈希表由 <strong>数组</strong> + <strong>(单向)链表</strong> 实现，链表长度超过8时转换为红黑树。</p>
+<p>➡ 调用 <code>put(k,v)</code> 插入元素时：</p>
+<ol>
+<li>hashCode(k) 计算键的哈希值，按照数组长度进行<strong>负载</strong><sup>按位与</sup>获得数组<sup>bucket桶</sup>的下标index；</li>
+<li>判定bucket是否为空：<ol>
+<li>bucket空，直接插入；</li>
+<li>bucket不为空，解决<strong>哈希冲突</strong> &#x3D;&gt; 遍历该桶中的链表（或红黑树，从 Java 8 开始引入），检查键对象是否已经存在：<ol>
+<li>键对象存在，新值替换旧值；</li>
+<li>键对象不存在，尾插法插入表尾。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>插入时如果 链表长度 超过 <em>8</em><sup>TREEIFY_THRESHOLD</sup>，则链表转化为红黑树，提高查询效率；长度小于 <em>6</em> 时，又会转回链表<br>插入时如果 键值对对数目 超过 <em>哈希表长度(default:16)与载因子(default:0.75)的乘积阈值</em><sup>capacity * loadfactor</sup>，则发生扩容<sup>resize</sup>(默认2倍扩容)<br>扩容操作会想创建一个2倍大小的新哈希表，然后将旧哈希表中的所有键值对重新插入到哈希表中</p>
+</blockquote>
+<div class="note note-info">
+            <p><strong>红黑树引入的原因</strong>：<br>早期HashMap使用的是基于拉链法的散列表来解决冲突。然而，当HashMap中的元素数量很大时，存在大量的散列冲突，导致链表长度过长，降低了查找、插入和删除操作的效率。<br>链表的时间复杂度为O(n)，而红黑树所有操作的**时间复杂度为O(logn)**，效率提升；<br>红黑树通过<code>节点着色</code>以及<code>自旋</code>功能提供了”<strong>自平衡</strong>“的高度控制，防止树的层级过深。</p>
+          </div>
+
+<p>➡ 调用 <code>get(k)</code> 获取元素时：</p>
+<ol>
+<li>hashCode(k) 计算键的哈希值，获得index；</li>
+<li>顺序遍历链表中每个”Node”，通过 <code>equals</code> 定位和k对应的v值</li>
+</ol>
+<h4 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><h4 id="ArrayList-LinkedList"><a href="#ArrayList-LinkedList" class="headerlink" title="ArrayList &amp; LinkedList"></a>ArrayList &amp; LinkedList</h4><h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><h3 id="1-3-JUC"><a href="#1-3-JUC" class="headerlink" title="1.3 JUC"></a>1.3 JUC</h3><h3 id="1-4-注解机制"><a href="#1-4-注解机制" class="headerlink" title="1.4 注解机制"></a>1.4 注解机制</h3><h3 id="1-5-动态代理与反射"><a href="#1-5-动态代理与反射" class="headerlink" title="1.5 动态代理与反射"></a>1.5 动态代理与反射</h3><h2 id="02-编码技巧"><a href="#02-编码技巧" class="headerlink" title="02 编码技巧"></a>02 编码技巧</h2><h3 id="2-1-Stream-API"><a href="#2-1-Stream-API" class="headerlink" title="2.1 Stream API"></a>2.1 Stream API</h3><p><strong>案例1</strong>：遍历students并将学生们的名字重新组成一个list集合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;String&gt; studentNames = students.stream().map(Student:getName)<br>                                             .collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+
+<p><strong>案例2</strong>：将List中的所有元素变成大写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;String&gt; words=Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>);<br>List&lt;String&gt; upperWords=words.stream().map(String::toUpperCase)<br>                                      .collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+
+<p><strong>案例3</strong>：将不同班级中的多个学生的名称 归集到一个花名册list中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;Classroom&gt; classrooms = Arrays.asList(<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Classroom</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;Alice&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;Bob&quot;</span>)),<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Classroom</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;Charlie&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;David&quot;</span>))<br>);<br><br><span class="hljs-comment">// 使用 flatMap 操作将嵌套的学生列表展开为一个扁平的流，并提取学生姓名</span><br>Stream&lt;String&gt; studentNames = classrooms.stream()<br>        .flatMap(classroom -&gt; classroom.getStudents().stream())<br>        .map(Student::getName);<br></code></pre></td></tr></table></figure>
+
+<p><strong>案例4</strong>：对students按照年龄进行排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">students.stream()<br>    .sorted(Comparator.comparingInt(Student::getAge))<br>    .forEach(System.out::println);<br></code></pre></td></tr></table></figure>
+
+<p><strong>案例5</strong>：按照学生年龄分组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//按学生年龄分组</span><br>Map&lt;Integer,List&lt;Student&gt;&gt; map= students.stream().<br>                                collect(Collectors.groupingBy(Student::getAge));<br></code></pre></td></tr></table></figure>
+
+<p><strong>案例6</strong>⭐️：遍历HashMap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 遍历 HashMap 的键值对并打印</span><br>hashMap.forEach((key1, value1) -&gt; System.out.println(<span class="hljs-string">&quot;Key: &quot;</span> + key1 + <span class="hljs-string">&quot;, Value: &quot;</span> + value1));<br><br><span class="hljs-comment">// 遍历 HashMap 的键并打印</span><br>hashMap.keySet().forEach(key -&gt; System.out.println(<span class="hljs-string">&quot;Key: &quot;</span> + key));<br><br><span class="hljs-comment">// 遍历 HashMap 的值并打印</span><br>hashMap.values().forEach(value -&gt; System.out.println(<span class="hljs-string">&quot;Value: &quot;</span> + value));<br></code></pre></td></tr></table></figure>
+
+<p>更详细的StreamAPI常用操作请跳转至<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/DXSspfii0T-mVzbuY-uWsA">八股一下：List集合常用的10多种数据处理用法</a></p>
+<h3 id="2-2-设计模式"><a href="#2-2-设计模式" class="headerlink" title="2.2 设计模式"></a>2.2 设计模式</h3><h2 id="03-分布式理论"><a href="#03-分布式理论" class="headerlink" title="03 分布式理论"></a>03 分布式理论</h2>
                 
               </div>
             
