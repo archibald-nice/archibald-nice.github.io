@@ -114,25 +114,53 @@
 
 
 
-<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/categories/">分类</a><a href="/tags/">标签</a></div><div class="sitemap-group"><span class="fs15">维基</span><a href="/wiki/">所有维基</a><a href="/wiki/archie-life/">Archie-Life</a><a href="/wiki/coding-study/">Coding-Study</a></div><div class="sitemap-group"><span class="fs15">动态</span><a href="/news/cat/">🐱</a><a href="/news/">2024</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/#">loading...</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/more/">我的订阅</a><a href="/more/music/">我的歌单</a><a href="/more/about/">关于本站</a><a href="/more/me/">关于博主</a></div></div><div class="text"><p>© 2024 本站使用 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo">Hexo</a>-v7.3.0 框架和 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>-v1.29.1 主题创建。<br>本站所有内容均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">署名-非商业性使用-禁止演绎 4.0 国际</a> 许可协议，未经授权请勿转载。<br><span id="runtime_span"></span><br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/imgs/foot-xiaoemo.gif" alt="描述文字" style="float: right; width: 60px; margin-left: 20px;"></p>
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/categories/">分类</a><a href="/tags/">标签</a></div><div class="sitemap-group"><span class="fs15">维基</span><a href="/wiki/">ALL</a><a href="/wiki/archie-life/">Archie-Life</a><a href="/wiki/coding-study/">Coding-Study</a></div><div class="sitemap-group"><span class="fs15">动态</span><a href="/#">loading...</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/#">loading...</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/more/">我的订阅</a><a href="/more/about/">关于本站</a><a href="/more/me/">关于博主</a></div></div><div class="text"><p>© 2025 本站使用 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo">Hexo</a>-v7.3.0 框架和 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>-v1.31.1 主题创建。<br><span id="runtime_span"></span></p>
 <script type="text/javascript">
 function show_runtime() {
     window.setTimeout("show_runtime()", 1000);
-    X = new Date("2024/01/01 17:00:00"); // 网站开始运行的日期和时间
-    Y = new Date(); // 当前日期和时间
-    T = (Y.getTime() - X.getTime()); // 网站运行的总毫秒数
-    M = 24 * 60 * 60 * 1000; // 一天的毫秒数
-    a = T / M; // 总天数
-    A = Math.floor(a); // 总天数的整数部分
-    b = (a - A) * 24; // 总小时数
-    B = Math.floor(b); // 总小时数的整数部分
-    c = (b - B) * 60; // 总分钟数
-    C = Math.floor((b - B) * 60); // 总分钟数的整数部分
-    D = Math.floor((c - C) * 60); // 总秒数
-    runtime_span.innerHTML = "⏱️勉强运行 <span class='runtime' style=\"font-weight: bold; color: #7F84A7;\">" + A + "天 " + B + "小时 " + C + "分 " + D + "秒</span>";
+    const startDate = new Date("2024/01/01 17:00:00");
+    const currentDate = new Date();
+    
+    // 计算总毫秒差
+    const diffTime = currentDate.getTime() - startDate.getTime();
+    
+    // 计算年、月、日、时、分、秒
+    let years = currentDate.getFullYear() - startDate.getFullYear();
+    let months = currentDate.getMonth() - startDate.getMonth();
+    let days = currentDate.getDate() - startDate.getDate();
+    let hours = currentDate.getHours() - startDate.getHours();
+    let minutes = currentDate.getMinutes() - startDate.getMinutes();
+    let seconds = currentDate.getSeconds() - startDate.getSeconds();
+    
+    // 处理负数情况
+    if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+    }
+    if (minutes < 0) {
+        minutes += 60;
+        hours--;
+    }
+    if (hours < 0) {
+        hours += 24;
+        days--;
+    }
+    if (days < 0) {
+        const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+        days += lastMonth.getDate();
+        months--;
+    }
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+    
+    runtime_span.innerHTML = "⏱️勉强运行 <span class='runtime' style=\"font-weight: bold; color: #7F84A7;\">" + 
+        years + "年" + months + "月" + days + "天-" + 
+        hours + "时" + minutes + "分" + seconds + "秒</span>";
 }
 show_runtime();
-</script> 
+</script>
 </div></footer>
 <div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
 <div class="widgets">
