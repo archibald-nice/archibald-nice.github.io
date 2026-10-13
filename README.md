@@ -62,6 +62,8 @@ ASTRO_TELEMETRY_DISABLED=1 npm run build
 
 ## 怎么改内容
 
+> 完整的日常维护步骤、字段说明、踩过的坑和回滚方法见 **[docs/maintenance.md](docs/maintenance.md)**。
+
 | 想改什么 | 改哪个文件 |
 |---|---|
 | 邮箱 / GitHub / 博客链接 | `src/consts.ts` |
@@ -71,6 +73,9 @@ ASTRO_TELEMETRY_DISABLED=1 npm run build
 | 关于页长文 | `src/content/pages/about-{zh,en}.md` |
 | 次要项目列表 | `src/data/other.ts` |
 | 颜色 / 字号 / 间距 | `src/styles/global.css` 顶部的 `:root` 设计令牌 |
+
+**注意**：当前**没有写新博客文章的能力**。`public/` 下是已冻结的 Hexo 产物，
+新站这边也还没有 posts 集合。要支持写文章需要额外搭建，详见维护手册 §7。
 
 ## 双语与主题
 
