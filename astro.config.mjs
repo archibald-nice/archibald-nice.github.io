@@ -15,8 +15,6 @@ export default defineConfig({
   integrations: [
     sitemap({
       i18n: { defaultLocale: 'zh', locales: { zh: 'zh-CN', en: 'en-US' } },
-      // 旧的 Hexo 静态博客（public/ 下）不进 sitemap，避免和新站内容互相稀释权重
-      filter: (page) => !/\/blog\//.test(page),
     }),
   ],
 

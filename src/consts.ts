@@ -9,8 +9,6 @@ export const SITE = {
 
   /** 新博客（Astro 内容集合，写在 src/content/posts/） */
   blog: '/blog/',
-  /** 旧 Hexo 博客的内容归档，路径保持原样 */
-  legacyArchive: '/archives/',
   /** 内容后台（Sveltia CMS，GitHub 账号或 token 登录） */
   admin: '/admin/',
 

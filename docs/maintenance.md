@@ -4,19 +4,19 @@
 
 ---
 
-## 0. 这里有三套东西
+## 0. 这里有什么
 
-| | 新站（Astro） | 旧博客（Hexo 产物） | 内容后台（Sveltia） |
-|---|---|---|---|
-| 位置 | `src/` | `public/` 里除 `admin/`、`uploads/` 外 | `public/admin/` |
-| 路径 | `/`、`/about/`、`/work/*`、`/blog/*`、`/en/*` | `/archives/`、`/2025/...`、`/wiki/` … | `/admin/` |
-| 源码 | Markdown + `.astro`，**在仓库里** | 编译好的 HTML，**源文件已丢失** | 一个静态 HTML + YAML 配置 |
-| 怎么改 | 改 Markdown（手改或走后台） | 直接编辑 HTML（痛苦，但可以） | 不用改，它是工具 |
-| 能否重新生成 | 能 | **不能** | 不适用 |
+| | 新站（Astro） | 内容后台（Sveltia） |
+|---|---|---|
+| 位置 | `src/` | `public/admin/` |
+| 路径 | `/`、`/about/`、`/work/*`、`/blog/*`、`/en/*` | `/admin/` |
+| 源码 | Markdown + `.astro`，在仓库里 | 一个静态 HTML + YAML 配置 |
+| 怎么改 | 改 Markdown（手改或走后台） | 不用改，它是工具 |
 
-> 旧博客是 **2025-08 之前** 的 Hexo 产物，源文件（`_config.yml` / `source/`）已丢失。
-> 它现在只是一份只读归档，路径保持原样，别再指望用 Hexo 重新构建。
-> 写新文章一律走 §5 / §6。
+`public/` 下只剩部署需要的静态文件：`.nojekyll`、`admin/`、`favicon.png`、`robots.txt`、`uploads/`。
+
+> 以前的 Hexo 博客（2024–2025 那批文章、wiki、笔记）**已经全部删除**，
+> 那些 URL 现在都是 404。内容没有真丢，取回方法见 §12。
 
 ---
 
@@ -70,10 +70,9 @@ git add -A && git commit -m "..." && git push
 |---|---|
 | `http://127.0.0.1:4321/` | ❌ 连不上（HTTP 000） |
 | `http://localhost:4321/` | ✅ 200 |
-| `http://[::1]:4321/` | ✅ 200 |
 
-**用 `localhost`，别用 `127.0.0.1`。** 需要 IPv4：`npm run dev -- --host 127.0.0.1`。
-另外 `npm run dev` 和 `npm run preview` 不能同时跑，都占 4321。
+**用 `localhost`，别用 `127.0.0.1`。** 要 IPv4：`npm run dev -- --host 127.0.0.1`。
+`npm run dev` 和 `npm run preview` 不能同时跑，都占 4321。
 
 ### 坑：dev 下后台地址要带 index.html
 
@@ -98,7 +97,7 @@ Astro 的 dev server 对 `public/` 下的目录**不会自动补 `index.html`**�
 | 页面结构与列表/详情页渲染 | `src/components/*.astro` |
 | 路由 | `src/pages/**` |
 | 内容后台的表单字段 | `public/admin/config.yml` |
-| 旧博客的文字 | `public/**/index.html`（直接改 HTML） |
+| sitemap / 部署域名 / 集成 | `astro.config.mjs` |
 
 ---
 
@@ -152,14 +151,13 @@ draft: false              # true 则不出现在列表、RSS 和页面上
 正文 Markdown
 ```
 
-只需要建**一种语言**也能正常工作：中文有、英文没有，英文列表里就不会出现它。
-标签页同理，各语言各自统计。
+只建一种语言也能正常工作：中文有、英文没有，英文列表里就不会出现它。标签页同理，各语言各自统计。
 
 写完 `push` 即上线。列表页按年份分组，标签页和 RSS 都是自动的。
 
 > **关于 slug 用中文**：文件名如果是中文，URL 就是 `/blog/中文标题/`。这**能正常工作**
-> （浏览器和 GitHub Pages 都会正确处理百分号编码），只是不够好看。
-> 想要英文 URL，就在文件建好之后把文件名改成英文，或者用 §6 的后台建（它会先让你确认 slug）。
+> （浏览器和 GitHub Pages 都正确处理百分号编码），只是不够好看。
+> 想要英文 URL，就在文件建好后把文件名改成英文。
 
 ---
 
@@ -167,9 +165,9 @@ draft: false              # true 则不出现在列表、RSS 和页面上
 
 地址：**<https://archibald-nice.github.io/admin/>**
 
-它是一个纯静态页面（`public/admin/index.html`），从 CDN 加载 Sveltia CMS，配置在
-`public/admin/config.yml`。原理：你用 GitHub 身份登录，它在你的浏览器里拿着令牌直接往仓库
-提交 commit，然后照常触发部署。
+它是一个纯静态页面（`public/admin/index.html`），从 CDN 加载 Sveltia CMS（版本固定为 0.236.0），
+配置在 `public/admin/config.yml`。原理：你用 GitHub 身份登录，它在你的浏览器里拿着令牌直接往
+仓库提交 commit，然后照常触发部署。
 
 **没有数据库**，内容始终就是仓库里的 Markdown。谁能写完全由 GitHub 仓库权限决定 ——
 没有 Write 权限的账号登不进也提交不了。
@@ -184,34 +182,33 @@ draft: false              # true 则不出现在列表、RSS 和页面上
 1. 打开 <https://archibald-nice.github.io/admin/>
 2. 点 **「使用访问令牌登录」**
 3. 弹窗里会给出一个 GitHub 生成令牌的链接（权限已预选），点过去生成
-   - 用 **fine-grained token**：仓库选 `archibald-nice.github.io`，权限给
-     **Contents → Read and write**
-   - 或用 **classic token**：勾 `repo` 整个 scope
+   - **fine-grained token**：仓库选 `archibald-nice.github.io`，权限给 **Contents → Read and write**
+   - 或 **classic token**：勾 `repo` 整个 scope
 4. 生成后复制，粘回弹窗，登录
 
 ### 关于这个令牌
 
 | | |
 |---|---|
-| 存在哪 | **只在你自己的浏览器 localStorage 里**，不会进仓库，也不会到我的服务器（没有服务器） |
-| 权限范围 | 建议 fine-grained + 只授权这一个仓库，最小权限 |
-| 失效场景 | 换浏览器、清缓存、隐身模式都要重新登录一次 |
-| 撤销 | 随时在 GitHub → Settings → Developer settings 里删掉，删了后台立刻登不上 |
-| 注意 | **别在公用电脑上登录**（令牌落在浏览器里） |
+| 存在哪 | **只在你自己的浏览器 localStorage 里**，不会进仓库 |
+| 权限范围 | 建议 fine-grained + 只授权这一个仓库 |
+| 失效场景 | 换浏览器、清缓存、隐身模式都要重新登录 |
+| 撤销 | 随时在 GitHub → Settings → Developer settings 删掉，删了后台立刻登不上 |
+| 注意 | **别在公用电脑上登录** |
 
 ### 后台能做什么
 
 - 新建 / 编辑 / 删除中英文文章
 - 上传图片（存到 `public/uploads/`，引用路径 `/uploads/xxx`）
 - 用「草稿」开关控制是否发布
-- 每次保存 = 一次 commit，实测会自动 GPG 签名并标记为 verified
+- 每次保存 = 一次 commit，会自动 GPG 签名并标记为 verified
 
-### 后台的字段改了会怎样
+### 改后台字段时注意
 
 `public/admin/config.yml` 里的 `fields` 必须和 `src/content.config.ts` 里的 schema 对得上。
 只改一边，编辑器要么看不到字段，要么写出来的 frontmatter 过不了校验。**两边一起改。**
 
-另外配置里这两项是**必须的**，别删：
+这两项是**必须的**，别删：
 
 ```yaml
 output:
@@ -238,8 +235,9 @@ output:
 
 - 图片放 `public/` 下，用根路径引用：`public/me.png` → `<img src="/me.png">`。
 - 后台插入的图片会自动进 `public/uploads/`，引用 `/uploads/xxx`。
-- 旧博客的图片在 `public/imgs/`（47MB，多是没压过的壁纸，可以压一遍）。
 - 想用 Astro 的自动优化（尺寸/格式），需要放 `src/assets/` 并 `import` 引用，目前没用这套。
+- `public/favicon.png` 是**唯一保留下来的旧主题资源**（原来的 Stellar 默认图标）。
+  换成自己的图标时，记得同步改 `src/layouts/Base.astro` 和 `public/admin/index.html` 两处引用。
 
 ---
 
@@ -247,7 +245,7 @@ output:
 
 | 报错关键词 | 原因 | 怎么修 |
 |---|---|---|
-| `Nested mappings are not allowed in compact mappings` | frontmatter 里某个值含 **ASCII 冒号+空格** 且没加引号 | 用双引号包住整个值，例：`description: "讲三件事: A、B、C"` |
+| `Nested mappings are not allowed in compact mappings` | frontmatter 某个值含 **ASCII 冒号+空格** 且没加引号 | 用双引号包住整个值，例：`description: "讲三件事: A、B、C"` |
 | `Expected type "string", received "number"` | 日期/数字没加引号，YAML 把它当数字了 | `period: '2026'` |
 | `does not match collection schema` + `Required` | 必填字段缺了 | 对照 §4 / §5 的字段表补齐 |
 | `Invalid url` | `repo` 不是完整 URL | 加 `https://` |
@@ -257,6 +255,19 @@ output:
 | `EPERM .../.npm/_cacache` | 沙箱拦了 npm 缓存 | `--cache ./.npm-cache` |
 
 **提交前先跑一次 `npm run build`** —— schema 校验会当场报错，不会带着坏数据上线。
+
+### 坑：sitemap 的 filter 会把新页面一起排掉
+
+`astro.config.mjs` 里的 sitemap `filter` 是**按 URL 正则匹配**的。
+之前为了排除旧博客写过 `filter: (page) => !/\/blog\//.test(page)`，
+结果后来加的新博客因为它也匹配 `/blog/`，**整块没进 sitemap**，而且不报错、完全静默。
+
+改完 filter 或新增路由后，务必确认一次：
+
+```bash
+npm run build
+cat dist/sitemap-0.xml | tr '<' '\n' | grep -o 'https://archibald-nice.github.io/[^<"]*' | sort -u
+```
 
 ---
 
@@ -273,7 +284,7 @@ gh run view <run-id> --log-failed        # 只看失败的那一步
 ```
 
 **构建失败不会让站点挂掉。** 这一点实测过：故意删掉一个必填字段推上去，结果是
-`build: failure` + `deploy: skipped`，而线上继续提供上一次成功的版本（首页 200、内容不变）。
+`build: failure` + `deploy: skipped`，而线上继续提供上一次成功的版本。
 所以内容是改不坏线上站的，最坏情况就是白推一次。
 
 ### Pages 的关键配置（别乱改）
@@ -300,41 +311,47 @@ git revert <commit> && git push     # 推荐，保留历史
 
 **已知可用的还原点**：
 
-| commit | 状态 |
+| commit / tag | 状态 |
 |---|---|
-| `a6a84a3` | 迁移前的原始 Hexo 博客 |
-| `f1f514b` | Astro 新站首次上线 |
+| `f1f514b` | Astro 新站首次上线（此时旧博客内容还在） |
 | `3379dbe` | Actions 升级到 Node 24 版本 |
+| `hexo-final` | **含全部 Hexo 内容的最后一个提交**，见 §12 |
 
 ---
 
 ## 11. 不要做的事
 
-- **别删 `public/.nojekyll`**。退回分支发布模式时，Jekyll 会忽略 `_astro/` 目录，页面直接丢样式。
+- **别删 `public/.nojekyll`**。万一退回分支发布模式，Jekyll 会忽略 `_astro/` 目录，页面直接丢样式。
 - **别在 `src/pages/` 下建 `admin.astro`**。必须用 `public/admin/index.html` ——
   Astro 的 dev server 会在保存时重载页面，可能把正在保存的文章写空或留下临时文件。
 - **别在 `public/` 根下放 `index.html`**。产物根的 `index.html` 归 Astro 生成，会和它争路径。
 - **别删 `public/admin/config.yml` 里的 `output.omit_empty_optional_fields`**，见 §6。
 - **别把 `dist/` 提交进仓库**（已在 `.gitignore`）。
 - **别改 `astro.config.mjs` 里的 `site`**。写错会让 canonical、hreflang 和 sitemap 里的域名全错。
+- **别往 sitemap 的 filter 里加正则**而不验证输出，见 §9。
 
 ---
 
-## 12. 已知的内容缺口
+## 12. 旧 Hexo 内容怎么找回
 
-旧 Hexo 博客自带 6 条死链（迁移前就有，非新站引入）。要么补内容，要么从 HTML 里删掉链接：
+2024–2025 那批文章、wiki、笔记、图片已经从前端删除了，**但内容本身没有丢**。
+删除前我把「含全部 Hexo 内容的最后一个提交」打了标签并推到远端：
 
-| 死链 | 出现位置 |
-|---|---|
-| `/notes/java_script` | `notes/`、`wiki/` 等页面的导航 |
-| `/notes/java_script.md` | 同上（Hexo 双份链接） |
-| `/wiki/archie-life/matters_of_fitness` | `wiki/` 系列 |
-| `/wiki/archie-life/matters_of_fitness.md` | 同上 |
-| `/bookmark/` | `public/2024/01/01/hello-world/` |
-| `/assets/wiki/stellar/photos/hello@1x.png` | `public/2024/01/01/hello-world/` |
+```bash
+git fetch --tags
 
-其他待办：
+# 看某篇文章
+git show hexo-final:public/2025/08/17/how-to-become-fullstacker/index.html
 
-- `public/imgs/` 有约 47MB 未压缩图片，可以用 `sips` 批量压一遍。
-- 没有买域名，用的是 `archibald-nice.github.io`。买了之后 CNAME 指过来即可，
-  也可以顺手把旧博客拆到 `blog.` 子域。
+# 把某个目录取回工作区
+git checkout hexo-final -- public/2025
+git checkout hexo-final -- public/imgs
+
+# 想恢复整份旧站点：切到那个标签另开一个目录看
+git worktree add /tmp/hexo-archive hexo-final
+```
+
+还有一个本地 mirror 备份在 `~/.backup/archibald-nice.github.io.git`（如果没删的话）。
+
+> 那些 URL 现在全部 404。如果哪天想把某篇文章重新发出来，从上面取回正文，
+> 转成 Markdown 放进 `src/content/posts/zh/` 就是一篇新文章 —— 比恢复整个旧站点划算。

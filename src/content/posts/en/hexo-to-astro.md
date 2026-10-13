@@ -79,7 +79,7 @@ Windows path separators had leaked into the config. The interesting part: it **n
 
 And a confession: while checking whether those images existed, I ran `replace('\\', '/')` on the paths. The leading backslash turned them into absolute filesystem paths, `/imgs/...` obviously did not exist, and I concluded "those images are missing, the live site is broken". I only corrected it by checking the real URLs. **Your checking script has bugs too — and the wrong conclusion it hands you looks exactly as credible as the right one.**
 
-## The structure now
+## The structure at the time of the migration
 
 ```
 src/                    new site (Astro)
@@ -96,3 +96,30 @@ Deployment runs through GitHub Actions: every push to `main` builds and publishe
 ## One takeaway
 
 The biggest risk in migration work is not "I can't change it" — it is **not being able to say which breakage was already there**. Building the baseline before touching anything is far cheaper than explaining afterwards. Without that before/after data, those five broken links would have cost me an afternoon.
+
+## Afterword: I retired the old content after all
+
+Once the "preserve every old path" approach above was working, I made another decision: **stop keeping any of the old blog.**
+
+The reason was that the cost never went away and the benefit was zero. 43MB of wallpapers and old theme assets sat in the repository slowing down every clone; the old pages only rendered properly with jsdelivr's CDN, and a CDN hiccup produced a wall of broken images; and it still carried six dead links that were never fixed — `/notes/java_script`, `/wiki/archie-life/matters_of_fitness`, `/bookmark/` and friends, all pointing at pages that stopped existing back in the Hexo era.
+
+So I removed every Hexo artefact under `public/` — 109 files — keeping exactly one, `favicon.png`, because the new site's `<link rel="icon">` still points at it.
+
+**The cost, stated plainly**: these URLs now all return 404.
+
+- `/2024/01/01/hello-world/`
+- `/2025/07/30/common-ai-words/`
+- `/2025/08/17/how-to-become-fullstacker/`
+- `/archives/`, `/categories/`, `/tags/`, `/wiki/`, `/notes/`, `/notebooks/`, `/more/`
+
+If search engines indexed them, or anyone linked to them, those links are broken now. I judged that acceptable: those pages were early study notes, not things I want people to find.
+
+**Nothing was actually lost.** Before deleting, I tagged the last commit containing the full Hexo content as `hexo-final` and pushed it, so it is one command away:
+
+```bash
+git fetch --tags
+git show hexo-final:public/2025/08/17/how-to-become-fullstacker/index.html
+git checkout hexo-final -- public/2025
+```
+
+That is probably the most valuable lesson here: **make a destructive change recoverable before you make it** — far cheaper than explaining afterwards.

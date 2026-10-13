@@ -1,6 +1,6 @@
 # archie-home
 
-大梁（Archibald）的个人主页 —— 作品集 + 博客 + 个人品牌站，托管在 GitHub Pages。
+大梁（Archibald）的个人主页 —— 作品集 + 博客，托管在 GitHub Pages。
 
 - 线上地址：<https://archibald-nice.github.io>
 - 内容后台：<https://archibald-nice.github.io/admin>（Sveltia CMS，GitHub 访问令牌登录）
@@ -9,17 +9,15 @@
 ## 这个仓库是什么
 
 这是 `archibald-nice.github.io` 用户站的**源码仓库**（GitHub Actions 构建后发布到 Pages）。
-它由三部分组成：
+两部分：
 
 | 部分 | 位置 | 说明 |
 |---|---|---|
-| 新站（Astro） | `src/` | 作品集、关于页、博客，中英双语 |
+| 站点（Astro） | `src/` | 作品集、关于页、博客，中英双语 |
 | 内容后台 | `public/admin/` | Sveltia CMS 的静态页面与配置，用 GitHub 令牌登录 |
-| 旧博客（Hexo 产物） | `public/` 其余部分 | 2025-08 之前用 Hexo + Stellar 生成的**静态产物**，原样保留，路径未变 |
 
-> ⚠️ **旧博客的 Hexo 源文件（`_config.yml` / `source/`）已丢失**，`public/` 下是编译好的 HTML。
-> 它现在是一份只读归档，无法再用 Hexo 重新生成。
-> 写新文章一律走 `src/content/posts/`（或内容后台）。
+> 2024–2025 的旧 Hexo 博客**已整体删除**，那些 URL 现在都是 404。
+> 内容没有真丢 —— 用 `hexo-final` 标签可以取回，见维护手册 §12。
 
 ## 常用命令
 
@@ -50,9 +48,8 @@ ASTRO_TELEMETRY_DISABLED=1 npm run build
 ├── public/                        # 原样拷进产物根的静态文件
 │   ├── .nojekyll                  # 防止 Jekyll 吞掉 _astro/
 │   ├── admin/                     # 内容后台（index.html + config.yml）
-│   ├── robots.txt
-│   ├── archives/ 2025/ wiki/ ...  # 旧博客内容，路径保持不变
-│   └── css/ js/ imgs/ search.json
+│   ├── favicon.png
+│   └── robots.txt
 └── src/
     ├── consts.ts                  # 站点常量（邮箱、GitHub、各路径）
     ├── i18n/ui.ts                 # 双语 UI 文案 + 路径与日期工具
@@ -114,22 +111,21 @@ gh api -X PUT repos/archibald-nice/archibald-nice.github.io/pages -f build_type=
 **构建失败不会让站点挂掉** —— 实测故意推坏内容的结果是 `build: failure` + `deploy: skipped`，
 线上继续提供上一次成功的版本。
 
-## 已知内容缺口（旧博客遗留，非新站问题）
+## 内链健康度
 
-全站内链用 HTML 解析器做过完整检查（不是正则 —— 正则会误报正文里的代码示例），
-新站与博客**零新增断链**。以下 6 条是旧 Hexo 博客原本就存在的死链：
+全站内链用 **HTML 解析器**做过完整检查（不用正则 —— 正则会误报正文里的代码示例，
+本项目就踩过：文章里为讲解 bug 写的 `<code>href="..."</code>` 被当成真实属性）：
 
-| 死链 | 出现位置 |
-|---|---|
-| `/notes/java_script`、`/notes/java_script.md` | `notes/`、`wiki/` 等页面导航 |
-| `/wiki/archie-life/matters_of_fitness(.md)` | `wiki/` 系列 |
-| `/bookmark/` | `public/2024/01/01/hello-world/` |
-| `/assets/wiki/stellar/photos/hello@1x.png` | `public/2024/01/01/hello-world/` |
+```
+HTML 文件: 22    内部链接: 312    断链: 0
+```
 
-另外 `public/imgs/` 有约 47MB 未压缩图片，会拉高仓库体积和克隆时间，可以用 `sips` 批量压一遍。
+改了路由或删除内容后，跑一遍 `node`/`python` 的检查脚本，或至少确认 sitemap 输出正确（见维护手册 §9）。
 
 ## 历史
 
 - 2024–2025：Hexo 7.3.0 + Stellar 1.31.1 静态博客
-- 2026-10：改为 Astro 站点，旧博客产物平移进 `public/`，保留原始路径与全部外链
+- 2026-10：改为 Astro 站点，旧博客产物先平移进 `public/` 保留原始路径
 - 2026-10：加入博客内容集合（中英双语）、标签页、RSS 与 Sveltia CMS 后台
+- 2026-10：决定不再保留旧内容，删除 `public/` 下全部 Hexo 产物（109 个文件、43MB）；
+  最后一个包含它们的提交打标签 `hexo-final` 以便随时取回

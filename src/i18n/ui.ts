@@ -60,10 +60,6 @@ export const ui = {
       rss: 'RSS 订阅',
       readMore: '阅读全文',
       countUnit: ' 篇',
-      legacyTitle: '更早的归档',
-      legacyNote:
-        '2025-08 之前写在 Hexo 上的随笔和笔记，没有迁移过来，链接保持原始路径。',
-      legacyLink: '浏览归档',
       adminHint: '内容后台',
       totalPrefix: '共 ',
       countUnitOne: ' 篇',
@@ -127,7 +123,7 @@ export const ui = {
       title: '页面走失了',
       lede: '这个地址没有对应的内容。可能是链接过期，或者我搬家时漏掉了什么。',
       home: '回到首页',
-      archive: '翻翻旧博客',
+      blog: '看看博客',
     },
   },
 
@@ -186,10 +182,6 @@ export const ui = {
       rss: 'RSS feed',
       readMore: 'Read more',
       countUnit: 'posts',
-      legacyTitle: 'Earlier archive',
-      legacyNote:
-        'Notes and posts written on Hexo before August 2025. Nothing was migrated — the links are the original paths.',
-      legacyLink: 'Browse the archive',
       adminHint: 'Content admin',
       totalPrefix: '',
       countUnitOne: ' post',
@@ -253,7 +245,7 @@ export const ui = {
       title: 'Page not found',
       lede: 'There is nothing at this address. The link may be stale, or something got lost when I moved.',
       home: 'Back home',
-      archive: 'Browse the old blog',
+      blog: 'Read the blog',
     },
   },
 } as const;

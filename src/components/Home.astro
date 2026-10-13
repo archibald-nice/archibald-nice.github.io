@@ -143,16 +143,9 @@ const altHref = pathFor(lang === 'zh' ? 'en' : 'zh', 'home');
       )
     }
 
-    <div class="note-box">
-      <p>
-        <strong>{T.blog.legacyTitle}</strong> — {T.blog.legacyNote}
-      </p>
-      <p>
-        <a href={SITE.legacyArchive}>{T.blog.legacyLink} ↗</a>
-        <span style="margin:0 0.5rem">·</span>
-        <a href={rssPath(lang)}>{T.blog.rss}</a>
-      </p>
-    </div>
+    <p class="post-meta" style="margin-top:1.25rem">
+      <a href={rssPath(lang)}>{T.blog.rss} ↗</a>
+    </p>
   </section>
 
   <section class="section" id="contact">
