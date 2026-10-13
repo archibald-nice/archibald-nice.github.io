@@ -2,7 +2,7 @@
 title: Idea Probe
 tagline: An idea engine on my own machine — Reddit threads through an LLM, keeping only claims and evidence
 lang: en
-order: 3
+order: 2
 period: '2026 — MVP'
 role: Solo build
 stack: ['Python', 'DeepSeek', 'Reddit API']

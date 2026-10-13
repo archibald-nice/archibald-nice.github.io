@@ -22,7 +22,6 @@ So my projects are mostly built around those questions:
 
 - In **Silicon River**, I cross-validate three leaderboards and add a layer of live web search, because a single leaderboard gets steered by release strategy, and an LLM on its own will confidently make things up
 - In **Idea Probe**, I insisted on splitting output into claims and evidence rather than producing a summary — summaries can't be compared, claims can
-- **Bloodline API** looks unrelated to AI, but it's the same idea: turn things that were answered by asking someone and hoping into something queryable
 
 ## How I work
 

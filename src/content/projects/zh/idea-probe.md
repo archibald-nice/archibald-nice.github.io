@@ -2,7 +2,7 @@
 title: Idea Probe
 tagline: 跑在自己机器上的灵感引擎：Reddit 热帖过一遍 LLM，只留下 claim 和 evidence
 lang: zh
-order: 3
+order: 2
 period: 2026 — MVP
 role: 独立开发
 stack: ['Python', 'DeepSeek', 'Reddit API']
