@@ -32,13 +32,13 @@ lang: zh
 
 ## 技术栈
 
+**AI Native** — LLM 应用设计、DeepSeek、联网检索增强、多源交叉验证、RAG、Agent 工具链
+
 **后端与数据** — Java、Spring Boot、MyBatis-Plus、Python、FastAPI、PostgreSQL、Redis、Druid
 
-**前端** — TypeScript、React、Three.js、Vite、Umi Max、Tailwind
+**前端与可视化** — TypeScript、React、Three.js、Vite、Umi Max、Tailwind
 
-**AI** — LLM 应用设计、DeepSeek、RAG、Agent 工具链、多源交叉验证、提示工程
-
-**工程** — Docker、docker-compose、nginx、GitHub Actions、Vercel、pytest
+**工程与交付** — Docker、docker-compose、nginx、GitHub Actions、Vercel、pytest
 
 ## 关于没开源的部分
 

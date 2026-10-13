@@ -80,22 +80,22 @@ export const ui = {
       {
         area: 'AI Native 应用',
         desc: 'LLM 应用设计、多源数据交叉验证、Agent 工具链、RAG 与提示工程；把「能跑通」推进到「敢上线」。',
-        chips: ['LLM', 'DeepSeek', 'LangChain 生态', 'RAG', 'Agent'],
+        chips: ['LLM 应用设计', 'DeepSeek', '联网检索增强', '多源交叉验证', 'RAG', 'Agent 工具链'],
       },
       {
         area: '后端与数据',
         desc: '服务端接口、数据管道与缓存层设计；静态代码分析、血缘图谱这类需要啃数据的活。',
-        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
+        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Python', 'FastAPI', 'PostgreSQL', 'Redis', 'Druid'],
       },
       {
         area: '前端与可视化',
         desc: '复杂交互界面的实现，包括 3D 数据可视化、筛选器密集的仪表盘。',
-        chips: ['TypeScript', 'React', 'Three.js', 'Vite', 'Umi'],
+        chips: ['TypeScript', 'React', 'Three.js', 'Vite', 'Umi Max', 'Tailwind'],
       },
       {
         area: '工程与交付',
         desc: '容器化、自动化部署、测试覆盖与可观测性；习惯先把边界和降级策略想清楚。',
-        chips: ['Docker', 'nginx', 'GitHub Actions', 'Vercel', 'pytest'],
+        chips: ['Docker', 'docker-compose', 'nginx', 'GitHub Actions', 'Vercel', 'pytest'],
       },
     ],
 
@@ -202,22 +202,22 @@ export const ui = {
       {
         area: 'AI-native apps',
         desc: 'LLM application design, cross-validating multiple data sources, agent tooling, RAG and prompt engineering — pushing past “it runs” to “it can ship”.',
-        chips: ['LLM', 'DeepSeek', 'RAG', 'Agent', 'Prompting'],
+        chips: ['LLM application design', 'DeepSeek', 'Web-augmented retrieval', 'Multi-source cross-validation', 'RAG', 'Agent tooling'],
       },
       {
         area: 'Backend & data',
         desc: 'Service APIs, data pipelines and caching layers; the kind of work that means chewing through data, static analysis and lineage graphs.',
-        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
+        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Python', 'FastAPI', 'PostgreSQL', 'Redis', 'Druid'],
       },
       {
         area: 'Frontend & visualization',
         desc: 'Building interfaces with real complexity, including 3D data visualization and filter-heavy dashboards.',
-        chips: ['TypeScript', 'React', 'Three.js', 'Vite', 'Umi'],
+        chips: ['TypeScript', 'React', 'Three.js', 'Vite', 'Umi Max', 'Tailwind'],
       },
       {
         area: 'Engineering & delivery',
         desc: 'Containers, automated deploys, test coverage and observability; I like to know the boundaries and the degradation path before writing the happy path.',
-        chips: ['Docker', 'nginx', 'GitHub Actions', 'Vercel', 'pytest'],
+        chips: ['Docker', 'docker-compose', 'nginx', 'GitHub Actions', 'Vercel', 'pytest'],
       },
     ],
 

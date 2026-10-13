@@ -32,13 +32,13 @@ So my projects are mostly built around those questions:
 
 ## Stack
 
+**AI-native** — LLM application design, DeepSeek, Web-augmented retrieval, Multi-source cross-validation, RAG, Agent tooling
+
 **Backend & data** — Java, Spring Boot, MyBatis-Plus, Python, FastAPI, PostgreSQL, Redis, Druid
 
-**Frontend** — TypeScript, React, Three.js, Vite, Umi Max, Tailwind
+**Frontend & visualization** — TypeScript, React, Three.js, Vite, Umi Max, Tailwind
 
-**AI** — LLM application design, DeepSeek, RAG, agent tooling, multi-source cross-validation, prompt engineering
-
-**Engineering** — Docker, docker-compose, nginx, GitHub Actions, Vercel, pytest
+**Engineering & delivery** — Docker, docker-compose, nginx, GitHub Actions, Vercel, pytest
 
 ## On what isn't open source
 
