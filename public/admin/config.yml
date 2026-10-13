@@ -9,8 +9,12 @@ backend:
   name: github
   repo: archibald-nice/archibald-nice.github.io
   branch: main
-  # 这里刻意不配 OAuth app，改用 Access Token 登录（个人站最省事，见维护手册）。
-  # 如果以后想换成 GitHub 授权页登录，需要部署一个 OAuth 中转并在此加 base_url。
+  # 只允许「访问令牌」登录，把 OAuth 按钮从界面上移除。
+  # 原因：OAuth 走的是 Netlify 的 api.netlify.com/auth 中转，那要求站点托管在 Netlify 上。
+  # 本站托管在 GitHub Pages，点了只会得到 "Not Found"。
+  # 想改用 GitHub 授权页登录，需要先在 Cloudflare Workers 部署 sveltia-cms-auth，
+  # 再在此加 base_url 并把 oauth 加回 auth_methods。见维护手册 §6。
+  auth_methods: [token]
 
 site_url: https://archibald-nice.github.io
 display_url: https://archibald-nice.github.io

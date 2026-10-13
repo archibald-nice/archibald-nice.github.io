@@ -172,12 +172,22 @@ draft: false              # true 则不出现在列表、RSS 和页面上
 **没有数据库**，内容始终就是仓库里的 Markdown。谁能写完全由 GitHub 仓库权限决定 ——
 没有 Write 权限的账号登不进也提交不了。
 
-### 首次登录：用访问令牌（不需要配 OAuth）
+### 登录：用访问令牌（不需要配 OAuth）
 
-登录页上有两个按钮，**请点「使用访问令牌登录」**。
+登录页上只有两项：**「使用本地仓库」和「使用访问令牌登录」**。线上请点后者。
 
-> ⚠️ 另一个「使用 GitHub 登录」走的是 Netlify 的 OAuth 中转，我们**故意没有配**，
-> 点了会失败。这不是故障，是设计如此（个人站不值得为它部署一个 OAuth 服务）。
+> 本来还有一个「使用 GitHub 登录」，我**已经把它从界面上移除了**
+> （配置里的 `auth_methods: [token]`）。原因是那个按钮走 Netlify 的
+> `api.netlify.com/auth` 中转，而中转要求站点托管在 Netlify 上 ——
+> 本站是 GitHub Pages，点了必然得到 `Not Found`。
+> 留一个点了就报错的按钮比没有按钮更糟，所以直接去掉。
+
+**如果以后真想要 GitHub 授权页登录**（多人协作、或不想手动管令牌）：
+
+1. 把 <https://github.com/sveltia/sveltia-cms-auth> 部署到 Cloudflare Workers（有免费额度）
+2. 在 GitHub 建一个 OAuth App，回调地址填 Worker 的地址，把 Client ID / Secret 配进 Worker
+3. 在 `public/admin/config.yml` 的 backend 里加 `base_url: <你的 Worker 地址>`
+4. 把 `auth_methods` 改成 `[oauth, token]` 或 `[oauth]`
 
 1. 打开 <https://archibald-nice.github.io/admin/>
 2. 点 **「使用访问令牌登录」**
@@ -211,6 +221,8 @@ draft: false              # true 则不出现在列表、RSS 和页面上
 这两项是**必须的**，别删：
 
 ```yaml
+backend:
+  auth_methods: [token]              # 少一个方法会变成配置错误；空数组也会报错
 output:
   omit_empty_optional_fields: true   # Zod 的 .optional() 只接受「字段不存在」，
                                      # 而 CMS 默认会写入空字符串/空数组，那会导致构建失败
