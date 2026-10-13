@@ -32,7 +32,7 @@ lang: zh
 
 ## 技术栈
 
-**后端与数据** — Java、Spring Boot、MyBatis-Plus、Dubbo、Python、FastAPI、PostgreSQL、Redis、Druid、JSqlParser
+**后端与数据** — Java、Spring Boot、MyBatis-Plus、Python、FastAPI、PostgreSQL、Redis、Druid
 
 **前端** — TypeScript、React、Three.js、Vite、Umi Max、Tailwind
 

@@ -32,7 +32,7 @@ So my projects are mostly built around those questions:
 
 ## Stack
 
-**Backend & data** — Java, Spring Boot, MyBatis-Plus, Dubbo, Python, FastAPI, PostgreSQL, Redis, Druid, JSqlParser
+**Backend & data** — Java, Spring Boot, MyBatis-Plus, Python, FastAPI, PostgreSQL, Redis, Druid
 
 **Frontend** — TypeScript, React, Three.js, Vite, Umi Max, Tailwind
 
