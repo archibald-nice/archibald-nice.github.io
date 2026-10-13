@@ -16,9 +16,8 @@
 | 站点（Astro） | `src/` | 作品集、关于页、博客，中英双语 |
 | 内容后台 | `public/admin/` | Sveltia CMS 的静态页面与配置，用 GitHub 令牌登录 |
 
-> 2024–2025 的旧 Hexo 博客**已整体删除**，那些 URL 现在都是 404。
-> 旧**文章文字**仍可用 `hexo-final` 标签取回；旧**图片**（43MB）已从 git 历史中
-> 彻底移除，只在离线归档 `archie-full-history-20261014.bundle` 里。详见维护手册 §12。
+> 2024–2025 的旧 Hexo 博客**已从站点和 git 历史中彻底移除**，那些 URL 现在都是 404。
+> 唯一的完整副本是离线归档 `archie-full-history-20261014.bundle`（见维护手册 §12）。
 
 ## 常用命令
 
@@ -116,7 +115,7 @@ gh api -X PUT repos/archibald-nice/archibald-nice.github.io/pages -f build_type=
 
 | | |
 |---|---|
-| `.git`（含全部 20 个提交的历史） | ~384K |
+| `.git`（含全部 11 个提交的历史） | ~244K |
 | 被跟踪的工作区文件 | ~388K |
 | `dist` 部署产物 | ~256K |
 
@@ -138,7 +137,9 @@ HTML 文件: 22    内部链接: 312    断链: 0
 - 2026-10：加入博客内容集合（中英双语）、标签页、RSS 与 Sveltia CMS 后台
 - 2026-10：决定不再保留旧内容，删除 `public/` 下全部 Hexo 产物（109 个文件、43MB）；
   最后一个包含它们的提交打标签 `hexo-final` 以便随时取回
-- 2026-10-14：**重写历史**，用 `git filter-branch` 把 43MB 旧图片从所有提交中移除，
-  `.git` 由 38M 降至 384K（强推）。旧的 `hexo-final` 标签随之更新，只保留文字；
-  重写前的完整历史（含图片）打包为 `archie-full-history-20261014.bundle`。
-  **在此之前的本地克隆 hash 已不同，需 `git reset --hard origin/main`**
+- 2026-10-14：**两次历史重写**（均强推）。第一次用 `git filter-branch` 移除 43MB 旧图片
+  （38M → 384K）；第二次移除全部旧博客路径并 `--prune-empty` 剪掉 10 个 Hexo 时代提交
+  （384K → 244K）。现在**历史里只剩当前站点**：提交 21 → 11，
+  「历史上出现过的路径数 == 当前路径数 == 51」，`hexo-final` 标签已删除。
+  重写前的完整历史打包为 `archie-full-history-20261014.bundle`（唯一副本）。
+  **在此之前克隆的本地副本 hash 已不同，需 `git fetch && git reset --hard origin/main`**

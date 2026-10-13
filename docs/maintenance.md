@@ -324,16 +324,17 @@ gh api -X PUT repos/archibald-nice/archibald-nice.github.io/pages -f build_type=
 git revert <commit> && git push     # 推荐，保留历史
 ```
 
-**已知可用的还原点**（`2026-10-14` 历史重写后的 hash）：
+**已知可用的还原点**（hash 截至 `2026-10-14` 的两次重写之后；
+重写会让 hash 变化，所以更可靠的做法是按提交信息找：`git log --oneline`）：
 
-| commit / tag | 状态 |
+| commit | 状态 |
 |---|---|
-| `61e7bea` | Astro 新站首次上线（此时旧博客内容还在） |
-| `5f4a74b` | Actions 升级到 Node 24 版本 |
-| `f405a22` | 删除全部旧 Hexo 内容，只保留新站 |
-| `hexo-final` | 旧博客的**文字**（`f74a41f`），图片已不在 git 里，见 §12 |
+| `460ebb8` | Astro 新站首次上线（现在是历史的根提交，之前的 Hexo 提交已被剪掉） |
+| `3018774` | Actions 升级到 Node 24 版本 |
+| `c2b1a9f` | 删除全部旧 Hexo 内容，只保留新站 |
+| `18c530f` | 当前 tip |
 
-> ⚠️ **2026-10-14 重写过一次历史**（为了把 43MB 旧图片从 `.git` 里清掉，见 §12）。
+> ⚠️ **2026-10-14 重写过两次历史**（为把旧博客从 `.git` 里彻底清掉，见 §12）。
 > 因此**在此之前克隆的每一份本地副本，commit hash 全部与远端不同**，直接 `git pull`
 > 会冲突。旧副本要执行一次：
 >
@@ -343,7 +344,6 @@ git revert <commit> && git push     # 推荐，保留历史
 > ```
 >
 > 如果本地有未提交的改动，先 `git stash` 或 `git diff > /tmp/wip.patch` 备份再执行。
-
 ---
 
 ## 11. 不要做的事
@@ -359,49 +359,60 @@ git revert <commit> && git push     # 推荐，保留历史
 
 ---
 
-## 12. 旧 Hexo 内容怎么找回（注意：恢复点已变）
+## 12. 旧 Hexo 内容：已从 git 中彻底移除
 
-2026-10-14 做过一次**历史重写**：为了把 43MB 旧图片从 `.git` 里彻底清掉
-（`.git` 从 38M 降到 384K），用 `git filter-branch` 把 `imgs/` 与 `public/imgs/`
-从**所有**提交中移除了。所以现在：
+2026-10-14 做过**两次历史重写**，目标是让仓库和 git 历史里都不再有旧博客的痕迹：
 
-| 内容 | 在哪 | 怎么取 |
+| 次数 | 做了什么 | `.git` |
 |---|---|---|
-| 旧文章、wiki、笔记的**文字** | git 历史里还在 | `hexo-final` 标签 |
-| 旧**图片**（壁纸等 43MB） | **已从 git 移除**，只在离线归档里 | 下面的 bundle 文件 |
-| 新站的全部文件 | 正常工作区 | —— |
+| 第一次 | 用 `git filter-branch` 移除全部旧图片（约 43MB 壁纸等） | 38M → 384K |
+| 第二次 | 移除**全部**旧博客路径（文字、CSS、JS、search.json 等 57 个路径），并用 `--prune-empty` 剪掉 10 个 Hexo 时代的提交 | 384K → 244K |
 
-### 取回旧文章的文字
+结果（以**从远端重新克隆**验证，不是看本地）：
 
-```bash
-git fetch --tags
-git show hexo-final:public/2025/08/17/how-to-become-fullstacker/index.html
-git checkout hexo-final -- public/2025
-git worktree add /tmp/hexo-archive hexo-final     # 整份旧站点另开目录看
-```
+- 提交数 **21 → 11**，`git log` 从「feat: 个人主页改为 Astro 作品集站」开始
+- **历史上出现过的路径数 = 当前站点的路径数 = 51**，即历史里只剩现在还在用的文件
+- `git log --oneline | grep -c 'Site updated\|First commit'` = **0**
+- `hexo-final` 标签**已删除** —— 内容已不在 git 里，留着只会误导
+- `git status` 干净、`git fsck` 干净、tip 的 tree hash 重写前后完全一致
 
-### 取回旧图片／完整原始历史
-
-离线归档（**是重写前的完整 20 个提交，含全部图片**）：
+### 旧内容现在只存在于一个地方
 
 ```
 /Users/archie/Temp/.backup/archie-full-history-20261014.bundle   （38MB）
 ```
 
-它是一个 git bundle，可以当成远程仓库直接克隆：
+这是重写**之前**打包的完整历史：20 个提交、原始 `hexo-final` 标签、全部旧文章与图片。
 
 ```bash
 git clone /Users/archie/Temp/.backup/archie-full-history-20261014.bundle /tmp/hexo-original
-cd /tmp/hexo-original && git log --oneline | head
-git show hexo-final:public/imgs/backup-2023/wallpaper-sun.png > /tmp/wallpaper.png
+cd /tmp/hexo-original
+git log --oneline | head
+git show hexo-final:public/2025/08/17/how-to-become-fullstacker/index.html   # 旧文章
+git show hexo-final:public/imgs/backup-2023/wallpaper-sun.png > /tmp/w.png    # 旧图片
 ```
 
-> ⚠️ **这个 bundle 目前只在一处**（工作区里的 `.backup/`），而工作区是你自己说的
-> 「可丢弃的试验场」。**请把它挪到安全的地方**（iCloud、移动硬盘、或私有仓库）。
-> 换机器前务必确认它还在 —— 它是那 43MB 图片和完整原始历史的唯一副本。
->
-> 另外还有一个 mirror 备份 `~/.backup/archibald-nice.github.io.git`（如果还在的话），
-> 那是重写**之前**抓的，同样含完整旧历史。
+> ⚠️ **这是那 43MB 图片和全部旧历史的唯一副本**，而它躺在 `/Users/archie/Temp/.backup/`
+> —— 一个被定义为「可丢弃的试验场」的工作区里。
+> **请挪到安全位置**（iCloud / 移动硬盘 / 私有仓库）。确认永不需要的话删掉也行，但不可逆。
 
-> 那些旧 URL 现在全部 404。如果哪天想把某篇文章重新发出来，从上面取回正文，
-> 转成 Markdown 放进 `src/content/posts/zh/` 就是一篇新文章 —— 比恢复整个旧站点划算。
+### 重写历史时的三个坑（下次别再踩）
+
+1. **枚举「历史上所有路径」不要用 `git log --diff-filter=A`。**
+   实测它漏了 7 条（101 vs 权威的 108），导致我第一次清除不干净。
+   可靠做法是遍历所有提交的树：
+   ```bash
+   git rev-list --all | while read -r c; do git ls-tree -r --name-only "$c"; done | sort -u
+   ```
+2. **光删文件不剪空提交，旧时代的提交会留下来。**
+   文件删光了但提交还在，`git log` 里仍能看到「Site updated: …」。
+   要么加 `--prune-empty`，要么接受这些空提交。
+3. **必须验证两个不变量**，否则你不知道重写有没有改坏东西：
+   ```bash
+   git rev-parse HEAD^{tree}        # 重写前后必须完全一致
+   ```
+   ```bash
+   # 历史里出现过的路径集合，应当等于当前站点的路径集合
+   comm -3 <(git rev-list --all | while read -r c; do git ls-tree -r --name-only "$c"; done | sort -u) \
+           <(git ls-tree -r --name-only HEAD | sort -u)
+   ```
