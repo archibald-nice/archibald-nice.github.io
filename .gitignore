@@ -17,3 +17,6 @@ pnpm-debug.log*
 
 # macOS
 .DS_Store
+
+# 沙箱内本地 npm 缓存（README 推荐的 --cache 目录）
+.npm-cache/
