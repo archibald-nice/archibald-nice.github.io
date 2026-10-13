@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { t, workPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const T = t(lang);
+const { data } = project;
+const slug = project.id.split('/')[1];
+const detailHref = workPath(lang, slug);
+---
+
+<li class="work-item">
+  <div class="work-top">
+    <a class="work-title-link" href={detailHref}>{data.title}</a>
+    <span class="work-arrow" aria-hidden="true">→</span>
+    <span class="work-meta mono">{data.period}</span>
+  </div>
+
+  <p class="work-tagline">{data.tagline}</p>
+  <p class="work-stack mono">{data.stack.join(' · ')}</p>
+
+  <div class="work-ext">
+    <a href={data.repo} rel="noopener" target="_blank">{T.work.repo} ↗</a>
+    <a href={detailHref}>{T.work.readMore}</a>
+  </div>
+</li>

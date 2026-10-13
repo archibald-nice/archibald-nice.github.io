@@ -1,0 +1,17 @@
+---
+import { getCollection, render } from 'astro:content';
+import WorkDetail from '../../components/WorkDetail.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => data.lang === 'zh');
+  return projects.map((project) => ({
+    params: { slug: project.id.split('/')[1] },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<WorkDetail project={project} lang="zh" Content={Content} />

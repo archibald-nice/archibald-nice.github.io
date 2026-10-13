@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui } from '../i18n/ui';
+import { SITE } from '../consts';
+
+const zh = ui.zh.notFound;
+const en = ui.en.notFound;
+---
+
+<Base
+  lang="zh"
+  title={`404 — ${SITE.name} (${SITE.latin})`}
+  description={zh.lede}
+  altHref="/en/"
+>
+  <section class="hero">
+    <p class="eyebrow mono">404</p>
+    <h1>{zh.title}<span class="latin"> / {en.title}</span></h1>
+    <div class="hero-lede">
+      <p>{zh.lede}</p>
+      <p>{en.lede}</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="/">{zh.home}</a>
+      <a class="btn" href={SITE.blogArchive}>{zh.archive}</a>
+      <a class="btn" href="/en/">{en.home}</a>
+    </div>
+  </section>
+</Base>

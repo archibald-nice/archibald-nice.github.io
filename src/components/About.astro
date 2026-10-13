@@ -1,0 +1,40 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { t, type Lang, pathFor } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const T = t(lang);
+
+const entry = await getEntry('pages', `about-${lang}`);
+if (!entry) throw new Error(`Missing about page content for lang=${lang}`);
+const { Content } = await render(entry);
+
+const altHref = pathFor(lang === 'zh' ? 'en' : 'zh', 'about');
+---
+
+<Base
+  lang={lang}
+  title={`${T.about.title} — ${T.hero.h1} (${T.hero.latin})`}
+  description={T.about.lede}
+  altHref={altHref}
+  current="about"
+>
+  <article>
+    <header class="page-head">
+      <p class="eyebrow">{T.about.title}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="page-lede">{entry.data.lede}</p>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <a class="back-link" href={pathFor(lang, 'home')}>{T.about.backHome}</a>
+</Base>

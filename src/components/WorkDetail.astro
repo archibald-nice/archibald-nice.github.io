@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { t, workPath, pathFor, type Lang } from '../i18n/ui';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+  Content: any;
+}
+
+const { project, lang, Content } = Astro.props;
+const T = t(lang);
+const { data } = project;
+const slug = project.id.split('/')[1];
+
+const altHref = workPath(lang === 'zh' ? 'en' : 'zh', slug);
+---
+
+<Base
+  lang={lang}
+  title={`${data.title} — ${T.hero.h1} (${T.hero.latin})`}
+  description={data.tagline}
+  altHref={altHref}
+  current="home"
+  ogType="article"
+>
+  <article>
+    <header class="page-head">
+      <p class="eyebrow mono">{data.period}</p>
+      <h1>{data.title}</h1>
+      <p class="page-lede">{data.tagline}</p>
+    </header>
+
+    <dl style="margin-top:1.75rem">
+      <div class="ability">
+        <dt>{T.work.role}</dt>
+        <dd>{data.role}</dd>
+      </div>
+      <div class="ability">
+        <dt>{T.work.stackLabel}</dt>
+        <dd>
+          <ul class="chips">
+            {data.stack.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+      <div class="ability">
+        <dt>{T.work.repo}</dt>
+        <dd>
+          <a href={data.repo} rel="noopener" target="_blank">{T.work.viewRepo} ↗</a>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <a class="back-link" href={`${pathFor(lang, 'home')}#work`}>{T.work.backToWork}</a>
+</Base>

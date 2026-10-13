@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import WorkItem from './WorkItem.astro';
+import { t, type Lang, pathFor } from '../i18n/ui';
+import { SITE } from '../consts';
+import { otherProjects, followedProjects } from '../data/other';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const T = t(lang);
+
+const projects = (await getCollection('projects', ({ data }) => data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const altHref = pathFor(lang === 'zh' ? 'en' : 'zh', 'home');
+
+/** 早期 Hexo 博客里的文章，路径是原来的，没有迁移 */
+const posts = [
+  { href: '/2025/08/17/how-to-become-fullstacker/', zh: '如何成为一个全栈开发', en: 'How to become a full-stack developer' },
+  { href: '/2025/07/30/common-ai-words/', zh: 'AI 相关的常见词汇', en: 'Common AI vocabulary' },
+  { href: '/more/about/', zh: '关于博主', en: 'About the author' },
+];
+---
+
+<Base lang={lang} title={T.meta.title} description={T.meta.description} altHref={altHref} current="home">
+  <section class="hero">
+    <h1>
+      {T.hero.h1}
+      <span class="latin">{T.hero.latin}</span>
+    </h1>
+
+    <p class="hero-role">
+      {T.hero.role}<strong>{T.hero.roleStrong}</strong>{T.hero.roleTail}
+    </p>
+
+    <div class="hero-lede">
+      {T.hero.lede.map((para) => <p>{para}</p>)}
+    </div>
+
+    <div class="slogan">
+      {T.hero.slogan}
+      <span class="slogan-en">{T.hero.sloganEn}</span>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="#work">{T.hero.ctaWork}</a>
+      <a class="btn" href={`mailto:${SITE.email}`}>{T.hero.ctaMail}</a>
+      <a class="btn" href={SITE.github} rel="me noopener" target="_blank">GitHub ↗</a>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="section-head">
+      <h2>{T.sections.work}</h2>
+      <span class="section-note mono">{T.sections.workNote} · {projects.length}</span>
+    </div>
+    <ul class="work-list">
+      {projects.map((project) => <WorkItem project={project} lang={lang} />)}
+    </ul>
+  </section>
+
+  <section class="section" id="other">
+    <div class="section-head">
+      <h2>{T.sections.minor}</h2>
+    </div>
+    <ul class="minor-list">
+      {
+        otherProjects.map((p) => (
+          <li>
+            {p.href ? (
+              <a class="minor-name" href={p.href} rel="noopener" target="_blank">
+                {p.name}
+              </a>
+            ) : (
+              <span class="minor-name">{p.name}</span>
+            )}
+            <span class="minor-desc">{p.desc[lang]}</span>
+          </li>
+        ))
+      }
+      {
+        followedProjects.map((p) => (
+          <li>
+            <a class="minor-name" href={p.href} rel="noopener" target="_blank">
+              {p.name}
+            </a>
+            <span class="minor-desc">
+              {p.desc[lang]}
+              {p.tag ? <span class="mono"> [{p.tag[lang]}]</span> : null}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" id="ability">
+    <div class="section-head">
+      <h2>{T.sections.ability}</h2>
+    </div>
+    <dl>
+      {
+        T.ability.map((item) => (
+          <div class="ability">
+            <dt>{item.area}</dt>
+            <dd>
+              <p style="margin:0 0 0.5rem">{item.desc}</p>
+              <ul class="chips">
+                {item.chips.map((chip) => (
+                  <li>{chip}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="section" id="writing">
+    <div class="section-head">
+      <h2>{T.sections.writing}</h2>
+      <a href={SITE.blogArchive}>{T.sections.writingNote} ↗</a>
+    </div>
+    <p style="color:var(--muted); margin: 1rem 0 0.5rem">{T.writing.intro}</p>
+    <ul class="minor-list">
+      {
+        posts.map((p) => (
+          <li>
+            <a class="minor-name" href={p.href}>
+              {lang === 'zh' ? p.zh : p.en}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a class="minor-name" href="/wiki/">{T.writing.wiki}</a>
+        <span class="minor-desc">Archie Life · Coding Study</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="section-head">
+      <h2>{T.sections.contact}</h2>
+    </div>
+    <p style="color:var(--muted); margin: 1rem 0 0.75rem">{T.contact.intro}</p>
+    <dl>
+      <div class="ability">
+        <dt>{T.contact.emailLabel}</dt>
+        <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+      </div>
+      <div class="ability">
+        <dt>{T.contact.githubLabel}</dt>
+        <dd><a href={SITE.github} rel="me noopener" target="_blank">{SITE.github.replace('https://', '')} ↗</a></dd>
+      </div>
+      <div class="ability">
+        <dt>{T.contact.blogLabel}</dt>
+        <dd><a href={SITE.blogArchive}>archibald-nice.github.io{SITE.blogArchive} ↗</a></dd>
+      </div>
+    </dl>
+  </section>
+</Base>

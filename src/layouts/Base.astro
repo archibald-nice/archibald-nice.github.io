@@ -1,0 +1,144 @@
+---
+import '../styles/global.css';
+import { SITE } from '../consts';
+import { t, languages, type Lang, pathFor } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** 同页面的另一语言地址，用于 hreflang 与切换按钮 */
+  altHref: string;
+  /** 当前导航高亮 */
+  current?: 'home' | 'about' | 'writing';
+  /** 详情页等需要额外 OG 类型的场景 */
+  ogType?: string;
+}
+
+const { lang, title, description, altHref, current, ogType = 'website' } = Astro.props;
+const T = t(lang);
+const other: Lang = lang === 'zh' ? 'en' : 'zh';
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+
+const navItems = [
+  { key: 'home' as const, label: T.nav.work, href: pathFor(lang, 'home') },
+  { key: 'about' as const, label: T.nav.about, href: pathFor(lang, 'about') },
+  { key: 'writing' as const, label: T.nav.writing, href: lang === 'zh' ? SITE.blogArchive : SITE.blogArchive },
+];
+---
+
+<!doctype html>
+<html lang={T.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- 双语 SEO：互相声明 -->
+    <link rel="alternate" hreflang={lang === 'zh' ? 'zh-CN' : 'en'} href={canonical} />
+    <link rel="alternate" hreflang={other === 'zh' ? 'zh-CN' : 'en'} href={new URL(altHref, SITE.url).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(pathFor('zh', current === 'about' ? 'about' : 'home'), SITE.url).href} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="author" content={`${SITE.name} (${SITE.latin})`} />
+
+    <link rel="icon" href="/imgs/favicon-nerdface.png" />
+    <meta name="theme-color" content={lang === 'zh' ? '#fbfbf9' : '#fbfbf9'} media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)" />
+
+    <!-- 无闪烁主题：只在用户手动选过时写入 data-theme，否则交给 prefers-color-scheme -->
+    <script is:inline>
+      (() => {
+        try {
+          const s = localStorage.getItem('theme');
+          if (s === 'light' || s === 'dark') document.documentElement.setAttribute('data-theme', s);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{T.skipToContent}</a>
+
+    <header class="site-header">
+      <div class="wrap site-header-inner">
+        <a class="brand" href={pathFor(lang, 'home')}>
+          <span class="brand-mark">{T.hero.h1}</span>
+          <span class="brand-sub">{T.hero.latin}</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          {
+            navItems.map((item) => (
+              <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+          <a href={`mailto:${SITE.email}`}>{T.nav.contact}</a>
+
+          <span class="nav-divider" aria-hidden="true"></span>
+
+          <a class="icon-btn lang-btn" href={altHref} hreflang={other} title={T.langSwitch} aria-label={T.langSwitch}>
+            {lang === 'zh' ? 'EN' : '中文'}
+          </a>
+
+          <button class="icon-btn" id="theme-toggle" type="button" title={T.themeToggle} aria-label={T.themeToggle}>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+            </svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer-inner">
+        <span>© {new Date().getFullYear()} {SITE.name} ({SITE.latin}) · {T.footer.rights}</span>
+        <span class="footer-links">
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          <a href={SITE.github} rel="me noopener" target="_blank">GitHub</a>
+          <a href={SITE.blogArchive}>{T.nav.writing}</a>
+          <a href="#">{T.footer.backTop}</a>
+        </span>
+      </div>
+      <div class="wrap" style="margin-top:0.75rem">
+        <span class="mono">{T.footer.builtWith}</span>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+          const current =
+            document.documentElement.getAttribute('data-theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          const next = current === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try {
+            localStorage.setItem('theme', next);
+          } catch (e) {}
+        });
+      })();
+    </script>
+  </body>
+</html>

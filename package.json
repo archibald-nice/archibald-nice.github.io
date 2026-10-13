@@ -1,0 +1,17 @@
+{
+  "name": "archie-home",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "archie (大梁) — full-stack / AI-native engineer. Personal portfolio on GitHub Pages.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.8"
+  }
+}
