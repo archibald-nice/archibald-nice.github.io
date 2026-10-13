@@ -359,54 +359,45 @@ git revert <commit> && git push     # 推荐，保留历史
 
 ---
 
-## 12. 旧 Hexo 内容：已从 git 中彻底移除
+## 12. 旧 Hexo 内容：已彻底移除，**不可恢复**
 
-2026-10-14 做过**两次历史重写**，目标是让仓库和 git 历史里都不再有旧博客的痕迹：
+2026-10-14 先做了**两次历史重写**把旧博客从仓库和 git 历史里清掉，随后**离线归档也按要求删除**。
 
-| 次数 | 做了什么 | `.git` |
-|---|---|---|
-| 第一次 | 用 `git filter-branch` 移除全部旧图片（约 43MB 壁纸等） | 38M → 384K |
-| 第二次 | 移除**全部**旧博客路径（文字、CSS、JS、search.json 等 57 个路径），并用 `--prune-empty` 剪掉 10 个 Hexo 时代的提交 | 384K → 244K |
+| 项 | 状态 |
+|---|---|
+| `public/` 下的旧产物（109 个文件、约 43MB） | 已删除 |
+| git 历史里的旧路径（57 条）与 10 个 Hexo 时代提交 | 已重写清除（`--prune-empty`） |
+| `hexo-final` 标签 | 已删除 |
+| 离线归档 bundle（38MB，含完整旧历史与图片） | **已删除** |
+| mirror 备份（38MB） | **已删除** |
 
-结果（以**从远端重新克隆**验证，不是看本地）：
+重写后的结果（以**从远端重新克隆**验证）：
 
-- 提交数 **21 → 11**，`git log` 从「feat: 个人主页改为 Astro 作品集站」开始
-- **历史上出现过的路径数 = 当前站点的路径数 = 51**，即历史里只剩现在还在用的文件
+- 提交数 **21 → 12**，`git log` 从「feat: 个人主页改为 Astro 作品集站」开始
+- **历史上出现过的路径数 = 当前站点的路径数 = 51**，历史里只剩现在还在用的文件
 - `git log --oneline | grep -c 'Site updated\|First commit'` = **0**
-- `hexo-final` 标签**已删除** —— 内容已不在 git 里，留着只会误导
-- `git status` 干净、`git fsck` 干净、tip 的 tree hash 重写前后完全一致
+- 克隆体积 **38M → 640K**（`.git` 292K）
+- tip 的 tree hash 重写前后完全一致、`git status` 干净、`git fsck` 干净
 
-### 旧内容现在只存在于一个地方
+> ⚠️ **没有任何副本了。** 2024–2025 的旧文章、wiki、笔记和 43MB 图片都已不存在于
+> 远端、线上站点、本仓库以及任何归档里。
+>
+> 万一哪天后悔，只剩两条路：① 搜索引擎或 Web Archive 的旧页面快照
+> （`web.archive.org` 搜 `archibald-nice.github.io`）；② 凭记忆重写。
+>
+> **以后再遇到同类决定，先问一句「要不要留一份离线归档」再动手删。**
 
-```
-/Users/archie/Temp/.backup/archie-full-history-20261014.bundle   （38MB）
-```
-
-这是重写**之前**打包的完整历史：20 个提交、原始 `hexo-final` 标签、全部旧文章与图片。
-
-```bash
-git clone /Users/archie/Temp/.backup/archie-full-history-20261014.bundle /tmp/hexo-original
-cd /tmp/hexo-original
-git log --oneline | head
-git show hexo-final:public/2025/08/17/how-to-become-fullstacker/index.html   # 旧文章
-git show hexo-final:public/imgs/backup-2023/wallpaper-sun.png > /tmp/w.png    # 旧图片
-```
-
-> ⚠️ **这是那 43MB 图片和全部旧历史的唯一副本**，而它躺在 `/Users/archie/Temp/.backup/`
-> —— 一个被定义为「可丢弃的试验场」的工作区里。
-> **请挪到安全位置**（iCloud / 移动硬盘 / 私有仓库）。确认永不需要的话删掉也行，但不可逆。
-
-### 重写历史时的三个坑（下次别再踩）
+### 重写历史时的三个坑（这个留着，下次别再踩）
 
 1. **枚举「历史上所有路径」不要用 `git log --diff-filter=A`。**
-   实测它漏了 7 条（101 vs 权威的 108），导致我第一次清除不干净。
+   实测它漏了 7 条（101 vs 权威的 108），导致第一次清除不干净、还误以为成功。
    可靠做法是遍历所有提交的树：
    ```bash
    git rev-list --all | while read -r c; do git ls-tree -r --name-only "$c"; done | sort -u
    ```
 2. **光删文件不剪空提交，旧时代的提交会留下来。**
    文件删光了但提交还在，`git log` 里仍能看到「Site updated: …」。
-   要么加 `--prune-empty`，要么接受这些空提交。
+   加 `--prune-empty` 才行。
 3. **必须验证两个不变量**，否则你不知道重写有没有改坏东西：
    ```bash
    git rev-parse HEAD^{tree}        # 重写前后必须完全一致
@@ -416,3 +407,21 @@ git show hexo-final:public/imgs/backup-2023/wallpaper-sun.png > /tmp/w.png    # 
    comm -3 <(git rev-list --all | while read -r c; do git ls-tree -r --name-only "$c"; done | sort -u) \
            <(git ls-tree -r --name-only HEAD | sort -u)
    ```
+
+### 本地旧克隆要清干净
+
+重写前克隆过的本地副本，历史里仍带着完整的旧对象（`.git` 里可能还有 38M）。
+`git reset --hard` **不够** —— 旧对象还被 reflog 与 remote-tracking ref 引用着：
+
+```bash
+git fetch origin --prune --tags
+git reset --hard origin/main
+git reflog expire --expire=now --all
+git gc --prune=now          # ← 少了这步，旧对象还躺在本地
+```
+
+**更省事的是直接重克隆**（新克隆只有 640K，不含任何旧对象）：
+
+```bash
+rm -rf <旧目录> && git clone https://github.com/archibald-nice/archibald-nice.github.io.git <新目录>
+```
