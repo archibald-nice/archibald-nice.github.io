@@ -8,7 +8,7 @@ lang: en
 
 I'm Archibald (大梁), based in Shenzhen. I registered on GitHub in 2017, and those six years have mostly gone into one thing: taking something from "it runs" to "it ships".
 
-I started on the server side — Java and Spring services, PostgreSQL data, the MyBatis persistence layer, Dubbo service meshes. What that period actually taught me wasn't fluency in a framework, but a habit: get the shape of the data right first, then think about APIs and interfaces. If the schema is wrong, it doesn't matter how pretty the code above it is.
+I started on the server side — Java and Spring services, PostgreSQL data, and the MyBatis persistence layer. What that period actually taught me wasn't fluency in a framework, but a habit: get the shape of the data right first, then think about APIs and interfaces. If the schema is wrong, it doesn't matter how pretty the code above it is.
 
 Later I moved to the frontend. Not for the "full-stack" label, but because I kept finding that interface problems couldn't be fixed at the interface layer: a laggy filter usually means the data wasn't aggregated in the right place; a slow page usually means the render boundaries were drawn wrong from the start. Writing it myself is how I learned what to ask of the frontend.
 

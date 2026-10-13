@@ -85,7 +85,7 @@ export const ui = {
       {
         area: '后端与数据',
         desc: '服务端接口、数据管道与缓存层设计；静态代码分析、血缘图谱这类需要啃数据的活。',
-        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Dubbo', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
+        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
       },
       {
         area: '前端与可视化',
@@ -207,7 +207,7 @@ export const ui = {
       {
         area: 'Backend & data',
         desc: 'Service APIs, data pipelines and caching layers; the kind of work that means chewing through data, static analysis and lineage graphs.',
-        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Dubbo', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
+        chips: ['Java', 'Spring Boot', 'MyBatis-Plus', 'Python', 'FastAPI', 'PostgreSQL', 'Redis'],
       },
       {
         area: 'Frontend & visualization',
