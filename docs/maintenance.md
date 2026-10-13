@@ -248,8 +248,11 @@ output:
 - 图片放 `public/` 下，用根路径引用：`public/me.png` → `<img src="/me.png">`。
 - 后台插入的图片会自动进 `public/uploads/`，引用 `/uploads/xxx`。
 - 想用 Astro 的自动优化（尺寸/格式），需要放 `src/assets/` 并 `import` 引用，目前没用这套。
-- `public/favicon.png` 是**唯一保留下来的旧主题资源**（原来的 Stellar 默认图标）。
-  换成自己的图标时，记得同步改 `src/layouts/Base.astro` 和 `public/admin/index.html` 两处引用。
+- 站点图标是 2026-10 按主色 `#2b5cd9` 生成的字母标，三个文件：
+  `public/favicon.svg`（矢量，现代浏览器优先）、`public/favicon.png`（48px 兜底）、
+  `public/apple-touch-icon.png`（180px，iOS 加到主屏用）。
+  换图标时改这三个文件即可；引用写死在 `src/layouts/Base.astro` 和 `public/admin/index.html`，
+  文件名不变就不用改引用。
 
 ---
 
@@ -321,13 +324,25 @@ gh api -X PUT repos/archibald-nice/archibald-nice.github.io/pages -f build_type=
 git revert <commit> && git push     # 推荐，保留历史
 ```
 
-**已知可用的还原点**：
+**已知可用的还原点**（`2026-10-14` 历史重写后的 hash）：
 
 | commit / tag | 状态 |
 |---|---|
-| `f1f514b` | Astro 新站首次上线（此时旧博客内容还在） |
-| `3379dbe` | Actions 升级到 Node 24 版本 |
-| `hexo-final` | **含全部 Hexo 内容的最后一个提交**，见 §12 |
+| `61e7bea` | Astro 新站首次上线（此时旧博客内容还在） |
+| `5f4a74b` | Actions 升级到 Node 24 版本 |
+| `f405a22` | 删除全部旧 Hexo 内容，只保留新站 |
+| `hexo-final` | 旧博客的**文字**（`f74a41f`），图片已不在 git 里，见 §12 |
+
+> ⚠️ **2026-10-14 重写过一次历史**（为了把 43MB 旧图片从 `.git` 里清掉，见 §12）。
+> 因此**在此之前克隆的每一份本地副本，commit hash 全部与远端不同**，直接 `git pull`
+> 会冲突。旧副本要执行一次：
+>
+> ```bash
+> git fetch origin --prune --tags
+> git reset --hard origin/main
+> ```
+>
+> 如果本地有未提交的改动，先 `git stash` 或 `git diff > /tmp/wip.patch` 备份再执行。
 
 ---
 
@@ -344,26 +359,49 @@ git revert <commit> && git push     # 推荐，保留历史
 
 ---
 
-## 12. 旧 Hexo 内容怎么找回
+## 12. 旧 Hexo 内容怎么找回（注意：恢复点已变）
 
-2024–2025 那批文章、wiki、笔记、图片已经从前端删除了，**但内容本身没有丢**。
-删除前我把「含全部 Hexo 内容的最后一个提交」打了标签并推到远端：
+2026-10-14 做过一次**历史重写**：为了把 43MB 旧图片从 `.git` 里彻底清掉
+（`.git` 从 38M 降到 384K），用 `git filter-branch` 把 `imgs/` 与 `public/imgs/`
+从**所有**提交中移除了。所以现在：
+
+| 内容 | 在哪 | 怎么取 |
+|---|---|---|
+| 旧文章、wiki、笔记的**文字** | git 历史里还在 | `hexo-final` 标签 |
+| 旧**图片**（壁纸等 43MB） | **已从 git 移除**，只在离线归档里 | 下面的 bundle 文件 |
+| 新站的全部文件 | 正常工作区 | —— |
+
+### 取回旧文章的文字
 
 ```bash
 git fetch --tags
-
-# 看某篇文章
 git show hexo-final:public/2025/08/17/how-to-become-fullstacker/index.html
-
-# 把某个目录取回工作区
 git checkout hexo-final -- public/2025
-git checkout hexo-final -- public/imgs
-
-# 想恢复整份旧站点：切到那个标签另开一个目录看
-git worktree add /tmp/hexo-archive hexo-final
+git worktree add /tmp/hexo-archive hexo-final     # 整份旧站点另开目录看
 ```
 
-还有一个本地 mirror 备份在 `~/.backup/archibald-nice.github.io.git`（如果没删的话）。
+### 取回旧图片／完整原始历史
 
-> 那些 URL 现在全部 404。如果哪天想把某篇文章重新发出来，从上面取回正文，
+离线归档（**是重写前的完整 20 个提交，含全部图片**）：
+
+```
+/Users/archie/Temp/.backup/archie-full-history-20261014.bundle   （38MB）
+```
+
+它是一个 git bundle，可以当成远程仓库直接克隆：
+
+```bash
+git clone /Users/archie/Temp/.backup/archie-full-history-20261014.bundle /tmp/hexo-original
+cd /tmp/hexo-original && git log --oneline | head
+git show hexo-final:public/imgs/backup-2023/wallpaper-sun.png > /tmp/wallpaper.png
+```
+
+> ⚠️ **这个 bundle 目前只在一处**（工作区里的 `.backup/`），而工作区是你自己说的
+> 「可丢弃的试验场」。**请把它挪到安全的地方**（iCloud、移动硬盘、或私有仓库）。
+> 换机器前务必确认它还在 —— 它是那 43MB 图片和完整原始历史的唯一副本。
+>
+> 另外还有一个 mirror 备份 `~/.backup/archibald-nice.github.io.git`（如果还在的话），
+> 那是重写**之前**抓的，同样含完整旧历史。
+
+> 那些旧 URL 现在全部 404。如果哪天想把某篇文章重新发出来，从上面取回正文，
 > 转成 Markdown 放进 `src/content/posts/zh/` 就是一篇新文章 —— 比恢复整个旧站点划算。
