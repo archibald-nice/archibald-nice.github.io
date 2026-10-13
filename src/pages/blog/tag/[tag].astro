@@ -1,0 +1,13 @@
+---
+import { getPosts, slugOf, tagCounts } from '@/lib/posts';
+import BlogList from '../../../components/BlogList.astro';
+
+export async function getStaticPaths() {
+  const posts = await getPosts('zh');
+  return tagCounts(posts).map(([tag]) => ({ params: { tag }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+---
+
+<BlogList lang="zh" tag={tag} />

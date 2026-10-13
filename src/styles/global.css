@@ -761,6 +761,176 @@ main {
   flex-wrap: wrap;
 }
 
+/* ---------- 博客 ---------- */
+
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-item {
+  padding: 1.125rem 0.75rem;
+  margin: 0 -0.75rem;
+  border-bottom: 1px solid var(--line);
+  border-radius: 10px;
+  transition: background-color 0.18s ease;
+}
+
+.post-item:hover {
+  background: var(--accent-soft);
+}
+
+.post-date {
+  display: block;
+  color: var(--faint);
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.post-title-link {
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.post-title-link:hover {
+  color: var(--accent);
+}
+
+.post-desc {
+  margin: 0.375rem 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  max-width: 40rem;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0;
+}
+
+.post-tags a {
+  color: var(--faint);
+  font-size: 0.75rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.post-tags a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.year-block {
+  margin-top: 2rem;
+}
+
+.year-block:first-child {
+  margin-top: 0;
+}
+
+.year-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-cloud a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-elev);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tag-cloud a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.tag-cloud .tag-count {
+  color: var(--faint);
+  font-size: 0.6875rem;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+  color: var(--faint);
+  font-size: 0.8125rem;
+}
+
+.post-meta a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.post-meta a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.note-box {
+  margin-top: 2.5rem;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.note-box p {
+  margin: 0;
+}
+
+.note-box p + p {
+  margin-top: 0.5rem;
+}
+
+.note-box a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+}
+
+.note-box a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.empty-state {
+  padding: 2rem 0;
+  color: var(--faint);
+  font-size: 0.9375rem;
+}
+
 /* ---------- 动效 ---------- */
 
 @keyframes rise {

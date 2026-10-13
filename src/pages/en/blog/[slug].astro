@@ -1,0 +1,18 @@
+---
+import { render } from 'astro:content';
+import { getPosts, slugOf } from '@/lib/posts';
+import PostDetail from '../../../components/PostDetail.astro';
+
+export async function getStaticPaths() {
+  const posts = await getPosts('en');
+  return posts.map((post) => ({
+    params: { slug: slugOf(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PostDetail post={post} lang="en" Content={Content} />

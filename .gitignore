@@ -20,3 +20,6 @@ pnpm-debug.log*
 
 # 沙箱内本地 npm 缓存（README 推荐的 --cache 目录）
 .npm-cache/
+
+# 内链检查脚本的输出（临时产物，不该入库）
+dist.json

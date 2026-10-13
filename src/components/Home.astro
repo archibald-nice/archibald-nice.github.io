@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import { getPosts, slugOf } from '@/lib/posts';
 import Base from '../layouts/Base.astro';
 import WorkItem from './WorkItem.astro';
-import { t, type Lang, pathFor } from '../i18n/ui';
+import { t, type Lang, pathFor, blogPath, postPath, rssPath, formatDate } from '../i18n/ui';
 import { SITE } from '../consts';
 import { otherProjects, followedProjects } from '../data/other';
 
@@ -17,14 +18,10 @@ const projects = (await getCollection('projects', ({ data }) => data.lang === la
   (a, b) => a.data.order - b.data.order
 );
 
-const altHref = pathFor(lang === 'zh' ? 'en' : 'zh', 'home');
+/** 首页只放最近三篇 */
+const latestPosts = (await getPosts(lang)).slice(0, 3);
 
-/** 早期 Hexo 博客里的文章，路径是原来的，没有迁移 */
-const posts = [
-  { href: '/2025/08/17/how-to-become-fullstacker/', zh: '如何成为一个全栈开发', en: 'How to become a full-stack developer' },
-  { href: '/2025/07/30/common-ai-words/', zh: 'AI 相关的常见词汇', en: 'Common AI vocabulary' },
-  { href: '/more/about/', zh: '关于博主', en: 'About the author' },
-];
+const altHref = pathFor(lang === 'zh' ? 'en' : 'zh', 'home');
 ---
 
 <Base lang={lang} title={T.meta.title} description={T.meta.description} altHref={altHref} current="home">
@@ -125,24 +122,37 @@ const posts = [
   <section class="section" id="writing">
     <div class="section-head">
       <h2>{T.sections.writing}</h2>
-      <a href={SITE.blogArchive}>{T.sections.writingNote} ↗</a>
+      <a href={blogPath(lang)}>{T.sections.writingNote} ↗</a>
     </div>
-    <p style="color:var(--muted); margin: 1rem 0 0.5rem">{T.writing.intro}</p>
-    <ul class="minor-list">
-      {
-        posts.map((p) => (
-          <li>
-            <a class="minor-name" href={p.href}>
-              {lang === 'zh' ? p.zh : p.en}
-            </a>
-          </li>
-        ))
-      }
-      <li>
-        <a class="minor-name" href="/wiki/">{T.writing.wiki}</a>
-        <span class="minor-desc">Archie Life · Coding Study</span>
-      </li>
-    </ul>
+
+    {
+      latestPosts.length > 0 ? (
+        <ul class="post-list" style="margin-top:1rem">
+          {latestPosts.map((post) => (
+            <li class="post-item">
+              <span class="post-date mono">{formatDate(post.data.date, lang)}</span>
+              <a class="post-title-link" href={postPath(lang, slugOf(post))}>
+                {post.data.title}
+              </a>
+              {post.data.description ? <p class="post-desc">{post.data.description}</p> : null}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty-state">{T.blog.empty}</p>
+      )
+    }
+
+    <div class="note-box">
+      <p>
+        <strong>{T.blog.legacyTitle}</strong> — {T.blog.legacyNote}
+      </p>
+      <p>
+        <a href={SITE.legacyArchive}>{T.blog.legacyLink} ↗</a>
+        <span style="margin:0 0.5rem">·</span>
+        <a href={rssPath(lang)}>{T.blog.rss}</a>
+      </p>
+    </div>
   </section>
 
   <section class="section" id="contact">
@@ -161,7 +171,7 @@ const posts = [
       </div>
       <div class="ability">
         <dt>{T.contact.blogLabel}</dt>
-        <dd><a href={SITE.blogArchive}>archibald-nice.github.io{SITE.blogArchive} ↗</a></dd>
+        <dd><a href={blogPath(lang)}>archibald-nice.github.io{blogPath(lang)} ↗</a></dd>
       </div>
     </dl>
   </section>

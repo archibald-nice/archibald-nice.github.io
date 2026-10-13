@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE } from '../consts';
-import { t, languages, type Lang, pathFor } from '../i18n/ui';
+import { t, languages, type Lang, pathFor, blogPath } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -23,7 +23,7 @@ const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const navItems = [
   { key: 'home' as const, label: T.nav.work, href: pathFor(lang, 'home') },
   { key: 'about' as const, label: T.nav.about, href: pathFor(lang, 'about') },
-  { key: 'writing' as const, label: T.nav.writing, href: lang === 'zh' ? SITE.blogArchive : SITE.blogArchive },
+  { key: 'writing' as const, label: T.nav.writing, href: blogPath(lang) },
 ];
 ---
 
@@ -115,7 +115,8 @@ const navItems = [
         <span class="footer-links">
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
           <a href={SITE.github} rel="me noopener" target="_blank">GitHub</a>
-          <a href={SITE.blogArchive}>{T.nav.writing}</a>
+          <a href={blogPath(lang)}>{T.nav.writing}</a>
+          <a href={SITE.legacyArchive}>{T.blog.legacyTitle}</a>
           <a href="#">{T.footer.backTop}</a>
         </span>
       </div>

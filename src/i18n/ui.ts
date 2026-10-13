@@ -40,8 +40,33 @@ export const ui = {
       minor: '其他项目',
       ability: '我在做什么',
       writing: '写作',
-      writingNote: '早期博客',
+      writingNote: '全部文章',
       contact: '联系',
+    },
+
+    blog: {
+      title: '博客',
+      lede: '记录工程上的取舍、踩过的坑，以及一些还没想清楚的想法。',
+      latest: '最新文章',
+      allPosts: '全部文章',
+      byYear: '按年份',
+      tagsTitle: '标签',
+      tagPageTitle: '标签',
+      tagPrefix: '标签：',
+      empty: '还没有文章。第一篇正在路上。',
+      backToBlog: '← 回到文章列表',
+      publishedOn: '发布于',
+      updatedOn: '更新于',
+      rss: 'RSS 订阅',
+      readMore: '阅读全文',
+      countUnit: ' 篇',
+      legacyTitle: '更早的归档',
+      legacyNote:
+        '2025-08 之前写在 Hexo 上的随笔和笔记，没有迁移过来，链接保持原始路径。',
+      legacyLink: '浏览归档',
+      adminHint: '内容后台',
+      totalPrefix: '共 ',
+      countUnitOne: ' 篇',
     },
 
     work: {
@@ -84,11 +109,6 @@ export const ui = {
       backHome: '← 回到首页',
     },
 
-    writing: {
-      intro: '更早的随笔和笔记还留在原来的博客里，没有迁移，链接都是原路径。',
-      posts: '文章归档',
-      wiki: 'Wiki 与笔记',
-    },
 
     contact: {
       intro: '有合适的机会、合作，或者只是想聊聊 AI 工程，都欢迎写信给我。',
@@ -146,8 +166,33 @@ export const ui = {
       minor: 'Other projects',
       ability: 'What I do',
       writing: 'Writing',
-      writingNote: 'earlier blog',
+      writingNote: 'all posts',
       contact: 'Contact',
+    },
+
+    blog: {
+      title: 'Blog',
+      lede: 'Notes on engineering trade-offs, things I broke along the way, and ideas I have not fully worked out yet.',
+      latest: 'Latest posts',
+      allPosts: 'All posts',
+      byYear: 'By year',
+      tagsTitle: 'Tags',
+      tagPageTitle: 'Tag',
+      tagPrefix: 'Tag: ',
+      empty: 'No posts yet. The first one is on its way.',
+      backToBlog: '← Back to all posts',
+      publishedOn: 'Published',
+      updatedOn: 'Updated',
+      rss: 'RSS feed',
+      readMore: 'Read more',
+      countUnit: 'posts',
+      legacyTitle: 'Earlier archive',
+      legacyNote:
+        'Notes and posts written on Hexo before August 2025. Nothing was migrated — the links are the original paths.',
+      legacyLink: 'Browse the archive',
+      adminHint: 'Content admin',
+      totalPrefix: '',
+      countUnitOne: ' post',
     },
 
     work: {
@@ -190,11 +235,6 @@ export const ui = {
       backHome: '← Back home',
     },
 
-    writing: {
-      intro: 'Earlier notes and posts still live on the original blog. Nothing was migrated — the links are the original paths.',
-      posts: 'Post archive',
-      wiki: 'Wiki & notes',
-    },
 
     contact: {
       intro: 'Good roles, collaborations, or just a conversation about AI engineering — email is the fastest way.',
@@ -233,3 +273,35 @@ export function workPath(lang: Lang, slug: string) {
   const prefix = lang === 'zh' ? '' : '/en';
   return `${prefix}/work/${slug}/`;
 }
+
+/** 博客列表页路径 */
+export function blogPath(lang: Lang) {
+  const prefix = lang === 'zh' ? '' : '/en';
+  return `${prefix}/blog/`;
+}
+
+/** 文章详情页路径 */
+export function postPath(lang: Lang, slug: string) {
+  return `${blogPath(lang)}${slug}/`;
+}
+
+/** 标签页路径。标签里可能有空格和大写，统一编码 */
+export function tagPath(lang: Lang, tag: string) {
+  return `${blogPath(lang)}tag/${encodeURIComponent(tag)}/`;
+}
+
+/** RSS 路径 */
+export function rssPath(lang: Lang) {
+  return lang === 'zh' ? '/rss.xml' : '/en/rss.xml';
+}
+
+/** 日期格式化：中文用「2026 年 10 月 14 日」，英文用「Oct 14, 2026」 */
+export function formatDate(date: Date, lang: Lang) {
+  return new Intl.DateTimeFormat(lang === 'zh' ? 'zh-CN' : 'en-US', {
+    year: 'numeric',
+    month: lang === 'zh' ? 'long' : 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(date);
+}
+

@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, type Lang, blogPath, postPath, tagPath, rssPath, formatDate } from '../i18n/ui';
+import { getPosts, groupByYear, tagCounts, slugOf } from '@/lib/posts';
+import { SITE } from '../consts';
+
+interface Props {
+  lang: Lang;
+  /** 传入标签则只显示该标签下的文章 */
+  tag?: string;
+}
+
+const { lang, tag } = Astro.props;
+const T = t(lang);
+const other: Lang = lang === 'zh' ? 'en' : 'zh';
+
+const allPublished = await getPosts(lang);
+/** 另一语言的标签集合：标签在两种语言间不是一一对应的，
+ *  切换语言时如果对面没有同名标签，就退回对面的列表页，避免 hreflang 指向不存在的页面 */
+const otherTags = new Set((await getPosts(other)).flatMap((p) => p.data.tags));
+const posts = tag ? allPublished.filter((p) => p.data.tags.includes(tag)) : allPublished;
+const byYear = groupByYear(posts);
+const tags = tagCounts(allPublished);
+
+const title = tag
+  ? `${T.blog.tagPageTitle}：${tag} — ${T.blog.title} — ${T.hero.h1}`
+  : `${T.blog.title} — ${T.hero.h1} (${T.hero.latin})`;
+
+const altHref = tag && otherTags.has(tag) ? tagPath(other, tag) : blogPath(other);
+---
+
+<Base lang={lang} title={title} description={T.blog.lede} altHref={altHref} current="writing">
+  <header class="page-head">
+    <p class="eyebrow">{tag ? `${T.blog.tagPrefix}${tag}` : T.blog.title}</p>
+    <h1>{tag ? `${T.blog.tagPageTitle}：${tag}` : T.blog.title}</h1>
+    <p class="page-lede">{T.blog.lede}</p>
+  </header>
+
+  {
+    posts.length === 0 ? (
+      <p class="empty-state">{T.blog.empty}</p>
+    ) : (
+      <>
+        <p class="post-meta" style="margin-top:1.5rem">
+          <span class="mono">
+            {T.blog.totalPrefix}
+            {posts.length}
+            {posts.length === 1 ? T.blog.countUnitOne : T.blog.countUnit}
+          </span>
+          <a href={rssPath(lang)}>{T.blog.rss}</a>
+          {tag ? <a href={blogPath(lang)}>{T.blog.allPosts}</a> : null}
+        </p>
+
+        {[...byYear.entries()].map(([year, items]) => (
+          <section class="year-block">
+            <p class="year-label mono">{year}</p>
+            <ul class="post-list">
+              {items.map((post) => (
+                <li class="post-item">
+                  <span class="post-date mono">{formatDate(post.data.date, lang)}</span>
+                  <a class="post-title-link" href={postPath(lang, slugOf(post))}>
+                    {post.data.title}
+                  </a>
+                  {post.data.description ? <p class="post-desc">{post.data.description}</p> : null}
+                  {post.data.tags.length > 0 ? (
+                    <div class="post-tags">
+                      {post.data.tags.map((name) => (
+                        <a href={tagPath(lang, name)}>{name}</a>
+                      ))}
+                    </div>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </>
+    )
+  }
+
+  {
+    tags.length > 0 ? (
+      <section class="section">
+        <div class="section-head">
+          <h2>{T.blog.tagsTitle}</h2>
+          <span class="section-note mono">{tags.length}</span>
+        </div>
+        <ul class="tag-cloud" style="margin-top:1rem">
+          {tags.map(([name, count]) => (
+            <li>
+              <a href={tagPath(lang, name)}>
+                {name}
+                <span class="tag-count mono">{count}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null
+  }
+
+  <div class="note-box">
+    <p>
+      <strong>{T.blog.legacyTitle}</strong> — {T.blog.legacyNote}
+    </p>
+    <p>
+      <a href={SITE.legacyArchive}>{T.blog.legacyLink} ↗</a>
+    </p>
+  </div>
+</Base>

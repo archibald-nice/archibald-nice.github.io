@@ -1,0 +1,105 @@
+# =============================================================================
+# Sveltia CMS 配置
+# 后台地址：https://archibald-nice.github.io/admin/
+# 文档：https://sveltiacms.app/en/docs
+# =============================================================================
+
+# 后端：GitHub。写权限由仓库权限决定 —— 没有 Write 权限的账号登不进也写不了。
+backend:
+  name: github
+  repo: archibald-nice/archibald-nice.github.io
+  branch: main
+  # 这里刻意不配 OAuth app，改用 Access Token 登录（个人站最省事，见维护手册）。
+  # 如果以后想换成 GitHub 授权页登录，需要部署一个 OAuth 中转并在此加 base_url。
+
+site_url: https://archibald-nice.github.io
+display_url: https://archibald-nice.github.io
+
+# 媒体文件（编辑器里插入的图片）上传到这里，公开路径是 /uploads/xxx
+media_folder: public/uploads
+public_folder: /uploads
+
+# 空了就不要写进 frontmatter。
+# 必须开着：Zod 的 .optional() 只接受「字段不存在」，而 CMS 默认会写入空字符串或空数组，
+# 那会直接导致内容集合校验失败、构建报错。
+output:
+  omit_empty_optional_fields: true
+
+collections:
+  # ---------------------------------------------------------------- 中文文章
+  - name: posts_zh
+    label: 文章 · 中文
+    label_singular: 中文文章
+    description: 写入 src/content/posts/zh/，发布后位于 /blog/<文件名>/
+    folder: src/content/posts/zh
+    create: true
+    slug: '{{slug}}'
+    preview_path: 'blog/{{slug}}'
+    fields:
+      - { name: title, label: 标题, widget: string, hint: 会显示在列表和文章顶部 }
+      - name: description
+        label: 摘要
+        widget: text
+        required: false
+        hint: 一句话说明这篇讲什么。列表页、搜索结果和 RSS 都会用它
+      - name: date
+        label: 日期
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+      - name: updated
+        label: 更新日期
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        required: false
+        hint: 只在文章有实质性修改时填
+      - name: tags
+        label: 标签
+        widget: list
+        required: false
+        default: []
+        hint: 每行一个，或者用逗号分隔
+      - name: draft
+        label: 草稿
+        widget: boolean
+        default: false
+        hint: 打开后不会出现在列表、RSS 和页面上
+      - { name: body, label: 正文, widget: markdown }
+
+  # ---------------------------------------------------------------- 英文文章
+  - name: posts_en
+    label: 文章 · English
+    label_singular: English post
+    description: 写入 src/content/posts/en/，发布后位于 /en/blog/<slug>/
+    folder: src/content/posts/en
+    create: true
+    slug: '{{slug}}'
+    preview_path: 'en/blog/{{slug}}'
+    fields:
+      - { name: title, label: Title, widget: string }
+      - name: description
+        label: Description
+        widget: text
+        required: false
+      - name: date
+        label: Date
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+      - name: updated
+        label: Updated
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        required: false
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+        default: []
+      - name: draft
+        label: Draft
+        widget: boolean
+        default: false
+      - { name: body, label: Body, widget: markdown }

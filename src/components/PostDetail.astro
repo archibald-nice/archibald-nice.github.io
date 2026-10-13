@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { t, type Lang, blogPath, postPath, tagPath, formatDate } from '../i18n/ui';
+import { slugOf } from '@/lib/posts';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  lang: Lang;
+  Content: any;
+}
+
+const { post, lang, Content } = Astro.props;
+const T = t(lang);
+const other: Lang = lang === 'zh' ? 'en' : 'zh';
+const { data } = post;
+const slug = slugOf(post);
+
+const altHref = postPath(other, slug);
+---
+
+<Base
+  lang={lang}
+  title={`${data.title} — ${T.blog.title} — ${T.hero.h1}`}
+  description={data.description ?? data.title}
+  altHref={altHref}
+  current="writing"
+  ogType="article"
+>
+  <article>
+    <header class="page-head">
+      <p class="eyebrow mono">
+        {formatDate(data.date, lang)}
+        {data.updated ? ` · ${T.blog.updatedOn} ${formatDate(data.updated, lang)}` : ''}
+      </p>
+      <h1>{data.title}</h1>
+      {data.description ? <p class="page-lede">{data.description}</p> : null}
+
+      {
+        data.tags.length > 0 ? (
+          <div class="post-tags">
+            {data.tags.map((name) => (
+              <a href={tagPath(lang, name)}>{name}</a>
+            ))}
+          </div>
+        ) : null
+      }
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <a class="back-link" href={blogPath(lang)}>{T.blog.backToBlog}</a>
+</Base>
