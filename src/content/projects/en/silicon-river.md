@@ -7,6 +7,7 @@ period: '2025 — ongoing'
 role: 'Solo build: data pipeline → API → 3D frontend'
 stack: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'Three.js', 'TypeScript', 'DeepSeek', 'Docker']
 repo: https://github.com/archibald-nice/SiliconRiver
+demo: https://siliconriver.vercel.app
 ---
 
 Model releases move far faster than anyone can track by hand. Every day brings new weights, new benchmark scores, new pricing — scattered across Hugging Face, OpenRouter, vendor blogs and X. Answering "what actually happened this week" is unreasonably expensive.

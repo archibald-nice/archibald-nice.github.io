@@ -21,11 +21,11 @@ I don't really buy the idea that wiring up a model API makes something an AI pro
 So my projects are mostly built around those questions:
 
 - In **Silicon River**, I cross-validate three leaderboards and add a layer of live web search, because a single leaderboard gets steered by release strategy, and an LLM on its own will confidently make things up
-- In **Idea Probe**, I insisted on splitting output into claims and evidence rather than producing a summary — summaries can't be compared, claims can
+- In **Immortal Blue**, a piece of content is generated in separate passes — topic, body, labels, cover image — and each pass can be verified and retried on its own, so one bad pass cannot take the whole pipeline down
 
 ## How I work
 
-- **Write it down before building it.** Idea Probe started with a PRD, including a dedicated "reality calibration" section separating aspiration from what the version could genuinely do. That saved far more time than the writing cost.
+- **Settle the contract before the model runs.** Immortal Blue's generation pipeline fixed the prompt structure and the parse-and-validate step before any model was wired in: a parse failure fails the run outright, and only truncated output gets one retry with a compact prompt — malformed content never reaches the database.
 - **Degrade first.** For any system with external dependencies, work out what happens when they're down before designing the happy path.
 - **Tests are for my future self.** Of Silicon River's 75+ test cases, the useful ones are the ones that confirmed I hadn't broken something else after changing a data source.
 - **Say when you don't know.** That goes in code comments and commit messages, and it goes here too.

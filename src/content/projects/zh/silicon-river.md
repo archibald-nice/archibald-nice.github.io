@@ -7,6 +7,7 @@ period: 2025 — 进行中
 role: 独立开发（数据管道 → 服务端 → 3D 前端）
 stack: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'Three.js', 'TypeScript', 'DeepSeek', 'Docker']
 repo: https://github.com/archibald-nice/SiliconRiver
+demo: https://siliconriver.vercel.app
 ---
 
 大模型的发布速度已经远超任何人手工跟踪的能力。每天都有新的权重、新的榜单成绩、新的定价，散落在 Hugging Face、OpenRouter、各家的博客和 X 上。想搞清楚「这周到底发生了什么」，成本高得离谱。

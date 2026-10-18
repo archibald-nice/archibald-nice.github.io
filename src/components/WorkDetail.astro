@@ -47,6 +47,17 @@ const altHref = workPath(lang === 'zh' ? 'en' : 'zh', slug);
           </ul>
         </dd>
       </div>
+      {data.demo ? (
+        <div class="ability">
+          <dt>{T.work.demoLabel}</dt>
+          <dd>
+            <a href={data.demo} rel="noopener" target="_blank">{T.work.viewDemo} ↗</a>
+            <span class="mono" style="color:var(--faint); margin-left:0.5rem">
+              {data.demo.replace('https://', '')}
+            </span>
+          </dd>
+        </div>
+      ) : null}
       <div class="ability">
         <dt>{T.work.repo}</dt>
         <dd>

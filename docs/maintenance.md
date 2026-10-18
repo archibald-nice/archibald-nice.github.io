@@ -92,7 +92,6 @@ Astro 的 dev server 对 `public/` 下的目录**不会自动补 `index.html`**�
 | 精选作品 | `src/content/projects/{zh,en}/*.md` |
 | 博客文章 | `src/content/posts/{zh,en}/*.md` |
 | 关于页长文 | `src/content/pages/about-{zh,en}.md` |
-| 「其他项目」和「关注的开源项目」 | `src/data/other.ts` |
 | 颜色 / 字号 / 间距 | `src/styles/global.css` 顶部的 `:root` 设计令牌 |
 | 页面结构与列表/详情页渲染 | `src/components/*.astro` |
 | 路由 | `src/pages/**` |
@@ -122,8 +121,12 @@ period: '2026 — 进行中'                 # 含数字必须加引号，见 §
 role: 独立开发
 stack: ['Python', 'FastAPI']
 repo: https://github.com/archibald-nice/my-project   # 必须是合法 URL
+demo: https://my-project.vercel.app    # 可选：线上地址，没部署就整行删掉
 ---
 ```
+
+`demo` 是可选字段：填了，首页卡片会多一个「在线访问」链接，详情页多一行「线上地址」；
+不填则两个地方都不出现。**只能填真实能打开的地址** —— 它是给人点的，不是装饰。
 
 正文就是 Markdown，建议结构：**问题 → 做法 → 关键取舍 → 现状**。
 详情页、首页列表、sitemap 都自动生成，不用碰路由。

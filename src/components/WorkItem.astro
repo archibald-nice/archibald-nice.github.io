@@ -25,6 +25,11 @@ const detailHref = workPath(lang, slug);
   <p class="work-stack mono">{data.stack.join(' · ')}</p>
 
   <div class="work-ext">
+    {data.demo ? (
+      <a class="work-ext-demo" href={data.demo} rel="noopener" target="_blank">
+        {T.work.demo} ↗
+      </a>
+    ) : null}
     <a href={data.repo} rel="noopener" target="_blank">{T.work.repo} ↗</a>
     <a href={detailHref}>{T.work.readMore}</a>
   </div>

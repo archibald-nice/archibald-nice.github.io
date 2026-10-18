@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 
 /**
  * 精选作品。id 形如 `zh/silicon-river`，前缀即语言。
- * 每个文件都会生成一个详情页；只做一句话说明的次要项目见 src/data/other.ts。
+ * 每个文件都会生成一个详情页。
  */
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
@@ -17,6 +17,8 @@ const projects = defineCollection({
     role: z.string(),
     stack: z.array(z.string()),
     repo: z.string().url(),
+    /** 线上可访问的地址；没有部署的项目留空 */
+    demo: z.string().url().optional(),
   }),
 });
 

@@ -498,44 +498,10 @@ main {
   border-color: var(--accent);
 }
 
-/* 纯文本项目条目（次要项目） */
-.minor-list {
-  list-style: none;
-  margin: 0.5rem 0 0;
-  padding: 0;
-}
-
-.minor-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.9375rem;
-  display: flex;
-  gap: 0.75rem;
-  align-items: baseline;
-}
-
-.minor-list li:last-child {
-  border-bottom: 0;
-}
-
-.minor-list .minor-name {
-  font-weight: 550;
-  white-space: nowrap;
-}
-
-.minor-list a.minor-name {
+/* 有线上地址时，把它排在源码之前并略微强调 */
+.work-ext a.work-ext-demo {
   color: var(--fg);
-  text-decoration: none;
-  border-bottom: 1px solid var(--line-strong);
-}
-
-.minor-list a.minor-name:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.minor-list .minor-desc {
-  color: var(--muted);
+  font-weight: 550;
 }
 
 /* ---------- 能力/技术栈 ---------- */

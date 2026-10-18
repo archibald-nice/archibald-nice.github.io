@@ -5,7 +5,6 @@ import Base from '../layouts/Base.astro';
 import WorkItem from './WorkItem.astro';
 import { t, type Lang, pathFor, blogPath, postPath, rssPath, formatDate } from '../i18n/ui';
 import { SITE } from '../consts';
-import { otherProjects, followedProjects } from '../data/other';
 
 interface Props {
   lang: Lang;
@@ -58,41 +57,6 @@ const altHref = pathFor(lang === 'zh' ? 'en' : 'zh', 'home');
     </div>
     <ul class="work-list">
       {projects.map((project) => <WorkItem project={project} lang={lang} />)}
-    </ul>
-  </section>
-
-  <section class="section" id="other">
-    <div class="section-head">
-      <h2>{T.sections.minor}</h2>
-    </div>
-    <ul class="minor-list">
-      {
-        otherProjects.map((p) => (
-          <li>
-            {p.href ? (
-              <a class="minor-name" href={p.href} rel="noopener" target="_blank">
-                {p.name}
-              </a>
-            ) : (
-              <span class="minor-name">{p.name}</span>
-            )}
-            <span class="minor-desc">{p.desc[lang]}</span>
-          </li>
-        ))
-      }
-      {
-        followedProjects.map((p) => (
-          <li>
-            <a class="minor-name" href={p.href} rel="noopener" target="_blank">
-              {p.name}
-            </a>
-            <span class="minor-desc">
-              {p.desc[lang]}
-              {p.tag ? <span class="mono"> [{p.tag[lang]}]</span> : null}
-            </span>
-          </li>
-        ))
-      }
     </ul>
   </section>
 

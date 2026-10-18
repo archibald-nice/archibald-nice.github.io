@@ -58,7 +58,6 @@ ASTRO_TELEMETRY_DISABLED=1 npm run build
     │   ├── projects/{zh,en}/      # 作品集，每个文件生成详情页
     │   ├── posts/{zh,en}/         # 博客文章，语言由目录决定
     │   └── pages/about-{zh,en}.md # 关于页长文
-    ├── data/other.ts              # 次要项目 + 关注的开源项目
     ├── layouts/Base.astro         # HTML 骨架、页头页脚、主题切换
     ├── components/                # Home / About / WorkDetail / BlogList / PostDetail / WorkItem
     ├── styles/global.css          # 设计令牌 + 全部样式（手写，无 Tailwind）
@@ -77,7 +76,6 @@ ASTRO_TELEMETRY_DISABLED=1 npm run build
 | 精选作品 | `src/content/projects/{zh,en}/*.md` |
 | 博客文章 | `src/content/posts/{zh,en}/*.md`（或走 `/admin/`） |
 | 关于页长文 | `src/content/pages/about-{zh,en}.md` |
-| 次要项目列表 | `src/data/other.ts` |
 | 内容后台的表单字段 | `public/admin/config.yml`（需与 `src/content.config.ts` 同步改） |
 | 颜色 / 字号 / 间距 | `src/styles/global.css` 顶部的 `:root` 设计令牌 |
 

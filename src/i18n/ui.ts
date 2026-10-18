@@ -37,7 +37,6 @@ export const ui = {
     sections: {
       work: '精选作品',
       workNote: '开源项目',
-      minor: '其他项目',
       ability: '我在做什么',
       writing: '写作',
       writingNote: '全部文章',
@@ -68,6 +67,9 @@ export const ui = {
     work: {
       stackLabel: '技术栈',
       repo: '源码',
+      demo: '在线访问',
+      demoLabel: '线上地址',
+      viewDemo: '打开线上站点',
       details: '详情',
       readMore: '查看详情',
       backToWork: '← 回到作品列表',
@@ -159,7 +161,6 @@ export const ui = {
     sections: {
       work: 'Selected work',
       workNote: 'open source',
-      minor: 'Other projects',
       ability: 'What I do',
       writing: 'Writing',
       writingNote: 'all posts',
@@ -190,6 +191,9 @@ export const ui = {
     work: {
       stackLabel: 'Stack',
       repo: 'Source',
+      demo: 'Live site',
+      demoLabel: 'Live',
+      viewDemo: 'Open the live site',
       details: 'Detail',
       readMore: 'Read the detail',
       backToWork: '← Back to work',
